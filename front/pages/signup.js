@@ -1,11 +1,18 @@
 import React ,{ useState ,useCallback}from 'react'
-import AppLayout from '../components/AppLayout'
-import Head from 'next/head'
 import {Form, Input, Checkbox,Button} from 'antd'
+import PropTypes from 'prop-types'
+const TextInput = ({value}) =>{
+    return (
+    <div>{value}</div>
+    )
+}
 
+TextInput.propTypes = {
+  value: PropTypes.string
+}
 const SignUp = () =>{
 
-
+  //setState 실행 시 해당 컴포넌트 전체가 리렌더링 됨을 잊지 마라. 
   const [nick,setNick]  = useState('')
   const [password,setPassword] = useState('')
   const [passwordCheck,setPasswordCheck] = useState('')
@@ -13,7 +20,7 @@ const SignUp = () =>{
   const [passwordError, setPasswordError] = useState(false) 
   const [termError, setTermError] = useState(false)
 
-  const onSubmit = (e) =>{
+  const onSubmit = useCallback((e) =>{
       
     e.preventDefault();
     
@@ -25,11 +32,9 @@ const SignUp = () =>{
         return setTermError(true); 
     }
 
-    
 
 
-
-};
+},[password,passwordCheck,term]);
 
   //id인풋만 커스텀 훅으로
   //-------------------------------
@@ -37,9 +42,10 @@ const SignUp = () =>{
   const useInput = (initValue = null)=>{
       const [value,setter] = useState(initValue);
       const handler = useCallback((e) =>{
-          console.log('sex'); 
+    
           console.log(e.target.value)
-        setter(e.target.value)
+          setter(e.target.value)
+
       } ,[]);
       return [value,handler];  
   }
@@ -53,28 +59,25 @@ const SignUp = () =>{
   const onChangePassword = (e)=>{
 
     setPassword(e.target.value)
-  }          
-  const onChangepasswordCheck = (e)=>{
+  } 
+
+  const onChangepasswordCheck = useCallback((e)=>{
     setPasswordError(e.target.value !== password); 
     setPasswordCheck(e.target.value)
-  }
-  const onChangeTerm = (e)=>{
+  },[password]); 
+
+  const onChangeTerm = useCallback((e)=>{
     setTermError(false); 
     setTerm(e.target.checked)
-  }
+  },[]); 
 
 
 
     return(
         
         <>
-        <Head>
-            <title>NodeBird</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css" />
-        </Head>
-        <AppLayout>
-            <form onSubmit={onSubmit} style={{padding:10}}>
-           
+            <Form onSubmit={onSubmit} style={{padding:10}}>
+            <TextInput value={'124'}></TextInput>
                 <div>
                     <label htmlFor="user-id">아이디</label>
                     <br />
@@ -105,8 +108,7 @@ const SignUp = () =>{
                      <Button type="primary" htmlType="submit">가입하기</Button>
                      <input type="submit" value="rkdlq"></input>
                 </div>
-            </form>
-        </AppLayout>
+            </Form>
          </>
 
       
