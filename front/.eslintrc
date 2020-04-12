@@ -1,21 +1,33 @@
 {
     "parserOptions" :{
-        "ecmaVersion" : 2018,
+        "ecmaVersion" : 2018, 
+        //자바스크립트 버젼, 
+
         "sourceType"  : "module", 
+        // import, export, require 모듈 시스템 쓸거야.
+        
         "ecmaFeatures":{
             "jsx" : true 
         }
+        //기본적으로 javascript에서 html이나 xml 쓰는거 안된다고 뜨는데,
+        //이 옵션을 걸어 줌으로서 허용 해준다. 
     },
     "env":{
         "browser" : true, 
         "node"    : true
+        //브라우저, node true로... 
     }, 
     "extends" :[
                 "eslint:recommended",
+                //eslint가 추천하는 기본 코딩 스타일 적용
+
                 "plugin:react/recommended"
-               ],
+                //react 코딩시 eslint가 추천하는 코딩 스타일 적용
+                //npm i eslint-plugin-react   
+            ],
+
     "plugins":[
-        "import",       //npm i eslint-plugin-import 
-        "react-hooks"
+        "import",       //npm i eslint-plugin-import -- import,export 가능하게 하는 plugin
+        "react-hooks"   //npm i eslint-plugin-react-hooks
     ]
 }

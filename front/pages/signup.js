@@ -10,6 +10,18 @@ const TextInput = ({value}) =>{
 TextInput.propTypes = {
   value: PropTypes.string
 }
+
+ 
+export const useInput = (initValue = null)=>{
+  const [value,setter] = useState(initValue);
+  const handler = useCallback((e) =>{
+
+      console.log(e.target.value)
+      setter(e.target.value)
+
+  } ,[]);
+  return [value,handler];  
+}
 const SignUp = () =>{
 
   //setState 실행 시 해당 컴포넌트 전체가 리렌더링 됨을 잊지 마라. 
@@ -38,17 +50,7 @@ const SignUp = () =>{
 
   //id인풋만 커스텀 훅으로
   //-------------------------------
- 
-  const useInput = (initValue = null)=>{
-      const [value,setter] = useState(initValue);
-      const handler = useCallback((e) =>{
-    
-          console.log(e.target.value)
-          setter(e.target.value)
 
-      } ,[]);
-      return [value,handler];  
-  }
   const [id,onChangeId] = useInput('')
   //-------------------------------
 
