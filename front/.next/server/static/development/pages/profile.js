@@ -88,10 +88,67 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/NicknameEditForm.js":
+/*!****************************************!*\
+  !*** ./components/NicknameEditForm.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\NicknameEditForm.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const NicknameEditForm = () => {
+  return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+    style: {
+      marginBottom: '20px',
+      border: '1px solid #d9d9d9',
+      padding: '20px'
+    },
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11,
+      columnNumber: 9
+    }
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    addonBefore: "\uB2C9\uB124\uC784",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12,
+      columnNumber: 9
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    type: "primary",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13,
+      columnNumber: 9
+    }
+  }, "\uC218\uC815"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NicknameEditForm);
+
+/***/ }),
 
 /***/ "./pages/profile.js":
 /*!**************************!*\
@@ -104,34 +161,215 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\profile.js";
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_NicknameEditForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/NicknameEditForm */ "./components/NicknameEditForm.js");
+var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\profile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
+
+
+
 const Profile = () => {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
+  return __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7,
+      lineNumber: 11,
       columnNumber: 9
     }
-  }, "\uD504\uB85C\uD544"));
+  }, __jsx(_components_NicknameEditForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13,
+      columnNumber: 17
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"], {
+    style: {
+      marginBottom: '20PX'
+    },
+    grid: {
+      gutter: 4,
+      xs: 2,
+      md: 3
+    },
+    size: "small",
+    header: __jsx("div", {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 18,
+        columnNumber: 29
+      }
+    }, "\uD314\uB85C\uC789 \uBAA9\uB85D"),
+    loadMore: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      style: {
+        width: '100%'
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 19,
+        columnNumber: 31
+      }
+    }, "\uB354 \uBCF4\uAE30"),
+    bordered: true,
+    dataSource: ['제로초', '정준일', '노드버드오피셜'],
+    renderItem: item => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+      style: {
+        marginTop: '20px'
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 23,
+        columnNumber: 25
+      }
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+      key: "stop",
+      actions: [__jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["StopOutlined"], {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 24,
+          columnNumber: 56
+        }
+      })],
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 24,
+        columnNumber: 29
+      }
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
+      description: item,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 24,
+        columnNumber: 75
+      }
+    }))),
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14,
+      columnNumber: 17
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"], {
+    style: {
+      marginBottom: '20PX'
+    },
+    grid: {
+      gutter: 4,
+      xs: 2,
+      md: 3
+    },
+    size: "small",
+    header: __jsx("div", {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 32,
+        columnNumber: 29
+      }
+    }, "\uD314\uB85C\uC6CC \uBAA9\uB85D"),
+    loadMore: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      style: {
+        width: '100%'
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 33,
+        columnNumber: 31
+      }
+    }, "\uB354 \uBCF4\uAE30"),
+    bordered: true,
+    dataSource: ['제로초', '정준일', '노드버드오피셜'],
+    renderItem: item => __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+      style: {
+        marginTop: '20px'
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 37,
+        columnNumber: 25
+      }
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+      key: "stop",
+      actions: [__jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["StopOutlined"], {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 38,
+          columnNumber: 56
+        }
+      })],
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 38,
+        columnNumber: 29
+      }
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
+      description: item,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 38,
+        columnNumber: 75
+      }
+    }))),
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28,
+      columnNumber: 18
+    }
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Profile);
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!********************************!*\
   !*** multi ./pages/profile.js ***!
   \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\git Repository\practice\front\pages\profile.js */"./pages/profile.js");
+module.exports = __webpack_require__(/*! C:\git Repository\practice\front\pages\profile.js */"./pages/profile.js");
 
+
+/***/ }),
+
+/***/ "@ant-design/icons":
+/*!************************************!*\
+  !*** external "@ant-design/icons" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@ant-design/icons");
+
+/***/ }),
+
+/***/ "antd":
+/*!***********************!*\
+  !*** external "antd" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("antd");
 
 /***/ }),
 

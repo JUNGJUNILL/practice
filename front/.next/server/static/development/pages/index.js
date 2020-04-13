@@ -88,10 +88,275 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/PostCard.js":
+/*!********************************!*\
+  !*** ./components/PostCard.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostCard.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+const PostCard = ({
+  post
+}) => {
+  return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+    key: +post.createdAt,
+    cover: post.img && __jsx("img", {
+      alt: "example",
+      src: post.img,
+      style: {
+        width: '100px'
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 15,
+        columnNumber: 32
+      }
+    }),
+    actions: [__jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["RetweetOutlined"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 17,
+        columnNumber: 17
+      }
+    }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["HeartOutlined"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 18,
+        columnNumber: 17
+      }
+    }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["EllipsisOutlined"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 19,
+        columnNumber: 17
+      }
+    })],
+    extra: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 21,
+        columnNumber: 20
+      }
+    }, "\uD314\uB85C\uC6B0"),
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13,
+      columnNumber: 9
+    }
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
+    avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 24,
+        columnNumber: 25
+      }
+    }, post.User.nickname[0]),
+    title: post.User.nickname,
+    description: post.content,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23,
+      columnNumber: 13
+    }
+  }));
+};
+
+PostCard.propTypes = {
+  //shape을 써서 객체의 각 props의 상세 타입을 지정할 수 있다.
+  post: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
+    User: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+    content: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+    img: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+    createdAt: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object
+  })
+};
+/* harmony default export */ __webpack_exports__["default"] = (PostCard);
+
+/***/ }),
+
+/***/ "./components/PostForm.js":
+/*!********************************!*\
+  !*** ./components/PostForm.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostForm.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const dummy = {
+  isLoggedIn: true,
+  mainPosts: [{
+    User: {
+      id: 1,
+      nickname: '정준일'
+    },
+    img: 'http://zzalbang.kr/wp-content/uploads/2019/06/944afa44ly1g3bon5dh4kj20u0140gvl-851x1024.jpg',
+    content: '요즘 핫한 배우'
+  }, {
+    User: {
+      id: 2,
+      nickname: '정준이'
+    },
+    img: 'https://i.pinimg.com/236x/94/c7/82/94c7822c6c5c33cd442c3b8d4fe524c6.jpg',
+    content: '김근식 군 추천배우'
+  }, {
+    User: {
+      id: 3,
+      nickname: '정준삼'
+    },
+    img: 'http://simg.donga.com/ugc/MLBPARK/Board/15/18/54/29/1518542968657.jpg',
+    content: '아스카짱!'
+  }],
+  imagePaths: []
+};
+
+const PostForm = () => {
+  return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+    style: {
+      margin: '10px 0 20px'
+    },
+    encType: "multipart/form-data",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48,
+      columnNumber: 17
+    }
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"].TextArea, {
+    maxLength: 140,
+    placeholder: "\uC5B4\uB5A4\uC77C\uC774 \uC788\uC5C8\uB098\uC694?",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49,
+      columnNumber: 25
+    }
+  }), __jsx("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50,
+      columnNumber: 25
+    }
+  }, __jsx("input", {
+    type: "file",
+    multiple: true,
+    hidden: true,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51,
+      columnNumber: 29
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 52,
+      columnNumber: 29
+    }
+  }, "\uC774\uBBF8\uC9C0 \uC5C5\uB85C\uB4DC"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    type: "primary",
+    style: {
+      float: 'right'
+    },
+    htmlType: "submit",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53,
+      columnNumber: 29
+    }
+  }, "\uC9F9\uC9F9")), __jsx("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55,
+      columnNumber: 25
+    }
+  }, dummy.imagePaths.map((v, i) => {
+    return __jsx("div", {
+      key: i,
+      style: {
+        display: 'inline-block'
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 59,
+        columnNumber: 33
+      }
+    }, __jsx("img", {
+      src: v,
+      style: {
+        width: '200px'
+      },
+      alt: v,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 60,
+        columnNumber: 33
+      }
+    }), __jsx("div", {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 61,
+        columnNumber: 33
+      }
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 62,
+        columnNumber: 37
+      }
+    }, "\uC81C\uAC70")));
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PostForm);
+
+/***/ }),
 
 /***/ "./pages/index.js":
 /*!************************!*\
@@ -104,11 +369,9 @@ module.exports =
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
-/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
-/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\index.js";
+/* harmony import */ var _components_PostForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/PostForm */ "./components/PostForm.js");
+/* harmony import */ var _components_PostCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PostCard */ "./components/PostCard.js");
+var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -145,178 +408,27 @@ const Home = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53,
+      lineNumber: 49,
       columnNumber: 13
     }
-  }, dummy.isLoggedIn && __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
-    encType: "multipart/form-data",
+  }, dummy.isLoggedIn && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54,
+      lineNumber: 50,
       columnNumber: 38
     }
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"].TextArea, {
-    maxLength: 140,
-    placeholder: "\uC5B4\uB5A4\uC77C\uC774 \uC788\uC5C8\uB098\uC694?",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 55,
-      columnNumber: 21
-    }
-  }), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 56,
-      columnNumber: 17
-    }
-  }, __jsx("input", {
-    type: "file",
-    multiple: true,
-    hidden: true,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 57,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 58,
-      columnNumber: 21
-    }
-  }, "\uC774\uBBF8\uC9C0 \uC5C5\uB85C\uB4DC"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    type: "primary",
-    style: {
-      float: 'right'
-    },
-    htmlType: "submit",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 59,
-      columnNumber: 21
-    }
-  }, "\uC9F9\uC9F9")), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 61,
-      columnNumber: 17
-    }
-  }, dummy.imagePaths.map((v, i) => {
-    return __jsx("div", {
-      key: i,
-      style: {
-        display: 'inline-block'
-      },
+  }), dummy.mainPosts.map((v, i) => {
+    return __jsx(_components_PostCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: v.User.id,
+      post: v,
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 65,
-        columnNumber: 25
-      }
-    }, __jsx("img", {
-      src: v,
-      style: {
-        width: '200px'
-      },
-      alt: v,
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 66,
-        columnNumber: 27
-      }
-    }), __jsx("div", {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 67,
-        columnNumber: 27
-      }
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 68,
+        lineNumber: 53,
         columnNumber: 29
       }
-    }, "\uC81C\uAC70")));
-  }))), dummy.mainPosts.map((v, i) => {
-    return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-      key: i,
-      cover: v.img && __jsx("img", {
-        alt: "example",
-        src: v.img,
-        style: {
-          width: '100px'
-        },
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 79,
-          columnNumber: 45
-        }
-      }),
-      actions: [__jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["RetweetOutlined"], {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 81,
-          columnNumber: 33
-        }
-      }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["HeartOutlined"], {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 82,
-          columnNumber: 33
-        }
-      }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["EllipsisOutlined"], {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 83,
-          columnNumber: 33
-        }
-      })],
-      extra: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 85,
-          columnNumber: 36
-        }
-      }, "\uD314\uB85C\uC6B0"),
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 77,
-        columnNumber: 25
-      }
-    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
-      avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 88,
-          columnNumber: 37
-        }
-      }, v.User.nickname[0]),
-      title: v.User.nickname,
-      description: v.content,
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 87,
-        columnNumber: 25
-      }
-    }));
+    });
   }));
 };
 
@@ -324,14 +436,14 @@ const Home = () => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\git Repository\practice\front\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\git Repository\practice\front\pages\index.js */"./pages/index.js");
 
 
 /***/ }),
@@ -355,6 +467,17 @@ module.exports = require("@ant-design/icons");
 /***/ (function(module, exports) {
 
 module.exports = require("antd");
+
+/***/ }),
+
+/***/ "prop-types":
+/*!*****************************!*\
+  !*** external "prop-types" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
 
 /***/ }),
 

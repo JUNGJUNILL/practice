@@ -1,11 +1,8 @@
 
 import React from 'react'; 
-import {Form, Input, Button, Card,  Avatar} from 'antd'; 
-import {RetweetOutlined ,
-    HeartOutlined ,
-    EllipsisOutlined 
+import PostForm from '../components/PostForm'
+import PostCard from '../components/PostCard'
 
-} from '@ant-design/icons';
 
 const dummy = {
     isLoggedIn : true,  
@@ -46,50 +43,14 @@ const dummy = {
     imagePaths : [],
 }
 
-
 const Home = ()=>{
 
     return (
             <div>
-                {dummy.isLoggedIn && <Form encType="multipart/form-data">               
-                    <Input.TextArea maxLength={140} placeholder="어떤일이 있었나요?"/>
-                <div>
-                    <input type="file" multiple hidden />
-                    <Button>이미지 업로드</Button>
-                    <Button type="primary" style={{float:'right'}} htmlType="submit">짹짹</Button>
-                </div>
-                <div>
-                {dummy.imagePaths.map((v,i)=>{
-                    return (
-
-                        <div key={i} style={{display:'inline-block'}}>
-                          <img src={v} style={{width:'200px' }} alt={v} />
-                          <div>
-                            <Button>제거</Button>
-                          </div>
-                        </div>
-                    )
-                })}
-                </div>
-                </Form>}
+                {dummy.isLoggedIn && <PostForm />}
                 {dummy.mainPosts.map((v,i)=>{
                     return (
-                        <Card
-                            key={i}
-                            cover={v.img && <img alt="example" src={v.img} style={{width:'100px'}}/>}
-                            actions={[
-                                <RetweetOutlined />,
-                                <HeartOutlined />,
-                                <EllipsisOutlined />,
-                            ]}
-                            extra={<Button>팔로우</Button>}
-                        >
-                        <Card.Meta 
-                            avatar={<Avatar>{v.User.nickname[0]}</Avatar>}
-                            title={v.User.nickname}
-                            description={v.content}
-                        />
-                        </Card>
+                            <PostCard key={v.User.id} post={v} />
                     )
                 })}
             </div>
