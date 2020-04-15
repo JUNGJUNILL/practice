@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _LoginForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./LoginForm */ "./components/LoginForm.js");
 /* harmony import */ var _UserProfile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserProfile */ "./components/UserProfile.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\AppLayout.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\AppLayout.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -308,7 +308,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _pages_signup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/signup */ "./pages/signup.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\LoginForm.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\LoginForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -464,7 +464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\UserProfile.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\UserProfile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2251,7 +2251,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next-redux-wrapper */ "next-redux-wrapper");
 /* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__);
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\_app.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 //next에서 제공하는 최상위 컴포넌트 파일 (_app.js로 직접 만들어야 한다. )
 //페이지들의 공통적인 부분기여주기 
@@ -2335,7 +2335,11 @@ NodeBird.propTypes = {
 }; //제로초가 그냥 외우라고함... 
 
 /* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()((initialState, options) => {
-  const store = Object(redux__WEBPACK_IMPORTED_MODULE_6__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], initialState);
+  const middleWares = [];
+  const enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_6__["applyMiddleware"])(...middleWares), !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f //브라우저에 REDUX DEVTOOLS 설치시 
+  //window객체애 해당 변수(__REDUX_DEVTOOLS_EXTENSION)가 생성됨, __REDUX_DEVTOOLS_EXTENSION__()해당 함수를 사용할 수 있게됨
+  );
+  const store = Object(redux__WEBPACK_IMPORTED_MODULE_6__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], initialState, enhancer);
   return store;
 })(NodeBird));
 
@@ -2357,7 +2361,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "prop-types");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\signup.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\signup.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2781,13 +2785,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //초기 state
 const initialState = {
   isLoggedIn: false,
-  user: {}
+  user: {
+    nickname: ''
+  }
 };
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT'; //실제 액션 
 
 const loginAction = {
-  type: LOG_IN
+  type: LOG_IN,
+  data: {
+    nickname: '주닐정'
+  }
 };
 const logOutAction = {
   type: LOG_OUT
@@ -2799,7 +2808,7 @@ const reducer = (state = initialState, action) => {
       {
         return _objectSpread({}, state, {
           isLoggedIn: true,
-          user: dummyUser
+          user: action.data
         });
       }
 

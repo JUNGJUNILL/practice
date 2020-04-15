@@ -4,7 +4,9 @@
 export const initialState = {
 
     isLoggedIn : false, 
-    user:{}, 
+    user:{
+        nickname:'', 
+    }, 
 };
 
 export const LOG_IN = 'LOG_IN'; 
@@ -13,6 +15,9 @@ export const LOG_OUT = 'LOG_OUT';
 //실제 액션 
 export const loginAction = {
     type:LOG_IN,
+    data:{
+        nickname:'주닐정', 
+    }, 
 }
 
 export const logOutAction = {
@@ -27,7 +32,7 @@ const reducer = (state = initialState , action)=>{
             return {
                 ...state,
                 isLoggedIn:true,
-                user:dummyUser,
+                user:action.data,
             };
         }
         case LOG_OUT:{

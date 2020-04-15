@@ -1,7 +1,9 @@
 
-import React from 'react'; 
+import React, {useEffect} from 'react'; 
 import PostForm from '../components/PostForm'
 import PostCard from '../components/PostCard'
+import {useDispatch ,useSelector} from 'react-redux'
+import { LOG_IN, loginAction } from '../reducers/user';
 
 
 const dummy = {
@@ -45,8 +47,20 @@ const dummy = {
 
 const Home = ()=>{
 
+    const dispatch = useDispatch(); 
+                                //dispatch() 는 useState 의 setState라고 생각하면 편하다.
+
+    const {isLoggedIn , user} = useSelector(state => state.user);
+                                //리덕스 STATE를 가져오기 위해서는 userSelector 
+    useEffect(()=>{
+        dispatch(loginAction);
+
+    },[])
+
     return (
+      
             <div>
+            {user ? <div>로그인됨</div> : <div>로그인 안됨</div>}
                 {dummy.isLoggedIn && <PostForm />}
                 {dummy.mainPosts.map((v,i)=>{
                     return (

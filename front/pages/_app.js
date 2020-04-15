@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
 //--react, redux 연결하기 
 import {Provider} from 'react-redux'; //redux state 제공, 이것으로 전체 컴포넌트의 state를 관리 할 수 있다. 
 import reducer from '../reducers'; 
-import {createStore} from 'redux'
+import {createStore, compose, applyMiddleware} from 'redux'
 import withRedux from 'next-redux-wrapper'
 
 const NodeBird = ({Component,store}) =>{
@@ -39,8 +39,22 @@ NodeBird.propTypes = {
     Component: PropTypes.elementType,
     store    : PropTypes.object, 
 }
+
+
 //제로초가 그냥 외우라고함... 
 export default withRedux((initialState,options)=>{
-    const store = createStore(reducer,initialState); 
+    const middleWares = [];
+                     
+                      
+    const enhancer = compose(
+                                applyMiddleware(...middleWares),
+                                !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION !== 'undefined'? window.__REDUX_DEVTOOLS_EXTENSION__() : (f)=>f,
+                                //브라우저에 REDUX DEVTOOLS 설치시 
+                                //window객체애 해당 변수(__REDUX_DEVTOOLS_EXTENSION)가 생성됨, __REDUX_DEVTOOLS_EXTENSION__()해당 함수를 사용할 수 있게됨
+
+                                );
+    const store = createStore(reducer,initialState,enhancer); 
+
+    
         return store; 
 })(NodeBird); 
