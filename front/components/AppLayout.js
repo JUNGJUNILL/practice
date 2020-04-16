@@ -1,23 +1,23 @@
-import React,{useState} from 'react';
+import React,{useEffect} from 'react';
 import Link from 'next/link';
 import { Menu, Input, Button, Row, Col, Card, Avatar, Form } from 'antd';
 import PropTypes from 'prop-types'
 import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
 
-
-const dummy= {
-
-    nickname:'정준일', 
-    Post:['정','준'],
-    Followings:['정','준'],
-    Followers:['정','준'],
-    isLoggedIn: false, 
-}
+import {useDispatch ,useSelector} from 'react-redux'
+import { LOG_IN, loginAction } from '../reducers/user';
 
 const AppLayout = ({children}) =>{
 
+    const dispatch = useDispatch();
+    const {isLoggedIn} = useSelector(state=>state.user); 
 
+    useEffect(()=>{
+        console.log('애으?>>' + isLoggedIn); 
+        //dispatch(loginAction);
+
+    },[])
         return(
            <div>
                 <Menu mode="horizontal">
@@ -30,7 +30,7 @@ const AppLayout = ({children}) =>{
                 <Link href="signup"><a><Button>회원가입</Button></a></Link>
                 <Row gutter={10}>
                     <Col xs={24} md={6}>
-                    {dummy.isLoggedIn
+                    {isLoggedIn
                      ? <UserProfile />
               
                      :

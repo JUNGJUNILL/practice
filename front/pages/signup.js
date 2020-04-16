@@ -1,6 +1,9 @@
 import React ,{ useState ,useCallback}from 'react'
 import {Form, Input, Checkbox,Button} from 'antd'
 import PropTypes from 'prop-types'
+
+import {useDispatch ,useSelector} from 'react-redux'
+
 const TextInput = ({value}) =>{
     return (
     <div>{value}</div>

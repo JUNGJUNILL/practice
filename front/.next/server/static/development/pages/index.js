@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "prop-types");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\PostCard.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostCard.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -217,38 +217,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd */ "antd");
 /* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\PostForm.js";
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const dummy = {
-  isLoggedIn: true,
-  mainPosts: [{
-    User: {
-      id: 1,
-      nickname: '정준일'
-    },
-    img: 'http://zzalbang.kr/wp-content/uploads/2019/06/944afa44ly1g3bon5dh4kj20u0140gvl-851x1024.jpg',
-    content: '요즘 핫한 배우'
-  }, {
-    User: {
-      id: 2,
-      nickname: '정준이'
-    },
-    img: 'https://i.pinimg.com/236x/94/c7/82/94c7822c6c5c33cd442c3b8d4fe524c6.jpg',
-    content: '김근식 군 추천배우'
-  }, {
-    User: {
-      id: 3,
-      nickname: '정준삼'
-    },
-    img: 'http://simg.donga.com/ugc/MLBPARK/Board/15/18/54/29/1518542968657.jpg',
-    content: '아스카짱!'
-  }],
-  imagePaths: []
-};
+
+
 
 const PostForm = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
+  const {
+    imagePaths
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(state => state.post);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {// dispatch(loginAction);
+  }, []);
   return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
     style: {
       margin: '10px 0 20px'
@@ -257,7 +242,7 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48,
+      lineNumber: 19,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"].TextArea, {
@@ -266,14 +251,14 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49,
+      lineNumber: 20,
       columnNumber: 25
     }
   }), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50,
+      lineNumber: 21,
       columnNumber: 25
     }
   }, __jsx("input", {
@@ -283,14 +268,14 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51,
+      lineNumber: 22,
       columnNumber: 29
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52,
+      lineNumber: 23,
       columnNumber: 29
     }
   }, "\uC774\uBBF8\uC9C0 \uC5C5\uB85C\uB4DC"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -302,17 +287,17 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53,
+      lineNumber: 24,
       columnNumber: 29
     }
   }, "\uC9F9\uC9F9")), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55,
+      lineNumber: 26,
       columnNumber: 25
     }
-  }, dummy.imagePaths.map((v, i) => {
+  }, imagePaths.map((v, i) => {
     return __jsx("div", {
       key: i,
       style: {
@@ -321,7 +306,7 @@ const PostForm = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 59,
+        lineNumber: 30,
         columnNumber: 33
       }
     }, __jsx("img", {
@@ -333,21 +318,21 @@ const PostForm = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 60,
+        lineNumber: 31,
         columnNumber: 33
       }
     }), __jsx("div", {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 61,
+        lineNumber: 32,
         columnNumber: 33
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 62,
+        lineNumber: 33,
         columnNumber: 37
       }
     }, "\uC81C\uAC70")));
@@ -374,87 +359,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\index.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
 
-const dummy = {
-  isLoggedIn: true,
-  mainPosts: [{
-    User: {
-      id: 1,
-      nickname: '정준일'
-    },
-    img: 'http://zzalbang.kr/wp-content/uploads/2019/06/944afa44ly1g3bon5dh4kj20u0140gvl-851x1024.jpg',
-    content: '요즘 핫한 배우'
-  }, {
-    User: {
-      id: 2,
-      nickname: '정준이'
-    },
-    img: 'https://i.pinimg.com/236x/94/c7/82/94c7822c6c5c33cd442c3b8d4fe524c6.jpg',
-    content: '김근식 군 추천배우'
-  }, {
-    User: {
-      id: 3,
-      nickname: '정준삼'
-    },
-    img: 'http://simg.donga.com/ugc/MLBPARK/Board/15/18/54/29/1518542968657.jpg',
-    content: '아스카짱!'
-  }],
-  imagePaths: []
-};
 
 const Home = () => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])(); //dispatch() 는 useState 의 setState라고 생각하면 편하다.
 
   const {
-    isLoggedIn,
-    user
+    user,
+    isLoggedIn
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.user); //리덕스 STATE를 가져오기 위해서는 userSelector 
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    dispatch(_reducers_user__WEBPACK_IMPORTED_MODULE_4__["loginAction"]);
+  const {
+    mainPosts
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.post);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {//   dispatch(loginAction);
   }, []);
   return __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62,
+      lineNumber: 26,
       columnNumber: 13
     }
   }, user ? __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63,
+      lineNumber: 27,
       columnNumber: 21
     }
   }, "\uB85C\uADF8\uC778\uB428") : __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63,
+      lineNumber: 27,
       columnNumber: 39
     }
-  }, "\uB85C\uADF8\uC778 \uC548\uB428"), dummy.isLoggedIn && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "\uB85C\uADF8\uC778 \uC548\uB428"), isLoggedIn && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64,
-      columnNumber: 38
+      lineNumber: 28,
+      columnNumber: 32
     }
-  }), dummy.mainPosts.map((v, i) => {
+  }), mainPosts.map((v, i) => {
     return __jsx(_components_PostCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: v.User.id,
       post: v,
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 67,
+        lineNumber: 31,
         columnNumber: 29
       }
     });
@@ -469,12 +430,14 @@ const Home = () => {
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, LOG_IN, LOG_OUT, loginAction, logOutAction, default */
+/*! exports provided: initialState, SIGN_UP, SIGN_UP_SUCCESS, LOG_IN, LOG_OUT, loginAction, logOutAction, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP", function() { return SIGN_UP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP_SUCCESS", function() { return SIGN_UP_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_IN", function() { return LOG_IN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT", function() { return LOG_OUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginAction", function() { return loginAction; });
@@ -487,12 +450,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 //user의 store 
 //초기 state
+const dummyUser = {
+  nickname: '정준일',
+  Post: ['정', '준'],
+  Followings: ['정', '준'],
+  Followers: ['정', '준'],
+  isLoggedIn: false
+};
 const initialState = {
   isLoggedIn: false,
-  user: {
-    nickname: ''
-  }
+  user: null
 };
+const SIGN_UP = 'SIGN_UP';
+const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT'; //실제 액션 
 
@@ -512,7 +482,7 @@ const reducer = (state = initialState, action) => {
       {
         return _objectSpread({}, state, {
           isLoggedIn: true,
-          user: action.data
+          user: dummyUser
         });
       }
 
@@ -521,6 +491,13 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           isLoggedIn: false,
           user: null
+        });
+      }
+
+    case SIGN_UP:
+      {
+        return _objectSpread({}, state, {
+          signUpData: action.data
         });
       }
 
@@ -535,14 +512,14 @@ const reducer = (state = initialState, action) => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\git Repository\practice\front\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\git Repository\practice\front\pages\index.js */"./pages/index.js");
 
 
 /***/ }),
