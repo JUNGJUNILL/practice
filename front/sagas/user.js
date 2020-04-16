@@ -1,8 +1,12 @@
 import {all ,fork, takeLatest, call, put }from 'redux-saga/effects'; 
-import { LOG_IN, LOGIN_SUCCESS, LOG_IN_FAILURE } from '../reducers/user';
+import { LOG_IN, LOG_IN_SUCCESS, LOG_IN_FAILURE } from '../reducers/user';
 
+//call : 함수 동기적 호출 
+//fort : 함수 비동기적 호출 
+//put  : 액션 , dispatch
 
 function* loginAPI(){
+//서버에 요청하는 부분 
 
 }
 
@@ -12,11 +16,14 @@ function* login(){
         
         yield call(loginAPI); 
         yield put({
-            type: LOGIN_SUCCESS,
+            type: LOG_IN_SUCCESS,
         })
 
     }catch(e){
         console.error(e); 
+        yield put({
+            type:LOG_IN_FAILURE,
+        });
     }
 
 }

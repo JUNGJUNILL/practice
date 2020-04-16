@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import {useDispatch ,useSelector} from 'react-redux'
 
+import {  signUpAction } from '../reducers/user';
 const TextInput = ({value}) =>{
     return (
     <div>{value}</div>
@@ -34,11 +35,18 @@ const SignUp = () =>{
   const [term,setTerm] =useState('')
   const [passwordError, setPasswordError] = useState(false) 
   const [termError, setTermError] = useState(false)
+  
+  const dispatch = useDispatch(); 
 
   const onSubmit = useCallback((e) =>{
       
-    e.preventDefault();
+   // e.preventDefault();
     
+    console.log({
+      id,
+      password,
+      nick,
+    }); 
     if(password !== passwordCheck){
         return setPasswordError(true); 
     }
@@ -46,6 +54,10 @@ const SignUp = () =>{
     if(!term){
         return setTermError(true); 
     }
+
+    dispatch(signUpAction({
+      id,password,nick
+    }));
 
 
 
@@ -81,7 +93,7 @@ const SignUp = () =>{
     return(
         
         <>
-            <Form onSubmit={onSubmit} style={{padding:10}}>
+            <Form onFinish={onSubmit} style={{padding:10}}>
             <TextInput value={'124'}></TextInput>
                 <div>
                     <label htmlFor="user-id">아이디</label>
