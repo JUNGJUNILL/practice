@@ -16,6 +16,11 @@ import reducer from '../reducers';
 import {createStore, compose, applyMiddleware} from 'redux'
 import withRedux from 'next-redux-wrapper'
 
+
+//리덕스 사가 
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../sagas';
+
 const NodeBird = ({Component,store}) =>{
                     //▲ next에서 제공하는 props
 
@@ -40,21 +45,38 @@ NodeBird.propTypes = {
     store    : PropTypes.object, 
 }
 
+//하이오더 컴포넌트 
+/*
+hello(Component); 
+const hello = (Component) => ()=>{
+    return (
+        <Component good="i'm a good person"/>
+    )
+}
+*/
 
 //제로초가 그냥 외우라고함... 
 export default withRedux((initialState,options)=>{
-    const middleWares = [];
+
+    const sagaMiddleware = createSagaMiddleware();
+    const middleWares = [sagaMiddleware];
                      
                       
-    const enhancer = compose(
+    const enhancer =  process.env.NODE_ENV ==='production' 
+                                ? compose(
+                               
                                 applyMiddleware(...middleWares),
-                                !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION !== 'undefined'? window.__REDUX_DEVTOOLS_EXTENSION__() : (f)=>f,
-                                //브라우저에 REDUX DEVTOOLS 설치시 
-                                //window객체애 해당 변수(__REDUX_DEVTOOLS_EXTENSION)가 생성됨, __REDUX_DEVTOOLS_EXTENSION__()해당 함수를 사용할 수 있게됨
-
-                                );
-    const store = createStore(reducer,initialState,enhancer); 
-
+                    
+                                )
+                                : compose(
+                               
+                                    applyMiddleware(...middleWares),
+                                    !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION !== 'undefined'? window.__REDUX_DEVTOOLS_EXTENSION__() : (f)=>f,
+                                    //브라우저에 REDUX DEVTOOLS 설치시 
+                                    //window객체애 해당 변수(__REDUX_DEVTOOLS_EXTENSION)가 생성됨, __REDUX_DEVTOOLS_EXTENSION__()해당 함수를 사용할 수 있게됨
     
-        return store; 
+                                    )
+    const store = createStore(reducer,initialState,enhancer); 
+    sagaMiddleware.run(rootSaga);
+    return store; 
 })(NodeBird); 
