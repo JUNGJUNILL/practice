@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "prop-types");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\PostCard.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostCard.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -220,7 +220,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\PostForm.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -359,7 +359,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\index.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -378,34 +378,38 @@ const Home = () => {
   const {
     mainPosts
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.post);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {//   dispatch(loginAction);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    //   dispatch(loginAction);
+    dispatch({
+      type: 'HELLO_SAGA'
+    });
   }, []);
   return __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26,
+      lineNumber: 29,
       columnNumber: 13
     }
   }, user ? __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27,
+      lineNumber: 30,
       columnNumber: 21
     }
   }, "\uB85C\uADF8\uC778\uB428") : __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27,
+      lineNumber: 30,
       columnNumber: 39
     }
   }, "\uB85C\uADF8\uC778 \uC548\uB428"), isLoggedIn && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28,
+      lineNumber: 31,
       columnNumber: 32
     }
   }), mainPosts.map((v, i) => {
@@ -415,7 +419,7 @@ const Home = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 31,
+        lineNumber: 34,
         columnNumber: 29
       }
     });
@@ -531,7 +535,7 @@ const reducer = (state = initialState, action) => {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\git Repository\practice\front\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\git Repository\practice\front\pages\index.js */"./pages/index.js");
 
 
 /***/ }),

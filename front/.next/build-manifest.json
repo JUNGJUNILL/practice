@@ -1,7 +1,7 @@
 {
   "devFiles": [
-    "static/development/dll/dll_fe850393d08f72bfe67b.js",
-    "static/development/dll/dll_fe850393d08f72bfe67b.js.map"
+    "static/development/dll/dll_eb7e2ce658ce70f7c53b.js",
+    "static/development/dll/dll_eb7e2ce658ce70f7c53b.js.map"
   ],
   "lowPriorityFiles": [
     "static/development/_buildManifest.js",
@@ -25,10 +25,6 @@
       "static/runtime/polyfills.js.map"
     ],
     "/index": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/signup": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

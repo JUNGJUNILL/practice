@@ -18,6 +18,9 @@ const Home = ()=>{
   
     useEffect(()=>{
      //   dispatch(loginAction);
+     dispatch({
+         type:'HELLO_SAGA', 
+     })
 
     },[])
 

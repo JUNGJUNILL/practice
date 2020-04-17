@@ -115,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\AppLayout.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\AppLayout.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -316,7 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\LoginForm.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\LoginForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -479,7 +479,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\UserProfile.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\UserProfile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2281,7 +2281,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-saga */ "redux-saga");
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\_app.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 //next에서 제공하는 최상위 컴포넌트 파일 (_app.js로 직접 만들어야 한다. )
 //페이지들의 공통적인 부분기여주기 
@@ -2377,16 +2377,16 @@ const hello = (Component) => ()=>{
 */
 //제로초가 그냥 외우라고함... 
 
-/* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()((initialState, options) => {
+const configureStore = (initialState, options) => {
   const sagaMiddleware = redux_saga__WEBPACK_IMPORTED_MODULE_8___default()();
-  const middleWares = [sagaMiddleware];
-  const enhancer = false ? undefined : Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_6__["applyMiddleware"])(...middleWares), !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f //브라우저에 REDUX DEVTOOLS 설치시 
-  //window객체애 해당 변수(__REDUX_DEVTOOLS_EXTENSION)가 생성됨, __REDUX_DEVTOOLS_EXTENSION__()해당 함수를 사용할 수 있게됨
-  );
+  const middlewares = [sagaMiddleware];
+  const enhancer = false ? undefined : Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_6__["applyMiddleware"])(...middlewares), !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f);
   const store = Object(redux__WEBPACK_IMPORTED_MODULE_6__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], initialState, enhancer);
   sagaMiddleware.run(_sagas__WEBPACK_IMPORTED_MODULE_9__["default"]);
   return store;
-})(NodeBird));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()(configureStore)(NodeBird));
 
 /***/ }),
 
@@ -2409,7 +2409,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\signup.js";
+var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\signup.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2989,11 +2989,12 @@ function* postSaga() {
 /*!***********************!*\
   !*** ./sagas/user.js ***!
   \***********************/
-/*! exports provided: default */
+/*! exports provided: HELLO_SAGA, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HELLO_SAGA", function() { return HELLO_SAGA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return userSaga; });
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
@@ -3002,6 +3003,9 @@ __webpack_require__.r(__webpack_exports__);
  //call : 함수 동기적 호출 
 //fort : 함수 비동기적 호출 
 //put  : 액션 , dispatch
+//take : 해당 액션이 dispatch되면 제너레이터를 next하는 이펙트 
+
+const HELLO_SAGA = 'HELLO_SAGA';
 
 function* loginAPI() {//서버에 요청하는 부분 
 }
@@ -3025,8 +3029,25 @@ function* watchLogin() {
   // dispatch될 때 login 제너레이터를 호출한다. 
 }
 
+function* hello() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: 'HELLO_TWO'
+    });
+    console.log('hello');
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function* helloSaga() {
+  console.log('before saga');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["take"])(HELLO_SAGA);
+  console.log('hello saga');
+}
+
 function* userSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogin)]);
+  yield helloSaga();
 }
 
 /***/ }),
