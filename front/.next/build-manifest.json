@@ -1,17 +1,13 @@
 {
   "devFiles": [
-    "static/development/dll/dll_eb7e2ce658ce70f7c53b.js",
-    "static/development/dll/dll_eb7e2ce658ce70f7c53b.js.map"
+    "static/development/dll/dll_f520ad7973ee4f06efdd.js",
+    "static/development/dll/dll_f520ad7973ee4f06efdd.js.map"
   ],
   "lowPriorityFiles": [
     "static/development/_buildManifest.js",
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -23,10 +19,6 @@
     "/_polyfills": [
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
-    ],
-    "/index": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }

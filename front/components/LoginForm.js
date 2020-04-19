@@ -5,7 +5,7 @@ import {Form,Input,Button} from 'antd'
 import {useInput} from '../pages/signup'
 
 import {useDispatch ,useSelector} from 'react-redux'
-import { LOG_IN, loginAction } from '../reducers/user';
+import { LOG_IN_REQUEST, loginAction,LOG_IN_SUCCESS } from '../reducers/user';
 
 const LoginForm = () =>{
 
@@ -17,7 +17,9 @@ const LoginForm = () =>{
 
     const onSubmitForm =useCallback((e) =>{
      //   e.preventDefault(); 
-        dispatch(loginAction); 
+        dispatch({type:LOG_IN_REQUEST});
+      
+         
 
         console.log({
             id,
