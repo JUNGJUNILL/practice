@@ -2,7 +2,7 @@
 
 //초기 state
 const dummyUser = {
-    nickname:'정준일', 
+    nickname:'정준일일', 
     Post:['정','준'],
     Followings:['정','준'],
     Followers:['정','준'],
