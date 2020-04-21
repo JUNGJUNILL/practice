@@ -101,3 +101,10 @@ Dispatch -> Action을 실행
 
 -------------------------------------------------------------------------------
 
+
+
+
+----
+npm i -D eslint-config-airbnb
+npm i -D eslint-plugin-jsx-a11y
+npm i -D babel-eslint --바벨 최신 문법 쓸래? 

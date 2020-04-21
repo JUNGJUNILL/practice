@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import {useDispatch ,useSelector} from 'react-redux'
 
-import {  signUpAction } from '../reducers/user';
+import {  SIGN_UP_REQUEST } from '../reducers/user';
 const TextInput = ({value}) =>{
     return (
     <div>{value}</div>
@@ -40,6 +40,13 @@ const SignUp = () =>{
 
   const onSubmit = useCallback((e) =>{
       
+    // dispatch({type:SIGN_UP_REQUEST,
+    //           data:{
+    //             id,
+    //             password,
+    //             nick,
+    //           }
+    // })
    // e.preventDefault();
     
     console.log({

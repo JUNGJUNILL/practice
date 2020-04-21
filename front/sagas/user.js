@@ -1,7 +1,8 @@
 import {all ,fork, takeLatest, call, put, delay,takeEvery,take }from 'redux-saga/effects'; 
 //이 외에도
 // race, cancel, select, throttle, debounce 등 도 있다. 
-import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE } from '../reducers/user';
+import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_FAILURE, SIGN_UP_SUCCESS } from '../reducers/user';
+import axios from 'axios';
 
 //call : 함수 동기적 호출   (순서를 지켜서 실행해야 하는 경우)
 //fort : 함수 비동기적 호출  
@@ -22,7 +23,8 @@ function* login(){
 
     try{
         
-        yield call(loginAPI);
+        //yield call(loginAPI);
+        yield delay(2000); 
         yield put({
             type: LOG_IN_SUCCESS,
         })
@@ -36,16 +38,39 @@ function* login(){
 
 }
 
+function* signUpAPI(){
+
+    return axios.post('/'); 
+}
+
+function* signUp(){
+
+    try{
+        
+        yield call(signUpAPI);
+        yield put({
+            type: SIGN_UP_REQUEST,
+        })
+
+    }catch(e){
+        console.error(e); 
+        yield put({
+            type:SIGN_UP_FAILURE,
+        });
+    }
+
+}
+
+
 function* watchLogin(){
     console.log('watchLogin'); 
-    yield take(LOG_IN);
-          //takeLatest가 LOG_IN 액션이 dispatch되길 기다려서 
-          // dispatch될 때 login 제너레이터를 호출한다. 
-
-    yield put({
-        type:LOG_IN_SUCCESS,
-    });
+    yield takeEvery(LOG_IN_REQUEST,login); 
 }
+
+function* watchSignUp(){
+    yield takeLatest(SIGN_UP_REQUEST,signUp)
+}
+
 
 function* hello(){
 
@@ -54,8 +79,6 @@ function* hello(){
         type:'Bye Saga'
     })
 }
-
-
 
 function* watchHello(){
      yield takeLatest(HELLO_SAGA, hello); 
@@ -75,6 +98,7 @@ export default function* userSaga() {
 
     yield all([
         fork(watchHello),
+        fork(watchSignUp),
         fork(watchLogin), 
     ]);
 

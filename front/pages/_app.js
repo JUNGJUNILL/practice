@@ -41,8 +41,8 @@ const NodeBird = ({Component,store}) =>{
 
 }
 NodeBird.propTypes = {
-    Component: PropTypes.elementType,
-    store    : PropTypes.object, 
+    Component: PropTypes.elementType.isRequired,
+    store    : PropTypes.object.isRequired, 
 }
 
 //하이오더 컴포넌트 

@@ -6,7 +6,7 @@ import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
 
 import {useDispatch ,useSelector} from 'react-redux'
-import { LOG_IN_REQUEST, loginAction } from '../reducers/user';
+import { LOG_IN_REQUEST } from '../reducers/user';
 
 const AppLayout = ({children}) =>{
 
