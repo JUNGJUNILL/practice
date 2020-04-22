@@ -1,3 +1,5 @@
+import { ConsoleSqlOutlined } from "@ant-design/icons";
+
 export const initialState = {
 
     mainPosts : [  {User : {
@@ -25,7 +27,7 @@ export const initialState = {
                         nickname:'정준삼',
                         
                     }, 
-                    img:'http://simg.donga.com/ugc/MLBPARK/Board/15/18/54/29/1518542968657.jpg',
+                    img:'https://img.extmovie.com/files/attach/images/197/785/981/025/882889a567914626e514406aa0759382.png',
                     content:'아스카짱!', 
 
                     }
@@ -130,6 +132,7 @@ const reducer = (state = initialState , action) =>{
         }
 
         case ADD_POST_SUCCESS : {
+            console.log('action.data ==>' , action);
             return {
                 ...state,
                 isAddingPost:false,
@@ -141,6 +144,14 @@ const reducer = (state = initialState , action) =>{
             return {
                 ...state,
                 addPostErrorReason :action.error,
+            }
+        }
+
+        case ADD_COMMENT_REQUEST : {
+            console.log('ADD_COMMENT_REQUEST==>' , ADD_COMMENT_REQUEST); 
+            return {
+                ...state,
+
             }
         }
         

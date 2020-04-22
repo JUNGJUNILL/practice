@@ -110,8 +110,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "prop-types");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostCard.js";
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\PostCard.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
 
 
 
@@ -120,7 +125,41 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 const PostCard = ({
   post
 }) => {
-  return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+  const {
+    0: commentFormOpend,
+    1: setCommentFormOpend
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const {
+    0: commentText,
+    1: setCommentText
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
+  const {
+    me
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => state.user);
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])();
+  const onToggleComment = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    setCommentFormOpend(preve => !preve);
+  }, []);
+  const onSubmitComment = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
+    if (!me) {
+      return alert('로그인이 필요합니다.');
+    }
+
+    return dispatch({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_5__["ADD_COMMENT_REQUEST"]
+    });
+  }, []);
+  const onChangeCommentText = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
+    setCommentText(e.target.value);
+  }, []);
+  return __jsx("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41,
+      columnNumber: 9
+    }
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
     key: +post.createdAt,
     cover: post.img && __jsx("img", {
       alt: "example",
@@ -131,7 +170,7 @@ const PostCard = ({
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 15,
+        lineNumber: 44,
         columnNumber: 32
       }
     }),
@@ -139,21 +178,29 @@ const PostCard = ({
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17,
+        lineNumber: 46,
         columnNumber: 17
       }
     }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["HeartOutlined"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18,
+        lineNumber: 47,
+        columnNumber: 17
+      }
+    }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["MessageOutlined"], {
+      onClick: onToggleComment,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 48,
         columnNumber: 17
       }
     }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["EllipsisOutlined"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19,
+        lineNumber: 49,
         columnNumber: 17
       }
     })],
@@ -161,14 +208,14 @@ const PostCard = ({
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 21,
+        lineNumber: 51,
         columnNumber: 20
       }
     }, "\uD314\uB85C\uC6B0"),
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13,
+      lineNumber: 42,
       columnNumber: 9
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
@@ -176,7 +223,7 @@ const PostCard = ({
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 24,
+        lineNumber: 54,
         columnNumber: 25
       }
     }, post.User.nickname[0]),
@@ -185,10 +232,80 @@ const PostCard = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23,
+      lineNumber: 53,
       columnNumber: 13
     }
-  }));
+  })), commentFormOpend && __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+    onFinish: onSubmitComment,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61,
+      columnNumber: 13
+    }
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"].Item, {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62,
+      columnNumber: 17
+    }
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"].TextArea, {
+    rows: 4,
+    value: commentText,
+    onChange: onChangeCommentText,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63,
+      columnNumber: 21
+    }
+  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    type: "primary",
+    htmlType: "submit",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65,
+      columnNumber: 17
+    }
+  }, "\uC090\uC57D")), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["List"], {
+    header: `${post.Comments ? post.Comments.length : 0} 댓글`,
+    itemLayout: "horizontal",
+    dataSource: post.Comment || [],
+    renderItem: item => __jsx("li", {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 72,
+        columnNumber: 22
+      }
+    }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Comment"], {
+      author: item.User.nickname,
+      avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 75,
+          columnNumber: 33
+        }
+      }, item.User.nickname[0]),
+      content: item.content,
+      datetime: item.createdAt,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 73,
+        columnNumber: 23
+      }
+    })),
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 67,
+      columnNumber: 13
+    }
+  })));
 };
 
 PostCard.propTypes = {
@@ -220,7 +337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\PostForm.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\PostForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -382,7 +499,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\index.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -503,11 +620,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_REQUEST", function() { return REMOVE_POST_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_SUCCESS", function() { return REMOVE_POST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_FAILURE", function() { return REMOVE_POST_FAILURE; });
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 const initialState = {
   mainPosts: [{
@@ -529,7 +649,7 @@ const initialState = {
       id: 3,
       nickname: '정준삼'
     },
-    img: 'http://simg.donga.com/ugc/MLBPARK/Board/15/18/54/29/1518542968657.jpg',
+    img: 'https://img.extmovie.com/files/attach/images/197/785/981/025/882889a567914626e514406aa0759382.png',
     content: '아스카짱!'
   }],
   //화면에 보일 POST들 
@@ -609,6 +729,7 @@ const reducer = (state = initialState, action) => {
 
     case ADD_POST_SUCCESS:
       {
+        console.log('action.data ==>', action);
         return _objectSpread({}, state, {
           isAddingPost: false,
           mainPosts: [dummyPost, ...state.mainPosts],
@@ -621,6 +742,12 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           addPostErrorReason: action.error
         });
+      }
+
+    case ADD_COMMENT_REQUEST:
+      {
+        console.log('ADD_COMMENT_REQUEST==>', ADD_COMMENT_REQUEST);
+        return _objectSpread({}, state);
       }
 
     default:
@@ -682,7 +809,8 @@ const dummyUser = {
   Post: ['정', '준'],
   Followings: ['정', '준'],
   Followers: ['정', '준'],
-  signUpData: {}
+  signUpData: {},
+  id: 1
 };
 const initialState = {
   isLoggedIn: false,
@@ -818,7 +946,7 @@ const reducer = (state = initialState, action) => {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\git Repository\practice\front\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! D:\git Repository\practice\front\pages\index.js */"./pages/index.js");
 
 
 /***/ }),

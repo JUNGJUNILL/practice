@@ -7,6 +7,7 @@ const dummyUser = {
     Followings:['정','준'],
     Followers:['정','준'],
     signUpData:{},
+    id:1,
     
 }
 export const initialState = {

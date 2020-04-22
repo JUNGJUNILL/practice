@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -111,9 +111,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\signup.js";
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\signup.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -176,8 +179,15 @@ const SignUp = () => {
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
   const {
-    isSigningUp
+    isSigningUp,
+    me
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.user);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (me) {
+      alert('로그인 성공!');
+      next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
+    }
+  }, [me && me.id]);
   const onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
     // e.preventDefault();
     console.log({
@@ -196,7 +206,7 @@ const SignUp = () => {
 
 
     return dispatch({
-      type: _reducers_user__WEBPACK_IMPORTED_MODULE_4__["SIGN_UP_REQUEST"],
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_5__["SIGN_UP_REQUEST"],
       data: {
         id,
         password,
@@ -232,7 +242,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 103,
+      lineNumber: 113,
       columnNumber: 13
     }
   }, __jsx(TextInput, {
@@ -240,76 +250,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104,
+      lineNumber: 114,
       columnNumber: 13
     }
   }), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 105,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-id",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 106,
-      columnNumber: 21
-    }
-  }, "\uC544\uC774\uB514"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 107,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    name: "user-id",
-    value: id,
-    required: true,
-    onChange: onChangeId,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 108,
-      columnNumber: 21
-    }
-  })), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 110,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-nick",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 111,
-      columnNumber: 21
-    }
-  }, "\uB2C9\uB124\uC784"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 112,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    name: "user-nick",
-    value: nick,
-    required: true,
-    onChange: onChangeNick,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 113,
-      columnNumber: 21
-    }
-  })), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -317,14 +261,14 @@ const SignUp = () => {
       columnNumber: 17
     }
   }, __jsx("label", {
-    htmlFor: "user-password",
+    htmlFor: "user-id",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 116,
       columnNumber: 21
     }
-  }, "\uBE44\uBC00\uBC88\uD638"), __jsx("br", {
+  }, "\uC544\uC774\uB514"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -332,10 +276,10 @@ const SignUp = () => {
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    name: "user-password",
-    value: password,
+    name: "user-id",
+    value: id,
     required: true,
-    onChange: onChangePassword,
+    onChange: onChangeId,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -350,18 +294,84 @@ const SignUp = () => {
       columnNumber: 17
     }
   }, __jsx("label", {
-    htmlFor: "user-password-check",
+    htmlFor: "user-nick",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 121,
       columnNumber: 21
     }
-  }, "\uBE44\uBC00\uBC88\uD638\uCCB4\uD06C"), __jsx("br", {
+  }, "\uB2C9\uB124\uC784"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 122,
+      columnNumber: 21
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    name: "user-nick",
+    value: nick,
+    required: true,
+    onChange: onChangeNick,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 123,
+      columnNumber: 21
+    }
+  })), __jsx("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 125,
+      columnNumber: 17
+    }
+  }, __jsx("label", {
+    htmlFor: "user-password",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 126,
+      columnNumber: 21
+    }
+  }, "\uBE44\uBC00\uBC88\uD638"), __jsx("br", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 127,
+      columnNumber: 21
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    name: "user-password",
+    value: password,
+    required: true,
+    onChange: onChangePassword,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 128,
+      columnNumber: 21
+    }
+  })), __jsx("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 130,
+      columnNumber: 17
+    }
+  }, __jsx("label", {
+    htmlFor: "user-password-check",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 131,
+      columnNumber: 21
+    }
+  }, "\uBE44\uBC00\uBC88\uD638\uCCB4\uD06C"), __jsx("br", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 132,
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
@@ -372,7 +382,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123,
+      lineNumber: 133,
       columnNumber: 21
     }
   }), passwordError && __jsx("div", {
@@ -382,14 +392,14 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124,
+      lineNumber: 134,
       columnNumber: 39
     }
   }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uB2E4\uB985\uB2C8\uB2E4.")), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126,
+      lineNumber: 136,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Checkbox"], {
@@ -399,7 +409,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127,
+      lineNumber: 137,
       columnNumber: 21
     }
   }, "\uB3D9\uC758 \uD569\uB2C8\uB2E4."), termError && __jsx("div", {
@@ -409,7 +419,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 128,
+      lineNumber: 138,
       columnNumber: 35
     }
   }, "\uC57D\uAD00\uC5D0 \uB3D9\uC758 \uD574\uC57C \uD569\uB2C8\uB2E4.")), __jsx("div", {
@@ -419,7 +429,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 131,
+      lineNumber: 141,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -429,7 +439,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132,
+      lineNumber: 142,
       columnNumber: 22
     }
   }, "\uAC00\uC785\uD558\uAE30"), __jsx("input", {
@@ -438,7 +448,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133,
+      lineNumber: 143,
       columnNumber: 22
     }
   }))));
@@ -496,7 +506,8 @@ const dummyUser = {
   Post: ['정', '준'],
   Followings: ['정', '준'],
   Followers: ['정', '준'],
-  signUpData: {}
+  signUpData: {},
+  id: 1
 };
 const initialState = {
   isLoggedIn: false,
@@ -625,14 +636,14 @@ const reducer = (state = initialState, action) => {
 
 /***/ }),
 
-/***/ 5:
+/***/ 4:
 /*!*******************************!*\
   !*** multi ./pages/signup.js ***!
   \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\git Repository\practice\front\pages\signup.js */"./pages/signup.js");
+module.exports = __webpack_require__(/*! D:\git Repository\practice\front\pages\signup.js */"./pages/signup.js");
 
 
 /***/ }),
@@ -645,6 +656,17 @@ module.exports = __webpack_require__(/*! C:\git Repository\practice\front\pages\
 /***/ (function(module, exports) {
 
 module.exports = require("antd");
+
+/***/ }),
+
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
 
 /***/ }),
 

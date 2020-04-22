@@ -1,9 +1,9 @@
-import React ,{ useState ,useCallback}from 'react'
+import React ,{ useState ,useCallback,useEffect}from 'react'
 import {Form, Input, Checkbox,Button} from 'antd'
 import PropTypes from 'prop-types'
 
 import {useDispatch ,useSelector} from 'react-redux'
-
+import Router from 'next/router'
 import {  SIGN_UP_REQUEST } from '../reducers/user';
 const TextInput = ({value}) =>{
     return (
@@ -34,10 +34,19 @@ const SignUp = () =>{
   const [passwordCheck,setPasswordCheck] = useState('')
   const [term,setTerm] =useState('')
   const [passwordError, setPasswordError] = useState(false) 
-  const [termError, setTermError] = useState(false)
+  const [termError, setTermError] = useState(false )
   
   const dispatch = useDispatch();
-  const { isSigningUp } = useSelector(state => state.user); 
+  const { isSigningUp, me } = useSelector(state => state.user); 
+
+  useEffect(()=>{
+    if(me){
+      alert('로그인 성공!'); 
+      Router.push('/'); 
+    }
+    
+
+  },[me && me.id]); 
 
   const onSubmit = useCallback((e) =>{
       
@@ -66,9 +75,10 @@ const SignUp = () =>{
                 nick,
               },
         });
-  
 
 },[password,passwordCheck,term]);
+
+
 
   //id인풋만 커스텀 훅으로
   //-------------------------------

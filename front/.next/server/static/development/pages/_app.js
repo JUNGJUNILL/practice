@@ -115,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\AppLayout.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\AppLayout.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\LoginForm.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\LoginForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -487,7 +487,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\UserProfile.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\UserProfile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2292,7 +2292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-saga */ "redux-saga");
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\_app.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 //next에서 제공하는 최상위 컴포넌트 파일 (_app.js로 직접 만들어야 한다. )
 //페이지들의 공통적인 부분기여주기 
@@ -2419,9 +2419,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\signup.js";
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\signup.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -2484,8 +2487,15 @@ const SignUp = () => {
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
   const {
-    isSigningUp
+    isSigningUp,
+    me
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.user);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (me) {
+      alert('로그인 성공!');
+      next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
+    }
+  }, [me && me.id]);
   const onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
     // e.preventDefault();
     console.log({
@@ -2504,7 +2514,7 @@ const SignUp = () => {
 
 
     return dispatch({
-      type: _reducers_user__WEBPACK_IMPORTED_MODULE_4__["SIGN_UP_REQUEST"],
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_5__["SIGN_UP_REQUEST"],
       data: {
         id,
         password,
@@ -2540,7 +2550,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 103,
+      lineNumber: 113,
       columnNumber: 13
     }
   }, __jsx(TextInput, {
@@ -2548,76 +2558,10 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104,
+      lineNumber: 114,
       columnNumber: 13
     }
   }), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 105,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-id",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 106,
-      columnNumber: 21
-    }
-  }, "\uC544\uC774\uB514"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 107,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    name: "user-id",
-    value: id,
-    required: true,
-    onChange: onChangeId,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 108,
-      columnNumber: 21
-    }
-  })), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 110,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-nick",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 111,
-      columnNumber: 21
-    }
-  }, "\uB2C9\uB124\uC784"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 112,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    name: "user-nick",
-    value: nick,
-    required: true,
-    onChange: onChangeNick,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 113,
-      columnNumber: 21
-    }
-  })), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -2625,14 +2569,14 @@ const SignUp = () => {
       columnNumber: 17
     }
   }, __jsx("label", {
-    htmlFor: "user-password",
+    htmlFor: "user-id",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 116,
       columnNumber: 21
     }
-  }, "\uBE44\uBC00\uBC88\uD638"), __jsx("br", {
+  }, "\uC544\uC774\uB514"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -2640,10 +2584,10 @@ const SignUp = () => {
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
-    name: "user-password",
-    value: password,
+    name: "user-id",
+    value: id,
     required: true,
-    onChange: onChangePassword,
+    onChange: onChangeId,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -2658,18 +2602,84 @@ const SignUp = () => {
       columnNumber: 17
     }
   }, __jsx("label", {
-    htmlFor: "user-password-check",
+    htmlFor: "user-nick",
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 121,
       columnNumber: 21
     }
-  }, "\uBE44\uBC00\uBC88\uD638\uCCB4\uD06C"), __jsx("br", {
+  }, "\uB2C9\uB124\uC784"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 122,
+      columnNumber: 21
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    name: "user-nick",
+    value: nick,
+    required: true,
+    onChange: onChangeNick,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 123,
+      columnNumber: 21
+    }
+  })), __jsx("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 125,
+      columnNumber: 17
+    }
+  }, __jsx("label", {
+    htmlFor: "user-password",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 126,
+      columnNumber: 21
+    }
+  }, "\uBE44\uBC00\uBC88\uD638"), __jsx("br", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 127,
+      columnNumber: 21
+    }
+  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    name: "user-password",
+    value: password,
+    required: true,
+    onChange: onChangePassword,
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 128,
+      columnNumber: 21
+    }
+  })), __jsx("div", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 130,
+      columnNumber: 17
+    }
+  }, __jsx("label", {
+    htmlFor: "user-password-check",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 131,
+      columnNumber: 21
+    }
+  }, "\uBE44\uBC00\uBC88\uD638\uCCB4\uD06C"), __jsx("br", {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 132,
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
@@ -2680,7 +2690,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123,
+      lineNumber: 133,
       columnNumber: 21
     }
   }), passwordError && __jsx("div", {
@@ -2690,14 +2700,14 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124,
+      lineNumber: 134,
       columnNumber: 39
     }
   }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uB2E4\uB985\uB2C8\uB2E4.")), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126,
+      lineNumber: 136,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Checkbox"], {
@@ -2707,7 +2717,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127,
+      lineNumber: 137,
       columnNumber: 21
     }
   }, "\uB3D9\uC758 \uD569\uB2C8\uB2E4."), termError && __jsx("div", {
@@ -2717,7 +2727,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 128,
+      lineNumber: 138,
       columnNumber: 35
     }
   }, "\uC57D\uAD00\uC5D0 \uB3D9\uC758 \uD574\uC57C \uD569\uB2C8\uB2E4.")), __jsx("div", {
@@ -2727,7 +2737,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 131,
+      lineNumber: 141,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -2737,7 +2747,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132,
+      lineNumber: 142,
       columnNumber: 22
     }
   }, "\uAC00\uC785\uD558\uAE30"), __jsx("input", {
@@ -2746,7 +2756,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133,
+      lineNumber: 143,
       columnNumber: 22
     }
   }))));
@@ -2826,11 +2836,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_REQUEST", function() { return REMOVE_POST_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_SUCCESS", function() { return REMOVE_POST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_FAILURE", function() { return REMOVE_POST_FAILURE; });
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 const initialState = {
   mainPosts: [{
@@ -2852,7 +2865,7 @@ const initialState = {
       id: 3,
       nickname: '정준삼'
     },
-    img: 'http://simg.donga.com/ugc/MLBPARK/Board/15/18/54/29/1518542968657.jpg',
+    img: 'https://img.extmovie.com/files/attach/images/197/785/981/025/882889a567914626e514406aa0759382.png',
     content: '아스카짱!'
   }],
   //화면에 보일 POST들 
@@ -2932,6 +2945,7 @@ const reducer = (state = initialState, action) => {
 
     case ADD_POST_SUCCESS:
       {
+        console.log('action.data ==>', action);
         return _objectSpread({}, state, {
           isAddingPost: false,
           mainPosts: [dummyPost, ...state.mainPosts],
@@ -2944,6 +2958,12 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           addPostErrorReason: action.error
         });
+      }
+
+    case ADD_COMMENT_REQUEST:
+      {
+        console.log('ADD_COMMENT_REQUEST==>', ADD_COMMENT_REQUEST);
+        return _objectSpread({}, state);
       }
 
     default:
@@ -3005,7 +3025,8 @@ const dummyUser = {
   Post: ['정', '준'],
   Followings: ['정', '준'],
   Followers: ['정', '준'],
-  signUpData: {}
+  signUpData: {},
+  id: 1
 };
 const initialState = {
   isLoggedIn: false,
@@ -3312,6 +3333,17 @@ module.exports = __webpack_require__(/*! private-next-pages/_app.js */"./pages/_
 
 /***/ }),
 
+/***/ "@ant-design/icons":
+/*!************************************!*\
+  !*** external "@ant-design/icons" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@ant-design/icons");
+
+/***/ }),
+
 /***/ "antd":
 /*!***********************!*\
   !*** external "antd" ***!
@@ -3353,6 +3385,17 @@ module.exports = require("next-redux-wrapper");
 /***/ (function(module, exports) {
 
 module.exports = require("next/head");
+
+/***/ }),
+
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
 
 /***/ }),
 
