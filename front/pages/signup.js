@@ -36,17 +36,12 @@ const SignUp = () =>{
   const [passwordError, setPasswordError] = useState(false) 
   const [termError, setTermError] = useState(false)
   
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
+  const { isSigningUp } = useSelector(state => state.user); 
 
   const onSubmit = useCallback((e) =>{
       
-    // dispatch({type:SIGN_UP_REQUEST,
-    //           data:{
-    //             id,
-    //             password,
-    //             nick,
-    //           }
-    // })
+
    // e.preventDefault();
     
     console.log({
@@ -62,11 +57,16 @@ const SignUp = () =>{
         return setTermError(true); 
     }
 
-    dispatch(signUpAction({
-      id,password,nick
-    }));
-
-
+    //희얀하네 dispatch를 return 하네... ? 
+    return dispatch({
+              type:SIGN_UP_REQUEST,
+              data:{
+                id,
+                password,
+                nick,
+              },
+        });
+  
 
 },[password,passwordCheck,term]);
 
@@ -129,7 +129,7 @@ const SignUp = () =>{
                 </div>
 
                 <div style={{marginTop:10}}>
-                     <Button type="primary" htmlType="submit">가입하기</Button>
+                     <Button type="primary" htmlType="submit" loading={isSigningUp}>가입하기</Button>
                      <input type="submit" value="rkdlq"></input>
                 </div>
             </Form>

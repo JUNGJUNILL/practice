@@ -2483,14 +2483,10 @@ const SignUp = () => {
     1: setTermError
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
+  const {
+    isSigningUp
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.user);
   const onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
-    // dispatch({type:SIGN_UP_REQUEST,
-    //           data:{
-    //             id,
-    //             password,
-    //             nick,
-    //           }
-    // })
     // e.preventDefault();
     console.log({
       id,
@@ -2504,13 +2500,17 @@ const SignUp = () => {
 
     if (!term) {
       return setTermError(true);
-    }
+    } //희얀하네 dispatch를 return 하네... ? 
 
-    dispatch(signUpAction({
-      id,
-      password,
-      nick
-    }));
+
+    return dispatch({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_4__["SIGN_UP_REQUEST"],
+      data: {
+        id,
+        password,
+        nick
+      }
+    });
   }, [password, passwordCheck, term]); //id인풋만 커스텀 훅으로
   //-------------------------------
 
@@ -2733,6 +2733,7 @@ const SignUp = () => {
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     type: "primary",
     htmlType: "submit",
+    loading: isSigningUp,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -2859,8 +2860,9 @@ const initialState = {
   //미리보기 이미지 경로 
   addPostErrorReason: false,
   // POST 업로드 실패 사유 
-  isAddingPost: false //post업로드중 
-
+  isAddingPost: false,
+  //post업로드중 
+  postAdded: false
 };
 const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST';
 const LOAD_MAIN_POSTS_SUCCESS = 'LOAD_MAIN_POSTS_SUCCESS';
@@ -2896,32 +2898,51 @@ const RETWEET_FAILURE = 'RETWEET_FAILURE';
 const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
-const ADD_DUMMY = 'ADD_DUMMY';
+const dummyPost = {
+  User: {
+    id: 1,
+    nickname: '주닐정'
+  },
+  content: '나는 더미 입니다.'
+}; //const ADD_DUMMY = 'ADD_DUMMY'; 
+
 const addPost = {
   type: ADD_POST_REQUEST
-};
-const addDummy = {
-  type: ADD_DUMMY,
-  data: {
-    content: 'Hello',
-    UserId: 1,
-    User: {
-      nickname: '정준일'
-    }
-  }
-};
+}; // const addDummy ={
+//     type:ADD_DUMMY, 
+//     data : {
+//         content : 'Hello', 
+//         UserId : 1, 
+//         User : {
+//             nickname:'정준일', 
+//         },
+//     },
+// }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST_REQUEST:
       {
-        return _objectSpread({}, state);
+        return _objectSpread({}, state, {
+          isAddingPost: true,
+          addPostErrorReason: '',
+          postAdded: false
+        });
       }
 
-    case ADD_DUMMY:
+    case ADD_POST_SUCCESS:
       {
         return _objectSpread({}, state, {
-          mainPosts: [action.data, ...state.mainPosts]
+          isAddingPost: false,
+          mainPosts: [dummyPost, ...state.mainPosts],
+          postAdded: true
+        });
+      }
+
+    case ADD_POST_FAILURE:
+      {
+        return _objectSpread({}, state, {
+          addPostErrorReason: action.error
         });
       }
 
@@ -3008,7 +3029,9 @@ const initialState = {
   userInfo: null,
   //남의 정보 
   successMesage: '',
-  isLoading: true
+  isLoading: true,
+  isSignedUp: false //회원가입 성공여부 
+
 };
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -3078,7 +3101,25 @@ const reducer = (state = initialState, action) => {
     case SIGN_UP_REQUEST:
       {
         return _objectSpread({}, state, {
-          signUpData: action.data
+          isSigningUp: true,
+          isSignedUp: false,
+          signUpErrorReason: ''
+        });
+      }
+
+    case SIGN_UP_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          isSigningUp: false,
+          isSignedUp: true
+        });
+      }
+
+    case SIGN_UP_FAILURE:
+      {
+        return _objectSpread({}, state, {
+          isSigningUp: false,
+          signUpErrorReason: action.error
         });
       }
 
@@ -3128,9 +3169,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return postSaga; });
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
+
+
+
+function* addPost() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_1__["ADD_POST_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_1__["ADD_POST_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* whatchAddPost() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_1__["ADD_POST_REQUEST"], addPost);
+}
 
 function* postSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost)]);
 }
 
 /***/ }),
@@ -3182,15 +3245,23 @@ function* login() {
   }
 }
 
+function* watchLogin() {
+  console.log('watchLogin');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_REQUEST"], login);
+}
+
 function* signUpAPI() {
   return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/');
 }
 
 function* signUp() {
   try {
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI);
+    //yield call(signUpAPI);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    console.log('????');
+    new Error('에러발생');
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_REQUEST"]
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_SUCCESS"]
     });
   } catch (e) {
     console.error(e);
@@ -3200,13 +3271,8 @@ function* signUp() {
   }
 }
 
-function* watchLogin() {
-  console.log('watchLogin');
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_REQUEST"], login);
-}
-
 function* watchSignUp() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_REQUEST"], signUp);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_REQUEST"], signUp);
 }
 
 function* hello() {

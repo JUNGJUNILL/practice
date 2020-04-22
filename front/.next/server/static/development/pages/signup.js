@@ -175,14 +175,10 @@ const SignUp = () => {
     1: setTermError
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
+  const {
+    isSigningUp
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.user);
   const onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
-    // dispatch({type:SIGN_UP_REQUEST,
-    //           data:{
-    //             id,
-    //             password,
-    //             nick,
-    //           }
-    // })
     // e.preventDefault();
     console.log({
       id,
@@ -196,13 +192,17 @@ const SignUp = () => {
 
     if (!term) {
       return setTermError(true);
-    }
+    } //희얀하네 dispatch를 return 하네... ? 
 
-    dispatch(signUpAction({
-      id,
-      password,
-      nick
-    }));
+
+    return dispatch({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_4__["SIGN_UP_REQUEST"],
+      data: {
+        id,
+        password,
+        nick
+      }
+    });
   }, [password, passwordCheck, term]); //id인풋만 커스텀 훅으로
   //-------------------------------
 
@@ -425,6 +425,7 @@ const SignUp = () => {
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     type: "primary",
     htmlType: "submit",
+    loading: isSigningUp,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
@@ -519,7 +520,9 @@ const initialState = {
   userInfo: null,
   //남의 정보 
   successMesage: '',
-  isLoading: true
+  isLoading: true,
+  isSignedUp: false //회원가입 성공여부 
+
 };
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -589,7 +592,25 @@ const reducer = (state = initialState, action) => {
     case SIGN_UP_REQUEST:
       {
         return _objectSpread({}, state, {
-          signUpData: action.data
+          isSigningUp: true,
+          isSignedUp: false,
+          signUpErrorReason: ''
+        });
+      }
+
+    case SIGN_UP_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          isSigningUp: false,
+          isSignedUp: true
+        });
+      }
+
+    case SIGN_UP_FAILURE:
+      {
+        return _objectSpread({}, state, {
+          isSigningUp: false,
+          signUpErrorReason: action.error
         });
       }
 

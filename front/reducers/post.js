@@ -35,6 +35,7 @@ export const initialState = {
      imagePaths : [], //미리보기 이미지 경로 
      addPostErrorReason : false, // POST 업로드 실패 사유 
      isAddingPost : false, //post업로드중 
+     postAdded : false, 
 
 
 };
@@ -86,7 +87,16 @@ export const REMOVE_POST_SUCCESS='REMOVE_POST_SUCCESS';
 export const REMOVE_POST_FAILURE='REMOVE_POST_FAILURE'; 
 
 
-const ADD_DUMMY = 'ADD_DUMMY'; 
+const dummyPost = {
+    User: {
+        id:1,
+        nickname:'주닐정', 
+
+    }, 
+    content:'나는 더미 입니다.', 
+}
+
+//const ADD_DUMMY = 'ADD_DUMMY'; 
 
 
 const addPost = {
@@ -95,16 +105,16 @@ const addPost = {
 
 }
 
-const addDummy ={
-    type:ADD_DUMMY, 
-    data : {
-        content : 'Hello', 
-        UserId : 1, 
-        User : {
-            nickname:'정준일', 
-        },
-    },
-}
+// const addDummy ={
+//     type:ADD_DUMMY, 
+//     data : {
+//         content : 'Hello', 
+//         UserId : 1, 
+//         User : {
+//             nickname:'정준일', 
+//         },
+//     },
+// }
 
 
 const reducer = (state = initialState , action) =>{
@@ -113,13 +123,24 @@ const reducer = (state = initialState , action) =>{
         case ADD_POST_REQUEST : {
             return {
                 ...state,
+                isAddingPost:true, 
+                addPostErrorReason:'', 
+                postAdded: false, 
             }
         }
-        
-        case ADD_DUMMY:{
+
+        case ADD_POST_SUCCESS : {
             return {
                 ...state,
-                mainPosts:[action.data, ...state.mainPosts]
+                isAddingPost:false,
+                mainPosts:[dummyPost, ...state.mainPosts],
+                postAdded:true, 
+            }
+        }
+        case ADD_POST_FAILURE : {
+            return {
+                ...state,
+                addPostErrorReason :action.error,
             }
         }
         

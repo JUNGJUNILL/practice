@@ -14,6 +14,8 @@ import axios from 'axios';
 
 export const HELLO_SAGA = 'HELLO_SAGA'; 
 
+
+
 function* loginAPI(){
 //서버에 요청하는 부분 
 
@@ -38,6 +40,14 @@ function* login(){
 
 }
 
+function* watchLogin(){
+    console.log('watchLogin'); 
+    yield takeEvery(LOG_IN_REQUEST,login); 
+}
+
+
+
+
 function* signUpAPI(){
 
     return axios.post('/'); 
@@ -47,10 +57,14 @@ function* signUp(){
 
     try{
         
-        yield call(signUpAPI);
+        //yield call(signUpAPI);
+        yield delay(2000); 
+        console.log('????'); 
+         new Error('에러발생'); 
+
         yield put({
-            type: SIGN_UP_REQUEST,
-        })
+                type: SIGN_UP_SUCCESS,
+            })
 
     }catch(e){
         console.error(e); 
@@ -62,13 +76,9 @@ function* signUp(){
 }
 
 
-function* watchLogin(){
-    console.log('watchLogin'); 
-    yield takeEvery(LOG_IN_REQUEST,login); 
-}
 
 function* watchSignUp(){
-    yield takeLatest(SIGN_UP_REQUEST,signUp)
+    yield takeEvery(SIGN_UP_REQUEST,signUp)
 }
 
 
