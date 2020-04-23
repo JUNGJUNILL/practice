@@ -1,5 +1,5 @@
 
-import React,{useState,useCallback}  from 'react'
+import React,{useState,useCallback,useEffect}  from 'react'
 import {Card , Button, Avatar,Form, Input, List, Comment}from 'antd'
 import {RetweetOutlined ,
         HeartOutlined ,
@@ -16,6 +16,7 @@ const PostCard = ({post}) =>{
     const [commentFormOpend,setCommentFormOpend] = useState(false); 
     const [commentText, setCommentText] = useState(''); 
     const { me } = useSelector(state=> state.user); 
+    const {commentAdded, isAddingComment}  = useSelector(state=>state.post); 
     const dispatch = useDispatch(); 
 
     const onToggleComment = useCallback(() =>{
@@ -29,13 +30,23 @@ const PostCard = ({post}) =>{
         }
         
         return dispatch({type:ADD_COMMENT_REQUEST,
+                         data:{
+                            postId:post.id,
+                         }
         })
 
-    },[]); 
+    },[me && me.id]); 
+
+        //댓글을 쓰고 새로 load해야 할 터이니...
+        useEffect(()=>{
+            setCommentText('');
+        },[commentAdded ===true]); 
 
     const onChangeCommentText = useCallback((e)=>{
         setCommentText(e.target.value); 
     },[]); 
+
+
 
     return (
         <div>
@@ -62,19 +73,18 @@ const PostCard = ({post}) =>{
                 <Form.Item>
                     <Input.TextArea rows={4} value={commentText} onChange={onChangeCommentText}/>
                 </Form.Item>
-                <Button type="primary" htmlType="submit">삐약</Button>
+                <Button type="primary" htmlType="submit" loading={isAddingComment}>삐약</Button>
             </Form>
             <List 
-                 header={`${post.Comments? post.Comments.length : 0 } 댓글`}
+                 header={`${post.Comments? post.Comments.length : 0 } 댓글${post.id}`}
                  itemLayout="horizontal"
-                 dataSource={post.Comment || []}
+                 dataSource={post.Comments || []}
                  renderItem={item=>(
                      <li>
                       <Comment 
                         author={item.User.nickname}
                         avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
                         content={item.content}
-                        datetime={item.createdAt}
                       />
                       </li>
                  )}

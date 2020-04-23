@@ -115,7 +115,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\AppLayout.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\AppLayout.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\LoginForm.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\LoginForm.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -487,7 +487,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\components\\UserProfile.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\UserProfile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2292,7 +2292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-saga */ "redux-saga");
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\_app.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 //next에서 제공하는 최상위 컴포넌트 파일 (_app.js로 직접 만들어야 한다. )
 //페이지들의 공통적인 부분기여주기 
@@ -2422,7 +2422,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "C:\\git Repository\\practice\\front\\pages\\signup.js";
+var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\signup.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2847,6 +2847,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 const initialState = {
   mainPosts: [{
+    id: 1,
     User: {
       id: 1,
       nickname: '정준일'
@@ -2855,6 +2856,7 @@ const initialState = {
     content: '요즘 핫한 배우',
     Comments: []
   }, {
+    id: 2,
     User: {
       id: 2,
       nickname: '정준이'
@@ -2863,6 +2865,7 @@ const initialState = {
     content: '김근식 군 추천배우',
     Comments: []
   }, {
+    id: 3,
     User: {
       id: 3,
       nickname: '정준삼'
@@ -2878,7 +2881,10 @@ const initialState = {
   // POST 업로드 실패 사유 
   isAddingPost: false,
   //post업로드중 
-  postAdded: false
+  postAdded: false,
+  isAddingComment: false,
+  addCommentErrorReason: '',
+  commentAdded: false
 };
 const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST';
 const LOAD_MAIN_POSTS_SUCCESS = 'LOAD_MAIN_POSTS_SUCCESS';
@@ -2915,6 +2921,7 @@ const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
 const dummyPost = {
+  id: 4,
   User: {
     id: 1,
     nickname: '주닐정'
@@ -2922,7 +2929,15 @@ const dummyPost = {
   content: '나는 더미 입니다.',
   Comments: []
 };
-const dummyComment = {}; //const ADD_DUMMY = 'ADD_DUMMY'; 
+const dummyComment = {
+  id: 1,
+  User: {
+    id: 1,
+    nickname: '주닐정'
+  },
+  createdAt: new Date(),
+  content: '더미 댓글 입니다...'
+}; //const ADD_DUMMY = 'ADD_DUMMY'; 
 
 const addPost = {
   type: ADD_POST_REQUEST
@@ -2964,12 +2979,42 @@ const reducer = (state = initialState, action) => {
           addPostErrorReason: action.error
         });
       }
+    //---------댓글 달기 액션    
 
     case ADD_COMMENT_REQUEST:
       {
         console.log('ADD_COMMENT_REQUEST==>', ADD_COMMENT_REQUEST);
-        return _objectSpread({}, state);
+        return _objectSpread({}, state, {
+          isAddingComment: true,
+          addCommentErrorReason: '',
+          commentAdded: false
+        });
       }
+
+    case ADD_COMMENT_SUCCESS:
+      {
+        const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        const post = state.mainPosts[postIndex];
+        const Comments = [...post.Comments, dummyComment];
+        const mainPosts = [...state.mainPosts];
+        mainPosts[postIndex] = _objectSpread({}, post, {
+          Comments
+        });
+        return _objectSpread({}, state, {
+          isAddingComment: false,
+          mainPosts,
+          commentAdded: true
+        });
+      }
+
+    case ADD_COMMENT_FAILURE:
+      {
+        return _objectSpread({}, state, {
+          isAddingComment: false,
+          addCommentErrorReason: action.error
+        });
+      }
+    //---------댓글 달기 액션
 
     default:
       {
@@ -3199,6 +3244,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function addPostAPI() {}
+
 function* addPost() {
   try {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
@@ -3218,8 +3265,34 @@ function* whatchAddPost() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_1__["ADD_POST_REQUEST"], addPost);
 }
 
+function addCommentAPI() {}
+
+function* addComment(action) {
+  try {
+    console.log('action.data.postId==>', action.data.postId);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_1__["ADD_COMMENT_SUCCESS"],
+      data: {
+        poSstId: action.data.postId
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_1__["ADD_COMMENT_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* whatchAddComment() {
+  console.log('whatchAddComment');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_1__["ADD_COMMENT_REQUEST"], addComment);
+}
+
 function* postSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost)]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddComment)]);
 }
 
 /***/ }),

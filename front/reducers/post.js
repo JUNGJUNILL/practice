@@ -2,7 +2,9 @@ import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 export const initialState = {
 
-    mainPosts : [  {User : {
+    mainPosts : [  {
+                    id:1,
+                    User : {
                             id:1,
                             nickname:'정준일',
                         
@@ -13,7 +15,9 @@ export const initialState = {
 
                     },
 
-                    {User : {
+                    {
+                    id:2,    
+                    User : {
                         id:2,
                         nickname:'정준이',
                         
@@ -24,7 +28,9 @@ export const initialState = {
                     Comments:[],
 
                     },
-                    {User : {
+                    {
+                    id:3,
+                    User : {
                         id:3,
                         nickname:'정준삼',
                         
@@ -96,6 +102,7 @@ export const REMOVE_POST_FAILURE='REMOVE_POST_FAILURE';
 
 
 const dummyPost = {
+    id:4,
     User: {
         id:1,
         nickname:'주닐정', 
@@ -106,13 +113,14 @@ const dummyPost = {
 }
 
 const dummyComment = {
-   User: {
-       id:1,
-       nickname:2,
+                        id:1,
+                        User: {
+                            id:1,
+                            nickname:'주닐정',
 
-   }, 
-   createdAt: new Date(),
-   content : '더미 댓글 입니다...'; 
+                        }, 
+                        createdAt: new Date(),
+                        content : '더미 댓글 입니다...',
 
 }
 
@@ -181,9 +189,9 @@ const reducer = (state = initialState , action) =>{
         case ADD_COMMENT_SUCCESS : {
             const postIndex = state.mainPosts.findIndex(v=>v.id===action.data.postId); 
             const post = state.mainPosts[postIndex]; 
-            const Comments = [...post.Comments, action.data.comment]; 
+            const Comments = [...post.Comments,dummyComment]; 
             const mainPosts = [...state.mainPosts]; 
-            mainPosts[postIndex] = [...post,Comments]; 
+            mainPosts[postIndex] = {...post,Comments}; 
 
             return {
                 ...state,
