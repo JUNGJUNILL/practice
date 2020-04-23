@@ -9,6 +9,7 @@ export const initialState = {
                         }, 
                         img:'http://zzalbang.kr/wp-content/uploads/2019/06/944afa44ly1g3bon5dh4kj20u0140gvl-851x1024.jpg',
                         content:'요즘 핫한 배우', 
+                        Comments:[],
 
                     },
 
@@ -20,6 +21,7 @@ export const initialState = {
                     
                     img:'https://i.pinimg.com/236x/94/c7/82/94c7822c6c5c33cd442c3b8d4fe524c6.jpg',
                     content:'김근식 군 추천배우', 
+                    Comments:[],
 
                     },
                     {User : {
@@ -29,6 +31,7 @@ export const initialState = {
                     }, 
                     img:'https://img.extmovie.com/files/attach/images/197/785/981/025/882889a567914626e514406aa0759382.png',
                     content:'아스카짱!', 
+                    Comments:[],
 
                     }
                 ],  //화면에 보일 POST들 
@@ -38,6 +41,9 @@ export const initialState = {
      addPostErrorReason : false, // POST 업로드 실패 사유 
      isAddingPost : false, //post업로드중 
      postAdded : false, 
+     isAddingComment: false,
+     addCommentErrorReason:'',
+     commentAdded: false,
 
 
 };
@@ -96,6 +102,18 @@ const dummyPost = {
 
     }, 
     content:'나는 더미 입니다.', 
+    Comments:[], 
+}
+
+const dummyComment = {
+   User: {
+       id:1,
+       nickname:2,
+
+   }, 
+   createdAt: new Date(),
+   content : '더미 댓글 입니다...'; 
+
 }
 
 //const ADD_DUMMY = 'ADD_DUMMY'; 
@@ -147,13 +165,43 @@ const reducer = (state = initialState , action) =>{
             }
         }
 
+ //---------댓글 달기 액션    
+
         case ADD_COMMENT_REQUEST : {
             console.log('ADD_COMMENT_REQUEST==>' , ADD_COMMENT_REQUEST); 
             return {
                 ...state,
+                isAddingComment : true,
+                addCommentErrorReason:'',
+                commentAdded: false, 
 
             }
         }
+
+        case ADD_COMMENT_SUCCESS : {
+            const postIndex = state.mainPosts.findIndex(v=>v.id===action.data.postId); 
+            const post = state.mainPosts[postIndex]; 
+            const Comments = [...post.Comments, action.data.comment]; 
+            const mainPosts = [...state.mainPosts]; 
+            mainPosts[postIndex] = [...post,Comments]; 
+
+            return {
+                ...state,
+                isAddingComment : false, 
+                mainPosts,
+                commentAdded: true, 
+
+            }
+        }
+        case ADD_COMMENT_FAILURE : {
+            return {
+                ...state,
+                isAddingComment:false, 
+                addCommentErrorReason:action.error,
+
+            }
+        }
+//---------댓글 달기 액션
         
         default : {
             return {
