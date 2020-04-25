@@ -1,0 +1,32 @@
+npm init 
+
+npm i express
+
+npm i axios
+
+npm i bcrypt
+
+npm i cookie-parser
+
+npm i express-session
+
+npm i dotenv
+
+npm i cors
+
+npm i helmet hpp --보안관련 
+
+npm i morgan --로그 데이터  
+
+npm i multer
+
+npm i passport passport-local
+
+npm i sequelize sequelize-cli
+npm i -g sequelize-cli
+sequelize init 터미널에 치면 디비 관련 파일 생성해준다. 
+
+npm i -D eslint eslint-config-airbnb
+npm i -D eslint-plugin-jsx-a11y
+
+npm i nodemon --서버 껏다켰다. 
