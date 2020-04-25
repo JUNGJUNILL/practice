@@ -14,9 +14,9 @@ npm i dotenv
 
 npm i cors
 
-npm i helmet hpp --º¸¾È°ü·Ã 
+npm i helmet hpp --ë³´ì•ˆê´€ë ¨ 
 
-npm i morgan --·Î±× µ¥ÀÌÅÍ  
+npm i morgan --ë¡œê·¸ ë°ì´í„°  
 
 npm i multer
 
@@ -24,9 +24,9 @@ npm i passport passport-local
 
 npm i sequelize sequelize-cli
 npm i -g sequelize-cli
-sequelize init ÅÍ¹Ì³Î¿¡ Ä¡¸é µğºñ °ü·Ã ÆÄÀÏ »ı¼ºÇØÁØ´Ù. 
+sequelize init í„°ë¯¸ë„ì— ì¹˜ë©´ ë””ë¹„ ê´€ë ¨ íŒŒì¼ ìƒì„±í•´ì¤€ë‹¤. 
 
 npm i -D eslint eslint-config-airbnb
 npm i -D eslint-plugin-jsx-a11y
 
-npm i nodemon --¼­¹ö ²¯´ÙÄ×´Ù. 
+npm i nodemon --ì„œë²„ ê»ë‹¤ì¼°ë‹¤. 
