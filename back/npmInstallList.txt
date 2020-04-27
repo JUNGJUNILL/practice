@@ -30,3 +30,6 @@ npm i -D eslint eslint-config-airbnb
 npm i -D eslint-plugin-jsx-a11y
 
 npm i nodemon --서버 껏다켰다. 
+
+
+npm install --save mariadb
