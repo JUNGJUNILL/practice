@@ -1,0 +1,37 @@
+{
+  "development": {
+    "username": "root",
+    "password": "6942",
+    "database": "MariaDB",
+    "host": "127.0.0.1",
+    "dialect": "mariadb",
+    "dialectOptions" :{
+      "timezone":"Etc/GMT0"
+    },
+    "operatorsAliases": 0,
+    "port": 3307
+  },
+  "test": {
+    "username": "root",
+    "password": "6942",
+    "database": "mariadb",
+    "host": "127.0.0.1",
+    "dialect": "mariadb",
+    "dialectOptions" :{
+      "timezone":"Etc/GMT0"
+    },
+    "operatorsAliases": 0,
+    "port":3307
+  },
+  "production": {
+    "username": "root",
+    "password": "6942",
+    "database": "test",
+    "host": "127.0.0.1",
+    "dialect": "mariadb",
+    "dialectOptions" :{
+      "timezone":"Etc/GMT0"
+    },
+    "operatorsAliases": 0
+  }
+}
