@@ -28,15 +28,21 @@ export const useInput = (initValue = null)=>{
 }
 const SignUp = () =>{
 
-  //setState 실행 시 해당 컴포넌트 전체가 리렌더링 됨을 잊지 마라. 
-  const [nick,setNick]  = useState('')
+  //setState 실행 시 해당 컴포넌트 전체가 리렌더링 됨을 잊지 마라.
+  //id인풋만 커스텀 훅으로
+  //-------------------------------
+
+  const [userId,onChangeUserId] = useInput('')
+  //-------------------------------
+  
+  const [nickName,setNickNick]  = useState('')
   const [password,setPassword] = useState('')
   const [passwordCheck,setPasswordCheck] = useState('')
   const [term,setTerm] =useState('')
   const [passwordError, setPasswordError] = useState(false) 
   const [termError, setTermError] = useState(false )
-  
-  const dispatch = useDispatch();
+
+  const dispatch = useDispatch(); 
   const { isSigningUp, me } = useSelector(state => state.user); 
 
   useEffect(()=>{
@@ -54,9 +60,9 @@ const SignUp = () =>{
    // e.preventDefault();
     
     console.log({
-      id,
+      userId,
       password,
-      nick,
+      nickName,
     }); 
     if(password !== passwordCheck){
         return setPasswordError(true); 
@@ -67,28 +73,31 @@ const SignUp = () =>{
     }
 
     //희얀하네 dispatch를 return 하네... ? 
-    return dispatch({
+     dispatch({
               type:SIGN_UP_REQUEST,
               data:{
-                id,
-                password,
-                nick,
+                
               },
         });
 
-},[password,passwordCheck,term]);
+        dispatch({
+          type:SIGN_UP_REQUEST,
+        data:{
+          userId,
+          password,
+          nickName,
+        }
+       });
+
+
+},[userId,nickName,password,passwordCheck,term]);
 
 
 
-  //id인풋만 커스텀 훅으로
-  //-------------------------------
-
-  const [id,onChangeId] = useInput('')
-  //-------------------------------
 
   const onChangeNick = (e)=>{
 
-    setNick(e.target.value)
+    setNickNick(e.target.value)
   }
   const onChangePassword = (e)=>{
 
@@ -115,12 +124,12 @@ const SignUp = () =>{
                 <div>
                     <label htmlFor="user-id">아이디</label>
                     <br />
-                    <Input name="user-id" value={id} required onChange={onChangeId}/>
+                    <Input name="user-id" value={userId} required onChange={onChangeUserId}/>
                 </div>
                 <div>
                     <label htmlFor="user-nick">닉네임</label>
                     <br />
-                    <Input name="user-nick" value={nick} required onChange={onChangeNick}/>                
+                    <Input name="user-nick" value={nickName} required onChange={onChangeNick}/>                
                 </div>
                 <div>
                     <label htmlFor="user-password">비밀번호</label>

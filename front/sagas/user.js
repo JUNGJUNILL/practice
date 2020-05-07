@@ -21,8 +21,8 @@ function* loginAPI(){
 
 }
 
-function* login(){
-
+function* login(action){
+    console.log('login data =>' + action.data); 
     try{
         
         //yield call(loginAPI);
@@ -48,19 +48,17 @@ function* watchLogin(){
 
 
 
-function* signUpAPI(){
-
-    return axios.post('/'); 
+function* signUpAPI(signUpData){
+    console.log('signUpData ==>' ,signUpData)
+    return axios.post('http://localhost:3065/api/user/',signUpData); 
 }
 
-function* signUp(){
+function* signUp(action){
 
     try{
-        
-        //yield call(signUpAPI);
-        yield delay(2000); 
-        console.log('????'); 
-         new Error('에러발생'); 
+        console.log('action.data-->' + action.data); 
+      //  yield call(signUpAPI);
+        yield call(signUpAPI,action.data);  
 
         yield put({
                 type: SIGN_UP_SUCCESS,
@@ -78,6 +76,7 @@ function* signUp(){
 
 
 function* watchSignUp(){
+    console.log('뭐여 왜 안되는겨???'); 
     yield takeEvery(SIGN_UP_REQUEST,signUp)
 }
 

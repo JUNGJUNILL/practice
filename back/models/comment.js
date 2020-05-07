@@ -8,8 +8,8 @@ module.exports = (sequelize , DataTypes)=>{
     },
 
     },{
-        charset : 'utf-8', 
-        collate : 'utf8_general_ci', //한글이 저장되게... 
+        charset: 'utf8',
+        collate: 'utf8_general_ci',  //한글이 저장되게... 
     }); 
 
     Comment.associate = (db)=>{

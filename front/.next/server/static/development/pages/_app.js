@@ -2460,10 +2460,14 @@ const useInput = (initValue = null) => {
 };
 
 const SignUp = () => {
-  //setState 실행 시 해당 컴포넌트 전체가 리렌더링 됨을 잊지 마라. 
+  //setState 실행 시 해당 컴포넌트 전체가 리렌더링 됨을 잊지 마라.
+  //id인풋만 커스텀 훅으로
+  //-------------------------------
+  const [userId, onChangeUserId] = useInput(''); //-------------------------------
+
   const {
-    0: nick,
-    1: setNick
+    0: nickName,
+    1: setNickNick
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
   const {
     0: password,
@@ -2499,9 +2503,9 @@ const SignUp = () => {
   const onSubmit = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
     // e.preventDefault();
     console.log({
-      id,
+      userId,
       password,
-      nick
+      nickName
     });
 
     if (password !== passwordCheck) {
@@ -2513,21 +2517,22 @@ const SignUp = () => {
     } //희얀하네 dispatch를 return 하네... ? 
 
 
-    return dispatch({
+    dispatch({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_5__["SIGN_UP_REQUEST"],
+      data: {}
+    });
+    dispatch({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_5__["SIGN_UP_REQUEST"],
       data: {
-        id,
+        userId,
         password,
-        nick
+        nickName
       }
     });
-  }, [password, passwordCheck, term]); //id인풋만 커스텀 훅으로
-  //-------------------------------
-
-  const [id, onChangeId] = useInput(''); //-------------------------------
+  }, [userId, nickName, password, passwordCheck, term]);
 
   const onChangeNick = e => {
-    setNick(e.target.value);
+    setNickNick(e.target.value);
   };
 
   const onChangePassword = e => {
@@ -2550,7 +2555,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 113,
+      lineNumber: 122,
       columnNumber: 13
     }
   }, __jsx(TextInput, {
@@ -2558,14 +2563,14 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114,
+      lineNumber: 123,
       columnNumber: 13
     }
   }), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115,
+      lineNumber: 124,
       columnNumber: 17
     }
   }, __jsx("label", {
@@ -2573,32 +2578,32 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 116,
+      lineNumber: 125,
       columnNumber: 21
     }
   }, "\uC544\uC774\uB514"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117,
+      lineNumber: 126,
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "user-id",
-    value: id,
+    value: userId,
     required: true,
-    onChange: onChangeId,
+    onChange: onChangeUserId,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118,
+      lineNumber: 127,
       columnNumber: 21
     }
   })), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120,
+      lineNumber: 129,
       columnNumber: 17
     }
   }, __jsx("label", {
@@ -2606,32 +2611,32 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121,
+      lineNumber: 130,
       columnNumber: 21
     }
   }, "\uB2C9\uB124\uC784"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122,
+      lineNumber: 131,
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "user-nick",
-    value: nick,
+    value: nickName,
     required: true,
     onChange: onChangeNick,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123,
+      lineNumber: 132,
       columnNumber: 21
     }
   })), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 125,
+      lineNumber: 134,
       columnNumber: 17
     }
   }, __jsx("label", {
@@ -2639,14 +2644,14 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126,
+      lineNumber: 135,
       columnNumber: 21
     }
   }, "\uBE44\uBC00\uBC88\uD638"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127,
+      lineNumber: 136,
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
@@ -2657,14 +2662,14 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 128,
+      lineNumber: 137,
       columnNumber: 21
     }
   })), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 130,
+      lineNumber: 139,
       columnNumber: 17
     }
   }, __jsx("label", {
@@ -2672,14 +2677,14 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 131,
+      lineNumber: 140,
       columnNumber: 21
     }
   }, "\uBE44\uBC00\uBC88\uD638\uCCB4\uD06C"), __jsx("br", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132,
+      lineNumber: 141,
       columnNumber: 21
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
@@ -2690,7 +2695,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133,
+      lineNumber: 142,
       columnNumber: 21
     }
   }), passwordError && __jsx("div", {
@@ -2700,14 +2705,14 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 134,
+      lineNumber: 143,
       columnNumber: 39
     }
   }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uB2E4\uB985\uB2C8\uB2E4.")), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 136,
+      lineNumber: 145,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Checkbox"], {
@@ -2717,7 +2722,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137,
+      lineNumber: 146,
       columnNumber: 21
     }
   }, "\uB3D9\uC758 \uD569\uB2C8\uB2E4."), termError && __jsx("div", {
@@ -2727,7 +2732,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 138,
+      lineNumber: 147,
       columnNumber: 35
     }
   }, "\uC57D\uAD00\uC5D0 \uB3D9\uC758 \uD574\uC57C \uD569\uB2C8\uB2E4.")), __jsx("div", {
@@ -2737,7 +2742,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 141,
+      lineNumber: 150,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -2747,7 +2752,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 142,
+      lineNumber: 151,
       columnNumber: 22
     }
   }, "\uAC00\uC785\uD558\uAE30"), __jsx("input", {
@@ -2756,7 +2761,7 @@ const SignUp = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 143,
+      lineNumber: 152,
       columnNumber: 22
     }
   }))));
@@ -3329,7 +3334,9 @@ const HELLO_SAGA = 'HELLO_SAGA';
 function* loginAPI() {//서버에 요청하는 부분 
 }
 
-function* login() {
+function* login(action) {
+  console.log('login data =>' + action.data);
+
   try {
     //yield call(loginAPI);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
@@ -3349,16 +3356,16 @@ function* watchLogin() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_REQUEST"], login);
 }
 
-function* signUpAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/');
+function* signUpAPI(signUpData) {
+  console.log('signUpData ==>', signUpData);
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://localhost:3065/api/user/', signUpData);
 }
 
-function* signUp() {
+function* signUp(action) {
   try {
-    //yield call(signUpAPI);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
-    console.log('????');
-    new Error('에러발생');
+    console.log('action.data-->' + action.data); //  yield call(signUpAPI);
+
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_SUCCESS"]
     });
@@ -3371,6 +3378,7 @@ function* signUp() {
 }
 
 function* watchSignUp() {
+  console.log('뭐여 왜 안되는겨???');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_REQUEST"], signUp);
 }
 

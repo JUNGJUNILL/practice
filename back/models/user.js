@@ -17,8 +17,8 @@ module.exports = (sequelize , DataTypes) =>{
             allowNull:false, 
         },
     },{
-        charset : 'utf-8', 
-        collate : 'utf8_general_ci', //한글이 저장되게...  
+        charset: 'utf8',
+        collate: 'utf8_general_ci', //한글이 저장되게...  
     }); 
 
     User.associate = (db) =>{
