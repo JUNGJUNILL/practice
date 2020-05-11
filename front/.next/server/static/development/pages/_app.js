@@ -3358,7 +3358,7 @@ function* watchLogin() {
 
 function* signUpAPI(signUpData) {
   console.log('signUpData ==>', signUpData);
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://localhost:3065/api/user/', signUpData);
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://192.168.1.24:3065/api/user/', signUpData);
 }
 
 function* signUp(action) {

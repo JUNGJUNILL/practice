@@ -3,7 +3,7 @@
     "username": "root",
     "password": "6942",
     "database": "MariaDB",
-    "host": "127.0.0.1",
+    "host": "192.168.1.24",
     "dialect": "mariadb",
     "dialectOptions" :{
       "timezone":"Etc/GMT0"
@@ -15,7 +15,7 @@
     "username": "root",
     "password": "6942",
     "database": "mariadb",
-    "host": "127.0.0.1",
+    "host": "192.168.1.24",
     "dialect": "mariadb",
     "dialectOptions" :{
       "timezone":"Etc/GMT0"
@@ -27,7 +27,7 @@
     "username": "root",
     "password": "6942",
     "database": "test",
-    "host": "127.0.0.1",
+    "host": "192.168.1.24",
     "dialect": "mariadb",
     "dialectOptions" :{
       "timezone":"Etc/GMT0"
