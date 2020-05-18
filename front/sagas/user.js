@@ -50,7 +50,7 @@ function* watchLogin(){
 
 function* signUpAPI(signUpData){
     console.log('signUpData ==>' ,signUpData)
-    return axios.post('http://192.168.1.24:3065/api/user/',signUpData); 
+    return axios.post('http://captainryan.gonetis.com:3065/api/user/',signUpData); 
 }
 
 function* signUp(action){

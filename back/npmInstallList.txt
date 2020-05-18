@@ -33,3 +33,5 @@ npm i nodemon --서버 껏다켰다.
 
 
 npm install --save mariadb
+
+--시퀄라이즈이지만, 쿼리는 raw로 가자. 
