@@ -336,7 +336,7 @@ const LoginForm = () => {
     dispatch({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_5__["LOG_IN_REQUEST"],
       data: {
-        id,
+        userId: id,
         password
       }
     });
@@ -499,6 +499,7 @@ const UserProfile = () => {
   const {
     me
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(state => state.user);
+  console.log(me);
   const onLogout = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
     dispatch({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_REQUEST"]
@@ -513,51 +514,51 @@ const UserProfile = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 24,
+        lineNumber: 25,
         columnNumber: 9
       }
     }, "\uC9F9\uC9F9", __jsx("br", {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 24,
+        lineNumber: 25,
         columnNumber: 27
       }
-    }), me.Post.length), __jsx("div", {
+    }), "3"), __jsx("div", {
       key: "following",
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25,
+        lineNumber: 26,
         columnNumber: 9
       }
     }, "\uD314\uB85C\uC789", __jsx("br", {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 25,
+        lineNumber: 26,
         columnNumber: 33
       }
-    }), me.Followings.length), __jsx("div", {
+    }), "3"), __jsx("div", {
       key: "follower",
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26,
+        lineNumber: 27,
         columnNumber: 9
       }
     }, "\uD314\uB85C\uC6CC", __jsx("br", {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26,
+        lineNumber: 27,
         columnNumber: 32
       }
-    }), me.Followers.length)],
+    }), "3")],
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23,
+      lineNumber: 24,
       columnNumber: 5
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
@@ -565,7 +566,7 @@ const UserProfile = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 29,
+        lineNumber: 30,
         columnNumber: 20
       }
     }, me.nickname[0]),
@@ -573,7 +574,7 @@ const UserProfile = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29,
+      lineNumber: 30,
       columnNumber: 1
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -581,7 +582,7 @@ const UserProfile = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30,
+      lineNumber: 31,
       columnNumber: 1
     }
   }, "\uB85C\uADF8\uC544\uC6C3"));
@@ -3150,7 +3151,7 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           isLoggingIn: false,
           isLoggedIn: true,
-          me: dummyUser,
+          me: action.data,
           isLoading: false,
           successMesage: '로그인에 성공하였습니다.'
         });
@@ -3328,20 +3329,25 @@ __webpack_require__.r(__webpack_exports__);
 //put  : 액션 , 사가의 dispatch
 //take : 해당 액션이 dispatch되면 제너레이터를 next하는 이펙트 
 //all  : 여러 이펙트를 동시에 실행 할 수 있게 합니다.
+// axios.defaults.baseURL='http://localhost:3065/api';
 
 const HELLO_SAGA = 'HELLO_SAGA';
 
-function* loginAPI() {//서버에 요청하는 부분 
+function* loginAPI(loginData) {
+  //서버에 요청하는 부분 
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://localhost:3065/api/user/login', loginData);
 }
 
 function* login(action) {
-  console.log('login data =>' + action.data);
-
   try {
-    //yield call(loginAPI);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loginAPI, action.data);
+    const loginInfo = yield result.then(resolve => {
+      return resolve.data;
+    });
+    console.log('loginInfo==>', loginInfo);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_SUCCESS"]
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_SUCCESS"],
+      data: loginInfo
     });
   } catch (e) {
     console.error(e);
@@ -3378,7 +3384,6 @@ function* signUp(action) {
 }
 
 function* watchSignUp() {
-  console.log('뭐여 왜 안되는겨???');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_REQUEST"], signUp);
 }
 

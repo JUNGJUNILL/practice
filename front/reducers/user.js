@@ -79,11 +79,9 @@ const reducer = (state = initialState , action)=>{
                 ...state,
                 isLoggingIn:false,
                 isLoggedIn:true,
-                me:dummyUser,
+                me:action.data,
                 isLoading:false,
                 successMesage :'로그인에 성공하였습니다.', 
-
-
             }
         }
         case LOG_IN_FAILURE: {

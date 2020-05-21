@@ -12,24 +12,34 @@ import axios from 'axios';
 //take : 해당 액션이 dispatch되면 제너레이터를 next하는 이펙트 
 //all  : 여러 이펙트를 동시에 실행 할 수 있게 합니다.
 
+// axios.defaults.baseURL='http://localhost:3065/api';
 export const HELLO_SAGA = 'HELLO_SAGA'; 
 
 
 
-function* loginAPI(){
+function* loginAPI(loginData){
 //서버에 요청하는 부분 
-
+    return axios.post('http://localhost:3065/api/user/login',loginData); 
 }
 
 function* login(action){
-    console.log('login data =>' + action.data); 
+   
+  
     try{
         
-        //yield call(loginAPI);
-        yield delay(2000); 
-        yield put({
+         const result    = yield call(loginAPI,action.data);  
+         const loginInfo = yield result.then((resolve)=>{
+            
+            return resolve.data; 
+            
+         }); 
+
+         console.log('loginInfo==>' , loginInfo);
+       
+        yield  put({
             type: LOG_IN_SUCCESS,
-        })
+            data:loginInfo,
+        });
 
     }catch(e){
         console.error(e); 
@@ -76,7 +86,6 @@ function* signUp(action){
 
 
 function* watchSignUp(){
-    console.log('뭐여 왜 안되는겨???'); 
     yield takeEvery(SIGN_UP_REQUEST,signUp)
 }
 

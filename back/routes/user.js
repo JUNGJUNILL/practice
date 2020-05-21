@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../models'); 
 const bcrypt = require('bcrypt'); 
 
+const passport = require('passport'); 
 
 
 router.get('/', (req,res)=>{
@@ -45,6 +46,42 @@ router.post('/',async (req,res,next)=>{
 
 }); 
 
+
+//로그인
+router.post('/login',(req,res,next)=>{
+
+        passport.authenticate('local',(err,user,info)=>{
+                //console.log('router/user/login==>',user); 
+                if(err){
+                        console.error(err); 
+                        return next(err); 
+                }
+
+                if(info){
+                        return res.status(401).send(info.reason); 
+                }
+
+                return req.login(user,(loginErr)=>{
+                        if(loginErr){
+                                console.error(loginErr); 
+                                return next(loginErr); 
+                        }
+                        const filteredUser = Object.assign({},user.toJSON());
+                                                             //순수한 json 데이터로 만들겠다.  
+                        delete filteredUser.password; 
+                       console.log('filteredUser==>' , filteredUser); 
+                       return res.json(filteredUser); 
+                });
+        })(req,res,next); 
+
+}); 
+
+router.post('/logout',(req,res)=>{
+        req.logout(); 
+        req.session.destroy();
+        res.send('logout 성공'); 
+}); 
+
 router.get('/api/user/:id',(req,res)=>{
 //:id 
 //req.param.id 로 가져올 수 있다.
@@ -53,13 +90,9 @@ router.get('/api/user/:id',(req,res)=>{
 }); 
 
 
-router.post('/api/user/:id/logout',(req,res)=>{
 
-}); 
 
-router.post('/api/user/:id/login',(req,res)=>{
 
-}); 
 
 router.get('/api/user/:id/follow',(req,res)=>{
 

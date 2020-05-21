@@ -6,9 +6,11 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session'); 
 const dotenv = require('dotenv');
 const passport = require('passport'); 
+const passportConfig = require('./passport');
 const app= express(); 
 dotenv.config(); 
 db.sequelize.sync(); //dbConnection 
+passportConfig();    
 
 
 const userAPIRouter = require('./routes/user'); 

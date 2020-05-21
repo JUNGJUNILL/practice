@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -940,7 +940,7 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           isLoggingIn: false,
           isLoggedIn: true,
-          me: dummyUser,
+          me: action.data,
           isLoading: false,
           successMesage: '로그인에 성공하였습니다.'
         });
@@ -1000,7 +1000,7 @@ const reducer = (state = initialState, action) => {
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
