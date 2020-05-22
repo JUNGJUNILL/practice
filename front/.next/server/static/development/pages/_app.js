@@ -3335,7 +3335,7 @@ const HELLO_SAGA = 'HELLO_SAGA';
 
 function* loginAPI(loginData) {
   //서버에 요청하는 부분 
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://localhost:3065/api/user/login', loginData);
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://captainryan.gonetis.com:3065/api/user/login', loginData);
 }
 
 function* login(action) {
