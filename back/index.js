@@ -25,7 +25,11 @@ app.get('/',(req,res)=>{
 app.use(morgan('dev')); 
 app.use(express.json()); 
 app.use(express.urlencoded({extended : true})); //form 데이터 처리 
-app.use(cors());
+app.use(cors({
+    origin: true, 
+    credentials:true,
+    //--프론트와 백엔드간에 쿠키 주고 받기 위함
+}));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(expressSession({
     resave : false,             //매번 세션 강제 저장
@@ -34,7 +38,9 @@ app.use(expressSession({
     cookie :{
         httpOnly : true, 
         secure: false, //https 시 true
-    }
+      //  maxAge : 1000*60*60,
+    },
+    name:'rnbck',
 
 }));
 app.use(passport.initialize()); 

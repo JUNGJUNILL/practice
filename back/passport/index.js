@@ -1,5 +1,5 @@
 const passport = require('passport'); 
-const db       = require('../models'); 
+const {User}       = require('../models'); 
 const local    = require('./local'); 
 module.exports = () =>{
 
@@ -11,10 +11,10 @@ module.exports = () =>{
 
     //매 요청하다 실행된다.(db 요청 1번씩 실행됨)
     //실무에서는 deserializeUser 결과물 캐싱함. 
-    passport.deserializeUser( async (id,done)=>{
-
+    passport.deserializeUser( async(id,done)=>{
+        console.log(id); 
         try{
-            const user =await db.User.fineOne({
+            const user = await User.findOne({
                 where :{id},
             }); 
          

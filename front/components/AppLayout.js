@@ -6,18 +6,22 @@ import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
 
 import {useDispatch ,useSelector} from 'react-redux'
-import { LOG_IN_REQUEST } from '../reducers/user';
+import { LOG_IN_REQUEST, LOAD_USER_REQUEST } from '../reducers/user';
 
 const AppLayout = ({children}) =>{
 
     const dispatch = useDispatch();
-    const {isLoggedIn} = useSelector(state=>state.user); 
-
+    const {isLoggedIn,me} = useSelector(state=>state.user); 
+    
     useEffect(()=>{
-       
-        //dispatch(loginAction);
 
-    },[])
+        if(!me){
+            dispatch({
+                type:LOAD_USER_REQUEST,
+            });
+        }
+    },[]);
+
         return(
            <div>
                 <Menu mode="horizontal">
@@ -30,7 +34,7 @@ const AppLayout = ({children}) =>{
                 <Link href="signup"><a><Button>회원가입</Button></a></Link>
                 <Row gutter={10}>
                     <Col xs={24} md={6}>
-                    {isLoggedIn
+                    {me
                      ? <UserProfile />
               
                      :

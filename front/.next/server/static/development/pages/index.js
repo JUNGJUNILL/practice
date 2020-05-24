@@ -534,39 +534,33 @@ const Home = () => {
     dispatch({
       type: 'HELLO_SAGA'
     });
-    dispatch({
-      type: 'HELLO_SAGA'
-    });
-    dispatch({
-      type: 'HELLO_SAGA'
-    });
   }, []);
   return __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36,
+      lineNumber: 31,
       columnNumber: 13
     }
   }, user ? __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37,
+      lineNumber: 32,
       columnNumber: 21
     }
   }, "\uB85C\uADF8\uC778\uB428") : __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37,
+      lineNumber: 32,
       columnNumber: 39
     }
   }, "\uB85C\uADF8\uC778 \uC548\uB428"), isLoggedIn && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38,
+      lineNumber: 33,
       columnNumber: 32
     }
   }), mainPosts.map((v, i) => {
@@ -576,7 +570,7 @@ const Home = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 41,
+        lineNumber: 36,
         columnNumber: 29
       }
     });
@@ -959,6 +953,14 @@ const reducer = (state = initialState, action) => {
     case LOG_OUT_REQUEST:
       {
         return _objectSpread({}, state, {
+          isLoggingOut: true
+        });
+      }
+
+    case LOG_OUT_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          isLoggingOut: false,
           isLoggedIn: false,
           me: null
         });
@@ -987,6 +989,23 @@ const reducer = (state = initialState, action) => {
           isSigningUp: false,
           signUpErrorReason: action.error
         });
+      }
+
+    case LOAD_USER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LOAD_USER_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          me: action.data
+        });
+      }
+
+    case LOAD_USER_FAILURE:
+      {
+        return _objectSpread({}, state);
       }
 
     default:

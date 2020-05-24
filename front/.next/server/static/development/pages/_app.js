@@ -131,15 +131,21 @@ const AppLayout = ({
 }) => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["useDispatch"])();
   const {
-    isLoggedIn
+    isLoggedIn,
+    me
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["useSelector"])(state => state.user);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {//dispatch(loginAction);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (!me) {
+      dispatch({
+        type: _reducers_user__WEBPACK_IMPORTED_MODULE_7__["LOAD_USER_REQUEST"]
+      });
+    }
   }, []);
   return __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22,
+      lineNumber: 26,
       columnNumber: 12
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"], {
@@ -147,7 +153,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23,
+      lineNumber: 27,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
@@ -155,7 +161,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24,
+      lineNumber: 28,
       columnNumber: 21
     }
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -163,14 +169,14 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24,
+      lineNumber: 28,
       columnNumber: 43
     }
   }, __jsx("a", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24,
+      lineNumber: 28,
       columnNumber: 58
     }
   }, "\uB178\uB4DC \uBC84\uB4DC"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
@@ -178,7 +184,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25,
+      lineNumber: 29,
       columnNumber: 21
     }
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -186,14 +192,14 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25,
+      lineNumber: 29,
       columnNumber: 46
     }
   }, __jsx("a", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25,
+      lineNumber: 29,
       columnNumber: 68
     }
   }, "\uD504\uB85C\uD544"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
@@ -201,7 +207,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26,
+      lineNumber: 30,
       columnNumber: 21
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Input"].Search, {
@@ -212,7 +218,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27,
+      lineNumber: 31,
       columnNumber: 25
     }
   }))), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -220,21 +226,21 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30,
+      lineNumber: 34,
       columnNumber: 17
     }
   }, __jsx("a", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30,
+      lineNumber: 34,
       columnNumber: 37
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30,
+      lineNumber: 34,
       columnNumber: 40
     }
   }, "\uD68C\uC6D0\uAC00\uC785"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Row"], {
@@ -242,7 +248,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31,
+      lineNumber: 35,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
@@ -251,21 +257,21 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32,
+      lineNumber: 36,
       columnNumber: 21
     }
-  }, isLoggedIn ? __jsx(_UserProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, me ? __jsx(_UserProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34,
+      lineNumber: 38,
       columnNumber: 24
     }
   }) : __jsx(_LoginForm__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37,
+      lineNumber: 41,
       columnNumber: 25
     }
   })), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
@@ -274,7 +280,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40,
+      lineNumber: 44,
       columnNumber: 21
     }
   }, children), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
@@ -283,7 +289,7 @@ const AppLayout = ({
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43,
+      lineNumber: 47,
       columnNumber: 21
     }
   }, "\uC138\uBC88\uCA30")));
@@ -3170,6 +3176,14 @@ const reducer = (state = initialState, action) => {
     case LOG_OUT_REQUEST:
       {
         return _objectSpread({}, state, {
+          isLoggingOut: true
+        });
+      }
+
+    case LOG_OUT_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          isLoggingOut: false,
           isLoggedIn: false,
           me: null
         });
@@ -3198,6 +3212,23 @@ const reducer = (state = initialState, action) => {
           isSigningUp: false,
           signUpErrorReason: action.error
         });
+      }
+
+    case LOAD_USER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LOAD_USER_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          me: action.data
+        });
+      }
+
+    case LOAD_USER_FAILURE:
+      {
+        return _objectSpread({}, state);
       }
 
     default:
@@ -3329,14 +3360,54 @@ __webpack_require__.r(__webpack_exports__);
 //put  : 액션 , 사가의 dispatch
 //take : 해당 액션이 dispatch되면 제너레이터를 next하는 이펙트 
 //all  : 여러 이펙트를 동시에 실행 할 수 있게 합니다.
-// axios.defaults.baseURL='http://localhost:3065/api';
 
-const HELLO_SAGA = 'HELLO_SAGA';
+axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = 'http://captainryan.gonetis.com:3065/api';
+const HELLO_SAGA = 'HELLO_SAGA'; //-----------------------------------API
 
 function* loginAPI(loginData) {
   //서버에 요청하는 부분 
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://captainryan.gonetis.com:3065/api/user/login', loginData);
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/user/login', loginData, {
+    withCredentials: true
+  });
+} //▲백엔드와 프론트간에 쿠키를 주고 받을 수 있다.
+
+
+function* signUpAPI(signUpData) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/user/signUp', signUpData);
 }
+
+function* logoutAPI() {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/user/logout', {}, {
+    withCredentials: true
+  }); //▲데이터 없더라도 빈 객체라도 보내야 한다.
+}
+
+function* loadUserAPI() {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/user/', {
+    withCredentials: true
+  });
+} //-----------------------------------END API
+//-----------------------------------WATCH
+
+
+function* watchLogin() {
+  console.log('watchLogin');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_REQUEST"], login);
+}
+
+function* watchSignUp() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_REQUEST"], signUp);
+}
+
+function* watchLogout() {
+  console.log('watchLogout');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_OUT_REQUEST"], logout);
+}
+
+function* watchLoadUser() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_REQUEST"], loadUser);
+} //-----------------------------------END WATCH 
+
 
 function* login(action) {
   try {
@@ -3344,7 +3415,6 @@ function* login(action) {
     const loginInfo = yield result.then(resolve => {
       return resolve.data;
     });
-    console.log('loginInfo==>', loginInfo);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_SUCCESS"],
       data: loginInfo
@@ -3355,16 +3425,6 @@ function* login(action) {
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_FAILURE"]
     });
   }
-}
-
-function* watchLogin() {
-  console.log('watchLogin');
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_REQUEST"], login);
-}
-
-function* signUpAPI(signUpData) {
-  console.log('signUpData ==>', signUpData);
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://captainryan.gonetis.com:3065/api/user/', signUpData);
 }
 
 function* signUp(action) {
@@ -3383,8 +3443,39 @@ function* signUp(action) {
   }
 }
 
-function* watchSignUp() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_REQUEST"], signUp);
+function* logout() {
+  try {
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(logoutAPI);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_OUT_SUCCESS"]
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_OUT_FAILURE"]
+    });
+  }
+}
+
+function* loadUser() {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadUserAPI);
+    const userData = yield result.then(resolve => {
+      return resolve.data;
+    });
+    console.log('userData==>', userData);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_SUCCESS"],
+      data: userData
+    });
+  } catch (e) {
+    console.log('eeee==>', e);
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_FAILURE"],
+      error: e
+    });
+  }
 }
 
 function* hello() {
@@ -3407,7 +3498,8 @@ function* watchHello() {
 
 
 function* userSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchHello), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchSignUp), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogin)]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogin), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogout), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUser), //fork(watchHello),
+  Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchSignUp)]);
 }
 
 /***/ }),

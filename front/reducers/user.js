@@ -93,10 +93,16 @@ const reducer = (state = initialState , action)=>{
                 me:null,
             }    
         }
-
         case LOG_OUT_REQUEST:{
+            return{
+                ...state,
+                isLoggingOut:true, 
+            }; 
+        }
+        case LOG_OUT_SUCCESS:{
             return {
                 ...state,
+                isLoggingOut:false, 
                 isLoggedIn:false,
                 me:null,
             }
@@ -125,6 +131,24 @@ const reducer = (state = initialState , action)=>{
             }
         }
 
+        case LOAD_USER_REQUEST:{
+            return {
+                ...state, 
+            }; 
+        }
+
+        case LOAD_USER_SUCCESS:{
+            return {
+                ...state, 
+                me:action.data, 
+            }; 
+        }
+
+        case LOAD_USER_FAILURE:{
+            return {
+                ...state, 
+            }; 
+        }
 
 
         default : {
