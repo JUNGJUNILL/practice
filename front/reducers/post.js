@@ -9,7 +9,7 @@ export const initialState = {
                             nickname:'정준일',
                         
                         }, 
-                        img:'http://zzalbang.kr/wp-content/uploads/2019/06/944afa44ly1g3bon5dh4kj20u0140gvl-851x1024.jpg',
+                        img:'https://img0.yna.co.kr/etc/inner/KR/2020/01/10/AKR20200110125500005_01_i_P4.jpg',
                         content:'요즘 핫한 배우', 
                         Comments:[],
 
@@ -23,7 +23,7 @@ export const initialState = {
                         
                     }, 
                     
-                    img:'https://i.pinimg.com/236x/94/c7/82/94c7822c6c5c33cd442c3b8d4fe524c6.jpg',
+                    img:'https://cdn.indiepost.co.kr/uploads/images/2016/07/pteoZSxk-580x821.jpeg',
                     content:'김근식 군 추천배우', 
                     Comments:[],
 
@@ -35,7 +35,7 @@ export const initialState = {
                         nickname:'정준삼',
                         
                     }, 
-                    img:'https://img.extmovie.com/files/attach/images/197/785/981/025/882889a567914626e514406aa0759382.png',
+                    img:'https://upload.wikimedia.org/wikipedia/ko/f/fd/%EB%B6%80%EC%82%B0%ED%96%89.jpg',
                     content:'아스카짱!', 
                     Comments:[],
 
@@ -162,7 +162,7 @@ const reducer = (state = initialState , action) =>{
             return {
                 ...state,
                 isAddingPost:false,
-                mainPosts:[dummyPost, ...state.mainPosts],
+                mainPosts:[action.data, ...state.mainPosts],
                 postAdded:true, 
             }
         }
@@ -210,6 +210,27 @@ const reducer = (state = initialState , action) =>{
             }
         }
 //---------댓글 달기 액션
+
+        case LOAD_MAIN_POSTS_REQUEST : {
+            return {
+                ...state,
+                mainPosts:[], 
+            }
+        }
+
+        case LOAD_MAIN_POSTS_SUCCESS : {
+            console.log('action.data ==>' , action);
+            return {
+                ...state,
+                mainPosts:action.data,
+
+            }
+        }
+        case LOAD_MAIN_POSTS_FAILURE : {
+            return {
+                ...state,
+            }
+        }
         
         default : {
             return {

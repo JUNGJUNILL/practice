@@ -73,13 +73,6 @@ const SignUp = () =>{
     }
 
     //희얀하네 dispatch를 return 하네... ? 
-     dispatch({
-              type:SIGN_UP_REQUEST,
-              data:{
-                
-              },
-        });
-
         dispatch({
           type:SIGN_UP_REQUEST,
         data:{

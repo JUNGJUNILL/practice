@@ -16,16 +16,15 @@ const PostForm = () =>{
     },[postAdded === true])
 
     const onSubmitForm = useCallback((e)=>{
-        //e.preventDefault(); 
-
+        //e.preventDefault();
         dispatch({
                 type:ADD_POST_REQUEST,
                 data: {
-                  text,
+                  content : text,
                     },
             });
 
-    },[])
+    },[text]); 
     
 
 

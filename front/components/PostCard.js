@@ -51,7 +51,7 @@ const PostCard = ({post}) =>{
     return (
         <div>
         <Card
-            key={+post.createdAt}
+            //key={post.}
             cover={post.img && <img alt="example" src={post.img} style={{width:'100px'}}/>}
             actions={[
                 <RetweetOutlined />,
@@ -62,7 +62,7 @@ const PostCard = ({post}) =>{
             extra={<Button>팔로우</Button>}
              >
             <Card.Meta 
-                avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
+                avatar={<Avatar>{"정준일"}</Avatar>}
                 title={post.User.nickname}
                 description={post.content}
             />

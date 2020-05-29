@@ -28,7 +28,13 @@ router.post('/signUp',async (req,res,next)=>{
                 }); 
 
                 if(exUser){
-                        return res.status(403).send('이미 사용중인 아이디입니다.'); 
+                        
+                        
+                        const alertJson = {error:'이미 사용중인 아이디 입니다.'};
+                        
+                        return res.status(403).json(alertJson)
+                       // return res.json(alertJson); 
+                        
                 }
                 
                 const hashedPassword = await bcrypt.hash(req.body.password,12); 

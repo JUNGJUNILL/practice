@@ -12,7 +12,7 @@ import axios from 'axios';
 //take : 해당 액션이 dispatch되면 제너레이터를 next하는 이펙트 
 //all  : 여러 이펙트를 동시에 실행 할 수 있게 합니다.
 
- axios.defaults.baseURL='http://captainryan.gonetis.com:3065/api';
+
 export const HELLO_SAGA = 'HELLO_SAGA'; 
 
 
@@ -25,7 +25,7 @@ function* loginAPI(loginData){
                                                                                
 function* signUpAPI(signUpData){
     
-    return axios.post('/user/signUp',signUpData); 
+    return axios.post('/user/signUp',signUpData,{withCredentials:true}); 
 }        
 
 
@@ -92,10 +92,10 @@ function* login(action){
 function* signUp(action){
 
     try{
-        console.log('action.data-->' + action.data); 
-      //  yield call(signUpAPI);
-        yield call(signUpAPI,action.data);  
-
+    
+       const result =  yield call(signUpAPI,action.data); 
+     
+        console.log('result----' , result); 
         yield put({
                 type: SIGN_UP_SUCCESS,
             })

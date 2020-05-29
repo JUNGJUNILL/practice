@@ -170,8 +170,8 @@ const PostCard = ({
       lineNumber: 52,
       columnNumber: 9
     }
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-    key: +post.createdAt,
+  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"] //key={post.}
+  , {
     cover: post.img && __jsx("img", {
       alt: "example",
       src: post.img,
@@ -237,7 +237,7 @@ const PostCard = ({
         lineNumber: 65,
         columnNumber: 25
       }
-    }, post.User.nickname[0]),
+    }, "정준일"),
     title: post.User.nickname,
     description: post.content,
     __self: undefined,
@@ -370,14 +370,14 @@ const PostForm = () => {
     setText('');
   }, [postAdded === true]);
   const onSubmitForm = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
-    //e.preventDefault(); 
+    //e.preventDefault();
     dispatch({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_POST_REQUEST"],
       data: {
-        text
+        content: text
       }
     });
-  }, []);
+  }, [text]);
   const onChangeText = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
     setText(e.target.value);
   }, []);
@@ -390,7 +390,7 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38,
+      lineNumber: 37,
       columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"].TextArea, {
@@ -401,14 +401,14 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40,
+      lineNumber: 39,
       columnNumber: 25
     }
   }), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41,
+      lineNumber: 40,
       columnNumber: 25
     }
   }, __jsx("input", {
@@ -418,14 +418,14 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42,
+      lineNumber: 41,
       columnNumber: 29
     }
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43,
+      lineNumber: 42,
       columnNumber: 29
     }
   }, "\uC774\uBBF8\uC9C0 \uC5C5\uB85C\uB4DC"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
@@ -438,14 +438,14 @@ const PostForm = () => {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44,
+      lineNumber: 43,
       columnNumber: 29
     }
   }, "\uC9F9\uC9F9")), __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46,
+      lineNumber: 45,
       columnNumber: 25
     }
   }, imagePaths.map((v, i) => {
@@ -457,7 +457,7 @@ const PostForm = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50,
+        lineNumber: 49,
         columnNumber: 33
       }
     }, __jsx("img", {
@@ -469,21 +469,21 @@ const PostForm = () => {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 51,
+        lineNumber: 50,
         columnNumber: 33
       }
     }), __jsx("div", {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52,
+        lineNumber: 51,
         columnNumber: 33
       }
     }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53,
+        lineNumber: 52,
         columnNumber: 37
       }
     }, "\uC81C\uAC70")));
@@ -510,8 +510,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
+/* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
 var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\index.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -522,8 +524,7 @@ const Home = () => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])(); //dispatch() 는 useState 의 setState라고 생각하면 편하다.
 
   const {
-    user,
-    isLoggedIn
+    me
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.user); //리덕스 STATE를 가져오기 위해서는 userSelector 
 
   const {
@@ -532,40 +533,41 @@ const Home = () => {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     //   dispatch(loginAction);
     dispatch({
-      type: 'HELLO_SAGA'
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_5__["LOAD_MAIN_POSTS_REQUEST"]
     });
   }, []);
   return __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31,
+      lineNumber: 30,
       columnNumber: 13
     }
-  }, user ? __jsx("div", {
+  }, me ? __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 21
+      lineNumber: 31,
+      columnNumber: 19
     }
   }, "\uB85C\uADF8\uC778\uB428") : __jsx("div", {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 39
+      lineNumber: 31,
+      columnNumber: 37
     }
-  }, "\uB85C\uADF8\uC778 \uC548\uB428"), isLoggedIn && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "\uB85C\uADF8\uC778 \uC548\uB428"), me && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33,
-      columnNumber: 32
+      lineNumber: 32,
+      columnNumber: 24
     }
   }), mainPosts.map((v, i) => {
+    console.log(v);
     return __jsx(_components_PostCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      key: v.User.id,
+      key: v.id,
       post: v,
       __self: undefined,
       __source: {
@@ -641,7 +643,7 @@ const initialState = {
       id: 1,
       nickname: '정준일'
     },
-    img: 'http://zzalbang.kr/wp-content/uploads/2019/06/944afa44ly1g3bon5dh4kj20u0140gvl-851x1024.jpg',
+    img: 'https://img0.yna.co.kr/etc/inner/KR/2020/01/10/AKR20200110125500005_01_i_P4.jpg',
     content: '요즘 핫한 배우',
     Comments: []
   }, {
@@ -650,7 +652,7 @@ const initialState = {
       id: 2,
       nickname: '정준이'
     },
-    img: 'https://i.pinimg.com/236x/94/c7/82/94c7822c6c5c33cd442c3b8d4fe524c6.jpg',
+    img: 'https://cdn.indiepost.co.kr/uploads/images/2016/07/pteoZSxk-580x821.jpeg',
     content: '김근식 군 추천배우',
     Comments: []
   }, {
@@ -659,7 +661,7 @@ const initialState = {
       id: 3,
       nickname: '정준삼'
     },
-    img: 'https://img.extmovie.com/files/attach/images/197/785/981/025/882889a567914626e514406aa0759382.png',
+    img: 'https://upload.wikimedia.org/wikipedia/ko/f/fd/%EB%B6%80%EC%82%B0%ED%96%89.jpg',
     content: '아스카짱!',
     Comments: []
   }],
@@ -757,7 +759,7 @@ const reducer = (state = initialState, action) => {
         console.log('action.data ==>', action);
         return _objectSpread({}, state, {
           isAddingPost: false,
-          mainPosts: [dummyPost, ...state.mainPosts],
+          mainPosts: [action.data, ...state.mainPosts],
           postAdded: true
         });
       }
@@ -804,6 +806,26 @@ const reducer = (state = initialState, action) => {
         });
       }
     //---------댓글 달기 액션
+
+    case LOAD_MAIN_POSTS_REQUEST:
+      {
+        return _objectSpread({}, state, {
+          mainPosts: []
+        });
+      }
+
+    case LOAD_MAIN_POSTS_SUCCESS:
+      {
+        console.log('action.data ==>', action);
+        return _objectSpread({}, state, {
+          mainPosts: action.data
+        });
+      }
+
+    case LOAD_MAIN_POSTS_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
 
     default:
       {
