@@ -19,7 +19,7 @@ const Home = ()=>{
     const {mainPosts} =useSelector(state => state.post); 
   
     useEffect(()=>{
-     //   dispatch(loginAction);
+     //   dispatch(loginActi
      dispatch({
          type:LOAD_MAIN_POSTS_REQUEST, 
      });
@@ -29,9 +29,8 @@ const Home = ()=>{
       
             <div>
             {me ? <div>로그인됨</div> : <div>로그인 안됨</div>}
-                {me && <PostForm />}
+                {me && <PostForm userInfo={me} />}
                 {mainPosts.map((v,i)=>{
-                    console.log(v); 
                     return (
                             <PostCard key={v.id} post={v} />
                     )

@@ -35,9 +35,9 @@ function* logoutAPI(){
                                     //▲데이터 없더라도 빈 객체라도 보내야 한다.
 }
 
-function* loadUserAPI(){
+function* loadUserAPI(userId){
 
-    return axios.get('/user/',{withCredentials:true}); 
+    return axios.get(userId? `/user/${userId}`:'/user/',{withCredentials:true}); 
 }
 //-----------------------------------END API
 
@@ -127,12 +127,12 @@ function* logout(){
 }
 
 
-function* loadUser(){
+function* loadUser(action){
 
     try{
 
       
-        const result   = yield call(loadUserAPI);  
+        const result   = yield call(loadUserAPI,action.data);  
         const userData = yield result.then((resolve)=>{
             return resolve.data; 
         }); 
@@ -140,6 +140,7 @@ function* loadUser(){
         yield put({
                 type: LOAD_USER_SUCCESS,
                 data: userData, 
+                me  : !action.data,         //남의 정보가 없으면 내 정보를 가져옴
             })
 
     }catch(e){

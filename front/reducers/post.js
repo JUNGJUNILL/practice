@@ -158,7 +158,7 @@ const reducer = (state = initialState , action) =>{
         }
 
         case ADD_POST_SUCCESS : {
-            console.log('action.data ==>' , action);
+            console.log('ADD_POST_SUCCESS ==>' , action);
             return {
                 ...state,
                 isAddingPost:false,
@@ -169,6 +169,7 @@ const reducer = (state = initialState , action) =>{
         case ADD_POST_FAILURE : {
             return {
                 ...state,
+                isAddingPost:false,
                 addPostErrorReason :action.error,
             }
         }
@@ -189,7 +190,7 @@ const reducer = (state = initialState , action) =>{
         case ADD_COMMENT_SUCCESS : {
             const postIndex = state.mainPosts.findIndex(v=>v.id===action.data.postId); 
             const post = state.mainPosts[postIndex]; 
-            const Comments = [...post.Comments,dummyComment]; 
+            const Comments = [...post.Comments,action.data.comment]; 
             const mainPosts = [...state.mainPosts]; 
             mainPosts[postIndex] = {...post,Comments}; 
 
@@ -211,14 +212,31 @@ const reducer = (state = initialState , action) =>{
         }
 //---------댓글 달기 액션
 
-        case LOAD_MAIN_POSTS_REQUEST : {
-            return {
+        case LOAD_COMMENTS_SUCCESS :{
+            const postIndex = state.mainPosts.findIndex(v=>v.id===action.data.postId); 
+            const post = state.mainPosts[postIndex]; 
+            const Comments  = action.data.comments; 
+            const mainPosts = [...state.mainPosts]; 
+            mainPosts[postIndex] = {...post,Comments}; 
+            return{
                 ...state,
-                mainPosts:[], 
-            }
+                mainPosts,
+            };
         }
 
-        case LOAD_MAIN_POSTS_SUCCESS : {
+
+            case LOAD_MAIN_POSTS_REQUEST :
+            case LOAD_HASHTAG_POSTS_REQUEST :
+            case LOAD_USER_POSTS_REQUEST : {
+                return {
+                    ...state,
+                    mainPosts:[], 
+                }
+            }
+
+            case LOAD_MAIN_POSTS_SUCCESS :
+            case LOAD_HASHTAG_POSTS_SUCCESS :
+            case LOAD_USER_POSTS_SUCCESS : {
             console.log('action.data ==>' , action);
             return {
                 ...state,
@@ -226,11 +244,44 @@ const reducer = (state = initialState , action) =>{
 
             }
         }
-        case LOAD_MAIN_POSTS_FAILURE : {
+
+            case LOAD_MAIN_POSTS_FAILURE :
+            case LOAD_HASHTAG_POSTS_FAILURE :
+            case LOAD_USER_POSTS_FAILURE : {
             return {
                 ...state,
             }
         }
+
+
+//이미지 업로드------------------------------------------
+        case UPLOAD_IMAGES_REQUEST : {
+            return {
+                ...state,
+            }
+        }
+
+        case UPLOAD_IMAGES_SUCCESS : {
+            return {
+                ...state,
+                imagePaths: [...state.imagePaths, ...action.data],
+            }
+        }
+        case UPLOAD_IMAGES_FAILURE : {
+            return {
+                ...state,
+
+            }
+        }
+
+        case REMOVE_IMAGE : {
+            return{
+                ...state,
+                imagePaths:state.imagePaths.filter((v,i)=> i !== action.index),
+            }
+        }
+//이미지 업로드------------------------------------------
+
         
         default : {
             return {

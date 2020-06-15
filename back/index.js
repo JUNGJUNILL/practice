@@ -16,6 +16,7 @@ passportConfig();
 const userAPIRouter = require('./routes/user'); 
 const postAPIRouter = require('./routes/post'); 
 const postsAPIRouter = require('./routes/posts'); 
+const hashtagAPIRouter = require('./routes/hashtag'); 
 
 
 app.get('/',(req,res)=>{
@@ -23,13 +24,14 @@ app.get('/',(req,res)=>{
 })
 
 app.use(morgan('dev')); 
-app.use(express.json()); 
-app.use(express.urlencoded({extended : true})); //form 데이터 처리 
+app.use('/',express.static('uploads')); 
 app.use(cors({
     origin: true, 
     credentials:true,
     //--프론트와 백엔드간에 쿠키 주고 받기 위함
 }));
+app.use(express.json()); 
+app.use(express.urlencoded({extended : true})); //form 데이터 처리 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(expressSession({
     resave : false,             //매번 세션 강제 저장
@@ -49,6 +51,7 @@ app.use(passport.session());
 app.use('/api/user',userAPIRouter); 
 app.use('/api/post',postAPIRouter); 
 app.use('/api/posts',postsAPIRouter); 
+app.use('/api/hashtag',hashtagAPIRouter); 
 
 app.listen(3065,()=>{
 

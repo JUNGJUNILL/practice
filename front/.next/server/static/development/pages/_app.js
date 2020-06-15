@@ -2299,7 +2299,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-saga */ "redux-saga");
 /* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 //next에서 제공하는 최상위 컴포넌트 파일 (_app.js로 직접 만들어야 한다. )
 //페이지들의 공통적인 부분기여주기 
@@ -2322,67 +2321,40 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 const NodeBird = ({
   Component,
-  store
+  store,
+  pageProps
 }) => {
   //▲ next에서 제공하는 props
   return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
-    store: store,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28,
-      columnNumber: 9
-    }
-  }, " ", __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29,
-      columnNumber: 13
-    }
-  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30,
-      columnNumber: 13
-    }
-  }, __jsx("title", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 31,
-      columnNumber: 17
-    }
-  }, "NodeBird"), __jsx("link", {
+    store: store
+  }, " ", __jsx("div", null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("title", null, "NodeBird"), __jsx("link", {
     rel: "stylesheet",
-    href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.min.css",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 17
-    }
-  })), __jsx(_components_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34,
-      columnNumber: 13
-    }
-  }, __jsx(Component, {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35,
-      columnNumber: 17
-    }
-  }))));
+    href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.min.css"
+  })), __jsx(_components_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"], null, __jsx(Component, pageProps))));
 };
 
 NodeBird.propTypes = {
   Component: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.elementType.isRequired,
-  store: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
+  store: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+  pageProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
+}; //ㅁnext에서 제공하는 기능
+
+NodeBird.getInitialProps = async context => {
+  //▲ next에서 제공해줌
+  console.log('context===>', context);
+  const {
+    ctx,
+    Component
+  } = context;
+  let pageProps = {};
+
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  return {
+    pageProps
+  };
 }; //하이오더 컴포넌트 
 
 /*
@@ -2394,6 +2366,7 @@ const hello = (Component) => ()=>{
 }
 */
 //제로초가 그냥 외우라고함... 
+
 
 const configureStore = (initialState, options) => {
   const sagaMiddleware = redux_saga__WEBPACK_IMPORTED_MODULE_8___default()();
@@ -2973,7 +2946,7 @@ const reducer = (state = initialState, action) => {
 
     case ADD_POST_SUCCESS:
       {
-        console.log('action.data ==>', action);
+        console.log('ADD_POST_SUCCESS ==>', action);
         return _objectSpread({}, state, {
           isAddingPost: false,
           mainPosts: [action.data, ...state.mainPosts],
@@ -2984,6 +2957,7 @@ const reducer = (state = initialState, action) => {
     case ADD_POST_FAILURE:
       {
         return _objectSpread({}, state, {
+          isAddingPost: false,
           addPostErrorReason: action.error
         });
       }
@@ -3003,7 +2977,7 @@ const reducer = (state = initialState, action) => {
       {
         const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
         const post = state.mainPosts[postIndex];
-        const Comments = [...post.Comments, dummyComment];
+        const Comments = [...post.Comments, action.data.comment];
         const mainPosts = [...state.mainPosts];
         mainPosts[postIndex] = _objectSpread({}, post, {
           Comments
@@ -3024,7 +2998,23 @@ const reducer = (state = initialState, action) => {
       }
     //---------댓글 달기 액션
 
+    case LOAD_COMMENTS_SUCCESS:
+      {
+        const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        const post = state.mainPosts[postIndex];
+        const Comments = action.data.comments;
+        const mainPosts = [...state.mainPosts];
+        mainPosts[postIndex] = _objectSpread({}, post, {
+          Comments
+        });
+        return _objectSpread({}, state, {
+          mainPosts
+        });
+      }
+
     case LOAD_MAIN_POSTS_REQUEST:
+    case LOAD_HASHTAG_POSTS_REQUEST:
+    case LOAD_USER_POSTS_REQUEST:
       {
         return _objectSpread({}, state, {
           mainPosts: []
@@ -3032,6 +3022,8 @@ const reducer = (state = initialState, action) => {
       }
 
     case LOAD_MAIN_POSTS_SUCCESS:
+    case LOAD_HASHTAG_POSTS_SUCCESS:
+    case LOAD_USER_POSTS_SUCCESS:
       {
         console.log('action.data ==>', action);
         return _objectSpread({}, state, {
@@ -3040,9 +3032,37 @@ const reducer = (state = initialState, action) => {
       }
 
     case LOAD_MAIN_POSTS_FAILURE:
+    case LOAD_HASHTAG_POSTS_FAILURE:
+    case LOAD_USER_POSTS_FAILURE:
       {
         return _objectSpread({}, state);
       }
+    //이미지 업로드------------------------------------------
+
+    case UPLOAD_IMAGES_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case UPLOAD_IMAGES_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          imagePaths: [...state.imagePaths, ...action.data]
+        });
+      }
+
+    case UPLOAD_IMAGES_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case REMOVE_IMAGE:
+      {
+        return _objectSpread({}, state, {
+          imagePaths: state.imagePaths.filter((v, i) => i !== action.index)
+        });
+      }
+    //이미지 업로드------------------------------------------
 
     default:
       {
@@ -3237,8 +3257,14 @@ const reducer = (state = initialState, action) => {
 
     case LOAD_USER_SUCCESS:
       {
+        if (action.me) {
+          return _objectSpread({}, state, {
+            me: action.data
+          });
+        }
+
         return _objectSpread({}, state, {
-          me: action.data
+          userInfo: action.data
         });
       }
 
@@ -3321,6 +3347,7 @@ function loadMainPostsAPI() {
 function* loadMainPosts(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadMainPostsAPI);
+    console.log('posts==>', result.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_SUCCESS"],
       data: result.data
@@ -3334,19 +3361,55 @@ function* loadMainPosts(action) {
   }
 }
 
-function* addPost(action) {
+function loadHashtagPostsAPI(tag) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/hashtag/${tag}`);
+}
+
+function* loadHashtagPosts(action) {
   try {
-    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(addPostAPI, action.data);
-    const postData = yield result.then(resolve => {
-      return resolve.data;
-    });
-    console.log('postData===>', postData);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadHashtagPostsAPI, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_POST_SUCCESS"],
-      data: postData
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_HASHTAG_POSTS_SUCCESS"],
+      data: result.data
     });
   } catch (e) {
     console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_HASHTAG_POSTS_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function loadUserPostsAPI(id) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/user/${id}/posts`);
+}
+
+function* loadUserPosts(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadUserPostsAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_USER_POSTS_SUCCESS"],
+      data: result.data
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_USER_POSTS_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* addPost(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(addPostAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_POST_SUCCESS"],
+      data: result.data
+    });
+  } catch (e) {
+    console.error('ADD_POST_FAILURE==>', e);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_POST_FAILURE"],
       error: e
@@ -3362,22 +3425,75 @@ function* watchLoadMainPosts() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_REQUEST"], loadMainPosts);
 }
 
-function addCommentAPI() {}
+function addCommentAPI(data) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`/post/${data.postId}/comment`, {
+    content: data.content
+  }, {
+    withCredentials: true
+  });
+}
 
 function* addComment(action) {
   try {
-    console.log('action.data.postId==>', action.data.postId);
-    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["delay"])(2000);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(addCommentAPI, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_COMMENT_SUCCESS"],
       data: {
-        poSstId: action.data.postId
+        postId: action.data.postId,
+        comment: result.data
+      }
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_COMMENT_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function loadCommentstAPI(postId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/post/${postId}/comments`);
+}
+
+function* loadComments(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadCommentstAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_COMMENTS_SUCCESS"],
+      data: {
+        postId: action.data,
+        comments: result.data
       }
     });
   } catch (e) {
     console.log(e);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
-      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_COMMENT_FAILURE"],
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_COMMENTS_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function upLoadImagesAPI(formData) {
+  console.log('saga==>', formData);
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/post/images', formData, {
+    withCredentials: true
+  });
+}
+
+function* upLoadImages(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(upLoadImagesAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["UPLOAD_IMAGES_SUCCESS"],
+      data: result.data //이미지가 저장된 주소를 가져온다. 
+
+    });
+  } catch (e) {
+    console.log(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["UPLOAD_IMAGES_FAILURE"],
       error: e
     });
   }
@@ -3388,8 +3504,28 @@ function* whatchAddComment() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_COMMENT_REQUEST"], addComment);
 }
 
+function* watchLoadHashtagPosts() {
+  console.log('watchLoadHashtagPosts');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_HASHTAG_POSTS_REQUEST"], loadHashtagPosts);
+}
+
+function* watchLoadUserPosts() {
+  console.log('watchLoadUserPosts');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_USER_POSTS_REQUEST"], loadUserPosts);
+}
+
+function* watchLoadComments() {
+  console.log('watchLoadComments');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_COMMENTS_REQUEST"], loadComments);
+}
+
+function* watchUploadImages() {
+  console.log('watchUploadImages');
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["UPLOAD_IMAGES_REQUEST"], upLoadImages);
+}
+
 function* postSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddComment)]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadHashtagPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUploadImages)]);
 }
 
 /***/ }),
@@ -3443,8 +3579,8 @@ function* logoutAPI() {
   }); //▲데이터 없더라도 빈 객체라도 보내야 한다.
 }
 
-function* loadUserAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/user/', {
+function* loadUserAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(userId ? `/user/${userId}` : '/user/', {
     withCredentials: true
   });
 } //-----------------------------------END API
@@ -3517,16 +3653,18 @@ function* logout() {
   }
 }
 
-function* loadUser() {
+function* loadUser(action) {
   try {
-    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadUserAPI);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadUserAPI, action.data);
     const userData = yield result.then(resolve => {
       return resolve.data;
     });
     console.log('userData==>', userData);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_SUCCESS"],
-      data: userData
+      data: userData,
+      me: !action.data //남의 정보가 없으면 내 정보를 가져옴
+
     });
   } catch (e) {
     console.log('eeee==>', e);
