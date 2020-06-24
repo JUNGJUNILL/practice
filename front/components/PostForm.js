@@ -3,6 +3,7 @@ import {Form, Button,Input}from 'antd'
 
 import {useDispatch ,useSelector} from 'react-redux'
 import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/post';
+import image from '../../back/models/image';
 
 
 
@@ -23,15 +24,18 @@ const PostForm = ({userInfo}) =>{
             alert('게시글을 입력해 주세요'); 
             return; 
         }
+        const formData = new FormData(); 
+        imagePaths.forEach((i)=>{
+            formData.append('image',i); 
+        }); 
+        formData.append('content',text); 
+
         dispatch({
                 type:ADD_POST_REQUEST,
-                data: {
-                  content : text,
-                  UserId  : userInfo.id,
-                    },
+                data: formData,
             });
 
-    },[text]); 
+    },[text,imagePaths]); 
     
 
 
@@ -41,7 +45,6 @@ const PostForm = ({userInfo}) =>{
 
     const onChangeImages =useCallback((e)=>{
 
-        console.log('읭??',e.target.files); 
         const imageFormData = new FormData(); //브라우저에서 제공 
                                               //express bodyParser로 전송 불가능
                                               //muter 미들웨어로 처리해야 한다.

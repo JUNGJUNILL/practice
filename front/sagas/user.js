@@ -1,7 +1,7 @@
 import {all ,fork, takeLatest, call, put, delay,takeEvery,take }from 'redux-saga/effects'; 
 //이 외에도
 // race, cancel, select, throttle, debounce 등 도 있다. 
-import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_FAILURE, SIGN_UP_SUCCESS, LOG_OUT_REQUEST, LOG_OUT_FAILURE, LOG_OUT_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOAD_USER_REQUEST } from '../reducers/user';
+import { LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_FAILURE, SIGN_UP_SUCCESS, LOG_OUT_REQUEST, LOG_OUT_FAILURE, LOG_OUT_SUCCESS, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOAD_USER_REQUEST, FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE } from '../reducers/user';
 import axios from 'axios';
 
 //call : 함수 동기적 호출   (순서를 지켜서 실행해야 하는 경우)
@@ -32,13 +32,26 @@ function* signUpAPI(signUpData){
 function* logoutAPI(){
 
     return axios.post('/user/logout',{},{withCredentials:true});
-                                    //▲데이터 없더라도 빈 객체라도 보내야 한다.
+                                    //▲POST로 보낼 때, 데이터 없더라도 빈 객체라도 보내야 한다.
 }
 
 function* loadUserAPI(userId){
 
     return axios.get(userId? `/user/${userId}`:'/user/',{withCredentials:true}); 
 }
+
+
+function* followAPI(userId){
+
+    return axios.post(`/user/${userId}/follow`,{},{withCredentials:true});
+                                             //▲데이터 없더라도 빈 객체라도 보내야 한다.
+}
+
+function* unFollowAPI(userId){
+
+    return axios.delete(`/user/${userId}/follow`, {
+        withCredentials: true,
+      });}
 //-----------------------------------END API
 
 
@@ -60,6 +73,18 @@ function* watchLogout(){
 function* watchLoadUser(){
     yield takeLatest(LOAD_USER_REQUEST,loadUser); 
 }
+
+
+function* watchFollowUser(){
+
+    yield takeEvery(FOLLOW_USER_REQUEST,follow); 
+}
+
+function* watchUnFollowUser(){
+    yield takeLatest(UNFOLLOW_USER_REQUEST,unFollow); 
+}
+
+
 //-----------------------------------END WATCH 
 
 function* login(action){
@@ -133,18 +158,14 @@ function* loadUser(action){
 
       
         const result   = yield call(loadUserAPI,action.data);  
-        const userData = yield result.then((resolve)=>{
-            return resolve.data; 
-        }); 
-        console.log('userData==>' , userData); 
+
         yield put({
                 type: LOAD_USER_SUCCESS,
-                data: userData, 
-                me  : !action.data,         //남의 정보가 없으면 내 정보를 가져옴
+                data: result.data, 
+          
             })
 
     }catch(e){
-        console.log('eeee==>', e); 
         console.error(e); 
 
         yield put({
@@ -156,6 +177,62 @@ function* loadUser(action){
 }
 
 
+
+
+
+
+
+function* follow(action){
+
+    try{
+
+      
+        const result   = yield call(followAPI,action.data);  
+
+        yield put({
+                type: FOLLOW_USER_SUCCESS,
+                data: result.data, 
+
+            })
+
+    }catch(e){
+        console.error(e); 
+
+        yield put({
+            type:FOLLOW_USER_FAILURE,
+            error:e,
+        });
+    }
+
+}
+
+
+
+
+
+function* unFollow(action){
+
+    try{
+
+      
+        const result   = yield call(unFollowAPI,action.data);  
+
+        yield put({
+                type: UNFOLLOW_USER_SUCCESS,
+                data: result.data, 
+
+            })
+
+    }catch(e){
+        console.error(e); 
+
+        yield put({
+            type:UNFOLLOW_USER_FAILURE,
+            error:e,
+        });
+    }
+
+}
 
 
 
@@ -196,6 +273,8 @@ export default function* userSaga() {
         fork(watchLoadUser), 
         //fork(watchHello),
         fork(watchSignUp),
+        fork(watchFollowUser), 
+        fork(watchUnFollowUser), 
         
     ]);
 

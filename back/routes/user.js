@@ -144,7 +144,14 @@ router.get('/:id/posts',async (req,res,next)=>{
                         include: [{
                                 model: db.User,
                                 attributes: ['id', 'nickname'],                        
-                        }], 
+                        },{
+                                model:db.Image,
+                         },{
+                                model:db.User,
+                                through : 'Like',
+                                as : 'Likers',
+                                attributes:['id'],
+                            }], 
                 }); 
                 res.json(posts); 
         }catch(e){
@@ -173,7 +180,9 @@ router.get('/:id', async (req, res, next) => { // 남의 정보 가져오는 것
               model: db.User,
               as: 'Followers',
               attributes: ['id'],
-            }],
+            },{
+                model:db.Image,
+              }],
             attributes: ['id', 'nickname'],
           });
           const jsonUser = user.toJSON();
@@ -192,17 +201,45 @@ router.get('/:id', async (req, res, next) => { // 남의 정보 가져오는 것
 
 
 
-// router.get('/api/user/:id/follow',(req,res)=>{
+//팔로우
+router.post('/:id/follow',isLoggedIn, async (req,res,next)=>{
 
-// }); 
+        try{
+                const me = await db.User.findOne({
+                        where : {id : req.user.id}, 
+                }); 
 
-// router.post('/api/user/:id/follow',(req,res)=>{
+                await me.addFollowing(req.params.id); 
+                res.send(req.params.id); 
 
-// }); 
+        }catch(e){
+                console.error(e); 
+                next(e); 
+        }
 
-// router.delete('/api/user/:id/follow',(req,res)=>{
+}); 
 
-// }); 
+
+//언팔로우
+router.delete('/:id/follow', isLoggedIn, async (req, res, next) => {
+        try {
+          const me = await db.User.findOne({
+            where: { id: req.user.id },
+          });
+
+          
+          await me.removeFollowing(req.params.id);
+          res.send(req.params.id);
+
+
+        } catch (e) {
+          console.error(e);
+          next(e);
+        }
+      });
+
+
+
 
 // router.delete('/api/user/:id/follower',(req,res)=>{
 

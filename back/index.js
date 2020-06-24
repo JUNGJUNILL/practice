@@ -25,6 +25,9 @@ app.get('/',(req,res)=>{
 
 app.use(morgan('dev')); 
 app.use('/',express.static('uploads')); 
+//정적 파일 제공 라우터, 
+
+
 app.use(cors({
     origin: true, 
     credentials:true,

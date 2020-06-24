@@ -1,16 +1,22 @@
 
 import React,{useState,useCallback,useEffect}  from 'react'
 import {Card , Button, Avatar,Form, Input, List, Comment}from 'antd'
-import {RetweetOutlined ,
-        HeartOutlined ,
-        MessageOutlined,
-        EllipsisOutlined 
+import {
+    RetweetOutlined, 
+    HeartOutlined,
+    MessageOutlined  ,
+    EllipsisOutlined ,
 } from '@ant-design/icons';
+
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import PostImages from './PostImages'; 
+import PostCardContent from './PostCardContent'; 
+
 
 import {useDispatch ,useSelector} from 'react-redux'
-import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST } from '../reducers/post';
+import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST, UNLIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_REQUEST, RETWEET_REQUEST } from '../reducers/post';
+import {FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST} from '../reducers/user';
 
 const PostCard = ({post}) =>{
     
@@ -20,6 +26,10 @@ const PostCard = ({post}) =>{
     const {commentAdded, isAddingComment}  = useSelector(state=>state.post); 
     const dispatch = useDispatch(); 
 
+    const liked =me && post.Likers && post.Likers.find(v => v.id === me.id);
+    useEffect(()=>{
+        console.log('힝힝힝' + me); 
+    },[])
     const onToggleComment = useCallback(() =>{
         setCommentFormOpend(preve => !preve); 
         if(!commentFormOpend){
@@ -47,7 +57,6 @@ const PostCard = ({post}) =>{
     
         //댓글을 쓰고 새로 load해야 할 터이니...
         useEffect(()=>{
-            console.log('post===>' , post); 
             setCommentText('');
         },[commentAdded ===true]); 
 
@@ -56,36 +65,103 @@ const PostCard = ({post}) =>{
     },[]); 
 
 
+    const onToggleLike = useCallback(() => {
+        if (!me) {
+          return alert('로그인이 필요합니다!');
+        }
+
+        if (liked) { // 좋아요 누른 상태
+          dispatch({
+            type: UNLIKE_POST_REQUEST,
+            data: post.id,
+          });
+
+        } else { // 좋아요 안 누른 상태
+          dispatch({
+            type: LIKE_POST_REQUEST,
+            data: post.id,
+          });
+        }
+      }, [me && me.id, post && post.id, liked]);
+
+
+      const onRetweet = useCallback(()=>{
+
+          if (!me) {
+            return alert('로그인이 필요합니다!');
+          }
+  
+
+        return  dispatch({
+            type : RETWEET_REQUEST,
+            data : post.id,
+        });
+
+
+      },[me && me.id , post && post.id]);
+
+
+      const onUnfollow = useCallback(userId=>()=>{
+            dispatch({
+                type : UNFOLLOW_USER_REQUEST,
+                data : userId,
+            })
+      },[])
+
+      const onFollow  = useCallback(userId=>()=>{
+
+        dispatch({
+            type : FOLLOW_USER_REQUEST,
+            data : userId,
+        })
+
+    },[])
+
+
 
     return (
         <div>
         <Card
             //key={post.}
-            cover={post.img && <img alt="example" src={post.img} style={{width:'100px'}}/>}
+            cover={post.Images[0] && <PostImages images={post.Images} />}
             actions={[
-                <RetweetOutlined />,
-                <HeartOutlined />,
+                <RetweetOutlined onClick={onRetweet} />,
+                <HeartOutlined onClick={onToggleLike} />,
                 <MessageOutlined  onClick={onToggleComment} />,
                 <EllipsisOutlined />,
             ]}
-            extra={<Button>팔로우</Button>}
+            title={post.RetweetId && post.Retweet ? `${post.User.nickname} 님이 리트윗하셨습니다.` : ''}
+            extra={!me || post.User.id === me.id
+                ? null
+                : me.Followings && me.Followings.find(v => v.id === post.User.id)
+                  ? <Button onClick={onUnfollow(post.User.id)}>언팔로우</Button>
+                  : <Button onClick={onFollow(post.User.id)}>팔로우</Button>
+              }
              >
+
+             {post.RetweetId && post.Retweet ?
+               ( 
+                <Card
+                        cover={post.Retweet.Images[0] && <PostImages images={post.Retweet.Images} />}
+                >
+                    <Card.Meta 
+                    
+                    avatar={<Link href={{pathname:'/user', query:{id : post.User.id} }} as={`user/${post.User.id}`}/*href={`/user/${post.User.id}`}*/><a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a></Link>}
+                    title={post.Retweet.User.nickname}
+                    description={<PostCardContent postData={post.Retweet.content}/>}
+                    //next 사용시 <a> 태그 말고 Link 를 사용해야 한다.
+                    />
+                </Card>
+               )
+
+            :( 
             <Card.Meta 
                 avatar={<Link href={{pathname:'/user', query:{id : post.User.id} }} as={`user/${post.User.id}`}/*href={`/user/${post.User.id}`}*/><a><Avatar>{post.User.nickname[0]}</Avatar></a></Link>}
                 title={post.User.nickname}
-                description={(<div>{post.content.split(/(#[^\s]+)/g).map((v)=>{
-                    if(v.match(/#[^\s]+/)){
-                        return(
-                            <Link href={{pathname:'/hashtag', query:{tag : v.replace(/#/g,"")}}} as={`hashtag/${v.replace(/#/g,"")}`}/*href={`/hashtag/${v.replace(/#/g,"")}`}*/ key={v}><a>{v}</a></Link>
-                        );
-                    }
-                  
-                        return v; 
-                  
-                })}</div>
-                )}
+                description={<PostCardContent postData={post.content}/>}
                 //next 사용시 <a> 태그 말고 Link 를 사용해야 한다.
             />
+            )}
         </Card>
         {commentFormOpend && (
             <>
@@ -122,9 +198,9 @@ PostCard.propTypes = {
     post : PropTypes.shape({
             User: PropTypes.object,
             content : PropTypes.string,
-            img:PropTypes.string,
+            images:PropTypes.array,
            // createdAt:PropTypes.object
     })
 }
 
-export default PostCard; 
+export default PostCard;    

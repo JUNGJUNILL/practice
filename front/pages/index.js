@@ -26,10 +26,11 @@ const Home = ()=>{
     },[])
 
     return (
-      
+                
             <div>
             {me ? <div>로그인됨</div> : <div>로그인 안됨</div>}
                 {me && <PostForm userInfo={me} />}
+                
                 {mainPosts.map((v,i)=>{
                     return (
                             <PostCard key={v.id} post={v} />

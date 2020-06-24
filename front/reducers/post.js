@@ -2,45 +2,7 @@ import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 export const initialState = {
 
-    mainPosts : [  {
-                    id:1,
-                    User : {
-                            id:1,
-                            nickname:'정준일',
-                        
-                        }, 
-                        img:'https://img0.yna.co.kr/etc/inner/KR/2020/01/10/AKR20200110125500005_01_i_P4.jpg',
-                        content:'요즘 핫한 배우', 
-                        Comments:[],
-
-                    },
-
-                    {
-                    id:2,    
-                    User : {
-                        id:2,
-                        nickname:'정준이',
-                        
-                    }, 
-                    
-                    img:'https://cdn.indiepost.co.kr/uploads/images/2016/07/pteoZSxk-580x821.jpeg',
-                    content:'김근식 군 추천배우', 
-                    Comments:[],
-
-                    },
-                    {
-                    id:3,
-                    User : {
-                        id:3,
-                        nickname:'정준삼',
-                        
-                    }, 
-                    img:'https://upload.wikimedia.org/wikipedia/ko/f/fd/%EB%B6%80%EC%82%B0%ED%96%89.jpg',
-                    content:'아스카짱!', 
-                    Comments:[],
-
-                    }
-                ],  //화면에 보일 POST들 
+     mainPosts : [],  //화면에 보일 POST들 
 
 
      imagePaths : [], //미리보기 이미지 경로 
@@ -164,6 +126,7 @@ const reducer = (state = initialState , action) =>{
                 isAddingPost:false,
                 mainPosts:[action.data, ...state.mainPosts],
                 postAdded:true, 
+                imagePaths:[],
             }
         }
         case ADD_POST_FAILURE : {
@@ -281,6 +244,96 @@ const reducer = (state = initialState , action) =>{
             }
         }
 //이미지 업로드------------------------------------------
+
+//게시글 좋아요------------------------------------------
+        case LIKE_POST_REQUEST : {
+
+
+            return {
+                ...state,
+            }
+        }
+
+        case LIKE_POST_SUCCESS : {
+            const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+            const post = state.mainPosts[postIndex];
+            const Likers = [{ id: action.data.userId }, ...post.Likers];
+            const mainPosts = [...state.mainPosts];
+            mainPosts[postIndex] = { ...post, Likers };
+      return {
+        ...state,
+        mainPosts,
+      };
+    }
+        case LIKE_POST_FAILURE : {
+            return {
+                ...state,
+            }
+        }
+//게시글 좋아요------------------------------------------
+
+
+
+//게시글 좋아요 취소------------------------------------------
+        case UNLIKE_POST_REQUEST : {
+
+
+            return {
+                ...state,
+            
+            }
+        }
+
+        case UNLIKE_POST_SUCCESS : {
+            const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+            const post = state.mainPosts[postIndex];
+            const Likers = post.Likers.filter(v => v.id !== action.data.userId);
+            const mainPosts = [...state.mainPosts];
+            mainPosts[postIndex] = { ...post, Likers };
+            return {
+              ...state,
+              mainPosts,
+            };
+          }
+        case UNLIKE_POST_FAILURE : {
+            return {
+                ...state,
+
+            }
+        }
+//게시글 좋아요 취소------------------------------------------
+
+
+
+
+//리트윗------------------------------------------
+        case RETWEET_REQUEST : {
+
+
+            return {
+                ...state,
+            
+            }
+        }
+
+        case RETWEET_SUCCESS : {
+
+            return {
+                ...state,
+                mainPosts : [action.data, ...state.mainPosts],
+            };
+        }
+        case RETWEET_FAILURE : {
+            return {
+                ...state,
+
+            }
+        }
+//리트윗------------------------------------------
+
+
+
+
 
         
         default : {

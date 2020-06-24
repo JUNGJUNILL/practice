@@ -93,6 +93,149 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "../back/models/image.js":
+/*!*******************************!*\
+  !*** ../back/models/image.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = (sequelize, DataTypes) => {
+    const Image = sequelize.define('Image', {
+      src: { // S3 저장
+        type: DataTypes.STRING(200),
+        allowNull: false,
+      },
+    }, {
+      charset: 'utf8',
+      collate: 'utf8_general_ci',
+    });
+    Image.associate = (db) => {
+      db.Image.belongsTo(db.Post);
+    };
+    return Image;
+  };
+
+/***/ }),
+
+/***/ "./components/ImagesZoom.js":
+/*!**********************************!*\
+  !*** ./components/ImagesZoom.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-slick */ "react-slick");
+/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_slick__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ant-design/icons */ "@ant-design/icons");
+/* harmony import */ var _ant_design_icons__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_ant_design_icons__WEBPACK_IMPORTED_MODULE_3__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+const ImagesZoom = ({
+  images,
+  onClose
+}) => {
+  const {
+    0: currentSlide,
+    1: setCurrentSlide
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
+  return __jsx("div", {
+    style: {
+      position: 'fixed',
+      zIndex: 5000,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0
+    }
+  }, __jsx("header", {
+    style: {
+      height: 44,
+      background: 'white',
+      position: 'relative',
+      padding: 0,
+      textAlign: 'center'
+    }
+  }, __jsx("h1", {
+    style: {
+      margin: 0,
+      fontSize: '17px',
+      color: '#333',
+      lineHeight: '44px'
+    }
+  }, "\uC0C1\uC138 \uC774\uBBF8\uC9C0"), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_3__["CloseOutlined"], {
+    onClick: onClose,
+    style: {
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      padding: 15,
+      lineHeight: '14px',
+      cursor: 'pointer'
+    }
+  })), __jsx("div", {
+    style: {
+      height: 'calc(100% - 44px)',
+      background: '#090909'
+    }
+  }, __jsx("div", null, __jsx(react_slick__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    initialSlide: 0,
+    afterChange: slide => setCurrentSlide(slide),
+    infinite: false,
+    arrows: true,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  }, images.map(v => {
+    return __jsx("div", {
+      style: {
+        padding: 32,
+        textAlign: 'center'
+      }
+    }, __jsx("img", {
+      src: `http://captainryan.gonetis.com:3065/${v.src}`,
+      style: {
+        margin: '0 auto',
+        maxHeight: 750
+      }
+    }));
+  })), __jsx("div", {
+    style: {
+      textAlign: 'center'
+    }
+  }, __jsx("div", {
+    style: {
+      width: 75,
+      height: 30,
+      lineHeight: '30px',
+      background: '#313131',
+      display: 'inline-block',
+      textAlign: 'center',
+      color: 'white',
+      fontSize: '15px'
+    }
+  }, currentSlide + 1, " / ", images.length)))));
+};
+
+ImagesZoom.propTypes = {
+  images: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
+    src: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  })).isRequired,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (ImagesZoom);
+
+/***/ }),
+
 /***/ "./components/PostCard.js":
 /*!********************************!*\
   !*** ./components/PostCard.js ***!
@@ -112,10 +255,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
+/* harmony import */ var _PostImages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PostImages */ "./components/PostImages.js");
+/* harmony import */ var _PostCardContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PostCardContent */ "./components/PostCardContent.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
 
 
 
@@ -137,18 +286,22 @@ const PostCard = ({
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('');
   const {
     me
-  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["useSelector"])(state => state.user);
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["useSelector"])(state => state.user);
   const {
     commentAdded,
     isAddingComment
-  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["useSelector"])(state => state.post);
-  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["useDispatch"])();
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["useSelector"])(state => state.post);
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["useDispatch"])();
+  const liked = me && post.Likers && post.Likers.find(v => v.id === me.id);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log('힝힝힝' + me);
+  }, []);
   const onToggleComment = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
     setCommentFormOpend(preve => !preve);
 
     if (!commentFormOpend) {
       dispatch({
-        type: _reducers_post__WEBPACK_IMPORTED_MODULE_6__["LOAD_COMMENTS_REQUEST"],
+        type: _reducers_post__WEBPACK_IMPORTED_MODULE_8__["LOAD_COMMENTS_REQUEST"],
         data: post.id
       });
     }
@@ -159,7 +312,7 @@ const PostCard = ({
     }
 
     return dispatch({
-      type: _reducers_post__WEBPACK_IMPORTED_MODULE_6__["ADD_COMMENT_REQUEST"],
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_8__["ADD_COMMENT_REQUEST"],
       data: {
         postId: post.id,
         content: commentText
@@ -168,26 +321,92 @@ const PostCard = ({
   }, [me && me.id, commentText]); //댓글을 쓰고 새로 load해야 할 터이니...
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log('post===>', post);
     setCommentText('');
   }, [commentAdded === true]);
   const onChangeCommentText = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
     setCommentText(e.target.value);
   }, []);
+  const onToggleLike = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    if (!me) {
+      return alert('로그인이 필요합니다!');
+    }
+
+    if (liked) {
+      // 좋아요 누른 상태
+      dispatch({
+        type: _reducers_post__WEBPACK_IMPORTED_MODULE_8__["UNLIKE_POST_REQUEST"],
+        data: post.id
+      });
+    } else {
+      // 좋아요 안 누른 상태
+      dispatch({
+        type: _reducers_post__WEBPACK_IMPORTED_MODULE_8__["LIKE_POST_REQUEST"],
+        data: post.id
+      });
+    }
+  }, [me && me.id, post && post.id, liked]);
+  const onRetweet = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    if (!me) {
+      return alert('로그인이 필요합니다!');
+    }
+
+    return dispatch({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_8__["RETWEET_REQUEST"],
+      data: post.id
+    });
+  }, [me && me.id, post && post.id]);
+  const onUnfollow = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(userId => () => {
+    dispatch({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_9__["UNFOLLOW_USER_REQUEST"],
+      data: userId
+    });
+  }, []);
+  const onFollow = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(userId => () => {
+    dispatch({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_9__["FOLLOW_USER_REQUEST"],
+      data: userId
+    });
+  }, []);
   return __jsx("div", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"] //key={post.}
   , {
-    cover: post.img && __jsx("img", {
-      alt: "example",
-      src: post.img,
-      style: {
-        width: '100px'
-      }
+    cover: post.Images[0] && __jsx(_PostImages__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      images: post.Images
     }),
-    actions: [__jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["RetweetOutlined"], null), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["HeartOutlined"], null), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["MessageOutlined"], {
+    actions: [__jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["RetweetOutlined"], {
+      onClick: onRetweet
+    }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["HeartOutlined"], {
+      onClick: onToggleLike
+    }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["MessageOutlined"], {
       onClick: onToggleComment
     }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["EllipsisOutlined"], null)],
-    extra: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], null, "\uD314\uB85C\uC6B0")
+    title: post.RetweetId && post.Retweet ? `${post.User.nickname} 님이 리트윗하셨습니다.` : '',
+    extra: !me || post.User.id === me.id ? null : me.Followings && me.Followings.find(v => v.id === post.User.id) ? __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      onClick: onUnfollow(post.User.id)
+    }, "\uC5B8\uD314\uB85C\uC6B0") : __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      onClick: onFollow(post.User.id)
+    }, "\uD314\uB85C\uC6B0")
+  }, post.RetweetId && post.Retweet ? __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+    cover: post.Retweet.Images[0] && __jsx(_PostImages__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      images: post.Retweet.Images
+    })
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
+    avatar: __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      href: {
+        pathname: '/user',
+        query: {
+          id: post.User.id
+        }
+      },
+      as: `user/${post.User.id}`
+      /*href={`/user/${post.User.id}`}*/
+
+    }, __jsx("a", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], null, post.Retweet.User.nickname[0]))),
+    title: post.Retweet.User.nickname,
+    description: __jsx(_PostCardContent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      postData: post.Retweet.content
+    }) //next 사용시 <a> 태그 말고 Link 를 사용해야 한다.
+
+  })) : __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
     avatar: __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
       href: {
         pathname: '/user',
@@ -200,24 +419,9 @@ const PostCard = ({
 
     }, __jsx("a", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], null, post.User.nickname[0]))),
     title: post.User.nickname,
-    description: __jsx("div", null, post.content.split(/(#[^\s]+)/g).map(v => {
-      if (v.match(/#[^\s]+/)) {
-        return __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
-          href: {
-            pathname: '/hashtag',
-            query: {
-              tag: v.replace(/#/g, "")
-            }
-          },
-          as: `hashtag/${v.replace(/#/g, "")}`
-          /*href={`/hashtag/${v.replace(/#/g,"")}`}*/
-          ,
-          key: v
-        }, __jsx("a", null, v));
-      }
-
-      return v;
-    })) //next 사용시 <a> 태그 말고 Link 를 사용해야 한다.
+    description: __jsx(_PostCardContent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      postData: post.content
+    }) //next 사용시 <a> 태그 말고 Link 를 사용해야 한다.
 
   })), commentFormOpend && __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
     onFinish: onSubmitComment
@@ -254,11 +458,61 @@ PostCard.propTypes = {
   post: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
     User: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
     content: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-    img: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string // createdAt:PropTypes.object
+    images: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array // createdAt:PropTypes.object
 
   })
 };
 /* harmony default export */ __webpack_exports__["default"] = (PostCard);
+
+/***/ }),
+
+/***/ "./components/PostCardContent.js":
+/*!***************************************!*\
+  !*** ./components/PostCardContent.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const PostCardContent = ({
+  postData
+}) => {
+  return __jsx("div", null, postData.split(/(#[^\s]+)/g).map(v => {
+    if (v.match(/#[^\s]+/)) {
+      return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        href: {
+          pathname: '/hashtag',
+          query: {
+            tag: v.replace(/#/g, "")
+          }
+        },
+        as: `hashtag/${v.replace(/#/g, "")}`
+        /*href={`/hashtag/${v.replace(/#/g,"")}`}*/
+        ,
+        key: v
+      }, __jsx("a", null, v));
+    }
+
+    return v;
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PostCardContent);
+PostCardContent.propTypes = {
+  postData: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
+};
 
 /***/ }),
 
@@ -278,7 +532,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
+/* harmony import */ var _back_models_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../back/models/image */ "../back/models/image.js");
+/* harmony import */ var _back_models_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_back_models_image__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -308,19 +565,20 @@ const PostForm = ({
       return;
     }
 
+    const formData = new FormData();
+    imagePaths.forEach(i => {
+      formData.append('image', i);
+    });
+    formData.append('content', text);
     dispatch({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_3__["ADD_POST_REQUEST"],
-      data: {
-        content: text,
-        UserId: userInfo.id
-      }
+      data: formData
     });
-  }, [text]);
+  }, [text, imagePaths]);
   const onChangeText = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
     setText(e.target.value);
   }, []);
   const onChangeImages = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
-    console.log('읭??', e.target.files);
     const imageFormData = new FormData(); //브라우저에서 제공 
     //express bodyParser로 전송 불가능
     //muter 미들웨어로 처리해야 한다.
@@ -389,6 +647,94 @@ const PostForm = ({
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PostForm);
+
+/***/ }),
+
+/***/ "./components/PostImages.js":
+/*!**********************************!*\
+  !*** ./components/PostImages.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ImagesZoom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ImagesZoom */ "./components/ImagesZoom.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const PostImges = ({
+  images
+}) => {
+  const {
+    0: showImageZoom,
+    1: setShowImageZoom
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const onZoom = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    setShowImageZoom(true);
+  }, [showImageZoom]);
+  const onClose = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    setShowImageZoom(false);
+  }, [showImageZoom]);
+
+  if (images.length === 1) {
+    return __jsx("div", null, __jsx("img", {
+      src: `http://captainryan.gonetis.com:3065/${images[0].src}`,
+      onClick: onZoom
+    }), showImageZoom && __jsx(_ImagesZoom__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      images: images,
+      onClose: onClose
+    }));
+  }
+
+  ;
+
+  if (images.length === 2) {
+    return __jsx("div", null, __jsx("div", null, __jsx("img", {
+      src: `http://captainryan.gonetis.com:3065/${images[0].src}`,
+      width: "50%",
+      onClick: onZoom
+    }), __jsx("img", {
+      src: `http://captainryan.gonetis.com:3065/${images[1].src}`,
+      width: "50%",
+      onClick: onZoom
+    })), showImageZoom && __jsx(_ImagesZoom__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      images: images,
+      onClose: onClose
+    }));
+  }
+
+  ;
+  return __jsx("div", null, __jsx("div", null, __jsx("img", {
+    src: `http://captainryan.gonetis.com:3065/${images[0].src}`,
+    width: "50%",
+    onClick: onZoom
+  }), __jsx("div", {
+    style: {
+      display: 'inline-block',
+      width: '50%',
+      textAlign: 'center',
+      verticalAlign: 'middle'
+    },
+    onClick: onZoom
+  }, "+", __jsx("br", null), images.length - 1, "\uAC1C \uC0AC\uC9C4 \uB354 \uBCF4\uAE30")), showImageZoom && __jsx(_ImagesZoom__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    images: images,
+    onClose: onClose
+  }));
+};
+
+PostImges.propTypes = {
+  images: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({
+    src: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  })).isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (PostImges);
 
 /***/ }),
 
@@ -2176,34 +2522,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const initialState = {
-  mainPosts: [{
-    id: 1,
-    User: {
-      id: 1,
-      nickname: '정준일'
-    },
-    img: 'https://img0.yna.co.kr/etc/inner/KR/2020/01/10/AKR20200110125500005_01_i_P4.jpg',
-    content: '요즘 핫한 배우',
-    Comments: []
-  }, {
-    id: 2,
-    User: {
-      id: 2,
-      nickname: '정준이'
-    },
-    img: 'https://cdn.indiepost.co.kr/uploads/images/2016/07/pteoZSxk-580x821.jpeg',
-    content: '김근식 군 추천배우',
-    Comments: []
-  }, {
-    id: 3,
-    User: {
-      id: 3,
-      nickname: '정준삼'
-    },
-    img: 'https://upload.wikimedia.org/wikipedia/ko/f/fd/%EB%B6%80%EC%82%B0%ED%96%89.jpg',
-    content: '아스카짱!',
-    Comments: []
-  }],
+  mainPosts: [],
   //화면에 보일 POST들 
   imagePaths: [],
   //미리보기 이미지 경로 
@@ -2299,7 +2618,8 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           isAddingPost: false,
           mainPosts: [action.data, ...state.mainPosts],
-          postAdded: true
+          postAdded: true,
+          imagePaths: []
         });
       }
 
@@ -2412,6 +2732,79 @@ const reducer = (state = initialState, action) => {
         });
       }
     //이미지 업로드------------------------------------------
+    //게시글 좋아요------------------------------------------
+
+    case LIKE_POST_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LIKE_POST_SUCCESS:
+      {
+        const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        const post = state.mainPosts[postIndex];
+        const Likers = [{
+          id: action.data.userId
+        }, ...post.Likers];
+        const mainPosts = [...state.mainPosts];
+        mainPosts[postIndex] = _objectSpread({}, post, {
+          Likers
+        });
+        return _objectSpread({}, state, {
+          mainPosts
+        });
+      }
+
+    case LIKE_POST_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //게시글 좋아요------------------------------------------
+    //게시글 좋아요 취소------------------------------------------
+
+    case UNLIKE_POST_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case UNLIKE_POST_SUCCESS:
+      {
+        const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        const post = state.mainPosts[postIndex];
+        const Likers = post.Likers.filter(v => v.id !== action.data.userId);
+        const mainPosts = [...state.mainPosts];
+        mainPosts[postIndex] = _objectSpread({}, post, {
+          Likers
+        });
+        return _objectSpread({}, state, {
+          mainPosts
+        });
+      }
+
+    case UNLIKE_POST_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //게시글 좋아요 취소------------------------------------------
+    //리트윗------------------------------------------
+
+    case RETWEET_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case RETWEET_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          mainPosts: [action.data, ...state.mainPosts]
+        });
+      }
+
+    case RETWEET_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //리트윗------------------------------------------
 
     default:
       {
@@ -2459,6 +2852,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_SUCCESS", function() { return REMOVE_FOLLOWER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_FAILURE", function() { return REMOVE_FOLLOWER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_POST_TO_ME", function() { return ADD_POST_TO_ME; });
+/* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./post */ "./reducers/post.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2466,7 +2860,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //user의 store 
-//초기 state
+ //초기 state
+
 const dummyUser = {
   nickname: '정준일일',
   Post: ['정', '준'],
@@ -2621,6 +3016,56 @@ const reducer = (state = initialState, action) => {
       {
         return _objectSpread({}, state);
       }
+    //------------------------------------------------팔로우
+
+    case FOLLOW_USER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case FOLLOW_USER_SUCCESS:
+      {
+        if (action.me) {
+          return _objectSpread({}, state, {
+            me: _objectSpread({}, state.me, {
+              Followings: [{
+                id: action.data
+              }, ...state.me.Followings]
+            })
+          });
+        }
+
+        return _objectSpread({}, state, {
+          userInfo: action.data
+        });
+      }
+
+    case FOLLOW_USER_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------팔로우
+    //------------------------------------------------언팔로우
+
+    case UNFOLLOW_USER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case UNFOLLOW_USER_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Followings: state.me.Followings.filter(v => v.id !== action.data)
+          })
+        });
+      }
+
+    case UNFOLLOW_USER_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------언팔로우
 
     default:
       {
@@ -2719,6 +3164,17 @@ module.exports = require("react-is");
 /***/ (function(module, exports) {
 
 module.exports = require("react-redux");
+
+/***/ }),
+
+/***/ "react-slick":
+/*!******************************!*\
+  !*** external "react-slick" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-slick");
 
 /***/ }),
 

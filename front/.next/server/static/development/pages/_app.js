@@ -493,7 +493,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\UserProfile.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -516,81 +515,17 @@ const UserProfile = () => {
 
   return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
     actions: [__jsx("div", {
-      key: "twit",
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 25,
-        columnNumber: 9
-      }
-    }, "\uC9F9\uC9F9", __jsx("br", {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 25,
-        columnNumber: 27
-      }
-    }), "3"), __jsx("div", {
-      key: "following",
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 26,
-        columnNumber: 9
-      }
-    }, "\uD314\uB85C\uC789", __jsx("br", {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 26,
-        columnNumber: 33
-      }
-    }), "3"), __jsx("div", {
-      key: "follower",
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 27,
-        columnNumber: 9
-      }
-    }, "\uD314\uB85C\uC6CC", __jsx("br", {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 27,
-        columnNumber: 32
-      }
-    }), "3")],
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24,
-      columnNumber: 5
-    }
+      key: "twit"
+    }, "\uC9F9\uC9F9", __jsx("br", null), me.Posts.length), __jsx("div", {
+      key: "following"
+    }, "\uD314\uB85C\uC789", __jsx("br", null), me.Followings.length), __jsx("div", {
+      key: "follower"
+    }, "\uD314\uB85C\uC6CC", __jsx("br", null), me.Followers.length)]
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
-    avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 30,
-        columnNumber: 20
-      }
-    }, me.nickname[0]),
-    title: me.nickname,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30,
-      columnNumber: 1
-    }
+    avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], null, me.nickname[0]),
+    title: me.nickname
   }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    onClick: onLogout,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 31,
-      columnNumber: 1
-    }
+    onClick: onLogout
   }, "\uB85C\uADF8\uC544\uC6C3"));
 };
 
@@ -2330,6 +2265,15 @@ const NodeBird = ({
   }, " ", __jsx("div", null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("title", null, "NodeBird"), __jsx("link", {
     rel: "stylesheet",
     href: "https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.min.css"
+  }), __jsx("link", {
+    rel: "stylesheet",
+    type: "text/css",
+    charset: "UTF-8",
+    href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+  }), __jsx("link", {
+    rel: "stylesheet",
+    type: "text/css",
+    href: "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
   })), __jsx(_components_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"], null, __jsx(Component, pageProps))));
 };
 
@@ -2827,34 +2771,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const initialState = {
-  mainPosts: [{
-    id: 1,
-    User: {
-      id: 1,
-      nickname: '정준일'
-    },
-    img: 'https://img0.yna.co.kr/etc/inner/KR/2020/01/10/AKR20200110125500005_01_i_P4.jpg',
-    content: '요즘 핫한 배우',
-    Comments: []
-  }, {
-    id: 2,
-    User: {
-      id: 2,
-      nickname: '정준이'
-    },
-    img: 'https://cdn.indiepost.co.kr/uploads/images/2016/07/pteoZSxk-580x821.jpeg',
-    content: '김근식 군 추천배우',
-    Comments: []
-  }, {
-    id: 3,
-    User: {
-      id: 3,
-      nickname: '정준삼'
-    },
-    img: 'https://upload.wikimedia.org/wikipedia/ko/f/fd/%EB%B6%80%EC%82%B0%ED%96%89.jpg',
-    content: '아스카짱!',
-    Comments: []
-  }],
+  mainPosts: [],
   //화면에 보일 POST들 
   imagePaths: [],
   //미리보기 이미지 경로 
@@ -2950,7 +2867,8 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           isAddingPost: false,
           mainPosts: [action.data, ...state.mainPosts],
-          postAdded: true
+          postAdded: true,
+          imagePaths: []
         });
       }
 
@@ -3063,6 +2981,79 @@ const reducer = (state = initialState, action) => {
         });
       }
     //이미지 업로드------------------------------------------
+    //게시글 좋아요------------------------------------------
+
+    case LIKE_POST_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LIKE_POST_SUCCESS:
+      {
+        const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        const post = state.mainPosts[postIndex];
+        const Likers = [{
+          id: action.data.userId
+        }, ...post.Likers];
+        const mainPosts = [...state.mainPosts];
+        mainPosts[postIndex] = _objectSpread({}, post, {
+          Likers
+        });
+        return _objectSpread({}, state, {
+          mainPosts
+        });
+      }
+
+    case LIKE_POST_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //게시글 좋아요------------------------------------------
+    //게시글 좋아요 취소------------------------------------------
+
+    case UNLIKE_POST_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case UNLIKE_POST_SUCCESS:
+      {
+        const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+        const post = state.mainPosts[postIndex];
+        const Likers = post.Likers.filter(v => v.id !== action.data.userId);
+        const mainPosts = [...state.mainPosts];
+        mainPosts[postIndex] = _objectSpread({}, post, {
+          Likers
+        });
+        return _objectSpread({}, state, {
+          mainPosts
+        });
+      }
+
+    case UNLIKE_POST_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //게시글 좋아요 취소------------------------------------------
+    //리트윗------------------------------------------
+
+    case RETWEET_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case RETWEET_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          mainPosts: [action.data, ...state.mainPosts]
+        });
+      }
+
+    case RETWEET_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //리트윗------------------------------------------
 
     default:
       {
@@ -3110,6 +3101,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_SUCCESS", function() { return REMOVE_FOLLOWER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_FAILURE", function() { return REMOVE_FOLLOWER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_POST_TO_ME", function() { return ADD_POST_TO_ME; });
+/* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./post */ "./reducers/post.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3117,7 +3109,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //user의 store 
-//초기 state
+ //초기 state
+
 const dummyUser = {
   nickname: '정준일일',
   Post: ['정', '준'],
@@ -3272,6 +3265,56 @@ const reducer = (state = initialState, action) => {
       {
         return _objectSpread({}, state);
       }
+    //------------------------------------------------팔로우
+
+    case FOLLOW_USER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case FOLLOW_USER_SUCCESS:
+      {
+        if (action.me) {
+          return _objectSpread({}, state, {
+            me: _objectSpread({}, state.me, {
+              Followings: [{
+                id: action.data
+              }, ...state.me.Followings]
+            })
+          });
+        }
+
+        return _objectSpread({}, state, {
+          userInfo: action.data
+        });
+      }
+
+    case FOLLOW_USER_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------팔로우
+    //------------------------------------------------언팔로우
+
+    case UNFOLLOW_USER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case UNFOLLOW_USER_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Followings: state.me.Followings.filter(v => v.id !== action.data)
+          })
+        });
+      }
+
+    case UNFOLLOW_USER_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------언팔로우
 
     default:
       {
@@ -3417,14 +3460,6 @@ function* addPost(action) {
   }
 }
 
-function* whatchAddPost() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_POST_REQUEST"], addPost);
-}
-
-function* watchLoadMainPosts() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_REQUEST"], loadMainPosts);
-}
-
 function addCommentAPI(data) {
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`/post/${data.postId}/comment`, {
     content: data.content
@@ -3476,7 +3511,6 @@ function* loadComments(action) {
 }
 
 function upLoadImagesAPI(formData) {
-  console.log('saga==>', formData);
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/post/images', formData, {
     withCredentials: true
   });
@@ -3485,6 +3519,7 @@ function upLoadImagesAPI(formData) {
 function* upLoadImages(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(upLoadImagesAPI, action.data);
+    console.log('upLoadImages result ===>', result);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["UPLOAD_IMAGES_SUCCESS"],
       data: result.data //이미지가 저장된 주소를 가져온다. 
@@ -3499,33 +3534,123 @@ function* upLoadImages(action) {
   }
 }
 
+function likePostAPI(postId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`/post/${postId}/like`, {}, {
+    withCredentials: true
+  });
+}
+
+function* likePost(action) {
+  console.log('post saga likePost==>', action);
+
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(likePostAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LIKE_POST_SUCCESS"],
+      data: {
+        postId: action.data,
+        userId: result.data.userId
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LIKE_POST_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function unLikePostAPI(postId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(`/post/${postId}/like`, {
+    withCredentials: true
+  });
+}
+
+function* unLikePost(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(unLikePostAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["UNLIKE_POST_SUCCESS"],
+      data: {
+        postId: action.data,
+        userId: result.data.userId
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["UNLIKE_POST_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function reTweetAPI(postId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(`/post/${postId}/retweet`, {}, {
+    withCredentials: true
+  });
+}
+
+function* reTweet(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(reTweetAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["RETWEET_SUCCESS"],
+      data: result.data
+    });
+  } catch (e) {
+    console.log(e);
+    alert(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["RETWEET_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* whatchAddPost() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_POST_REQUEST"], addPost);
+}
+
+function* watchLoadMainPosts() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_REQUEST"], loadMainPosts);
+}
+
 function* whatchAddComment() {
-  console.log('whatchAddComment');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_COMMENT_REQUEST"], addComment);
 }
 
 function* watchLoadHashtagPosts() {
-  console.log('watchLoadHashtagPosts');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_HASHTAG_POSTS_REQUEST"], loadHashtagPosts);
 }
 
 function* watchLoadUserPosts() {
-  console.log('watchLoadUserPosts');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_USER_POSTS_REQUEST"], loadUserPosts);
 }
 
 function* watchLoadComments() {
-  console.log('watchLoadComments');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_COMMENTS_REQUEST"], loadComments);
 }
 
 function* watchUploadImages() {
-  console.log('watchUploadImages');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["UPLOAD_IMAGES_REQUEST"], upLoadImages);
 }
 
+function* watchLikePost() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LIKE_POST_REQUEST"], likePost);
+}
+
+function* watchUnLikePost() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["UNLIKE_POST_REQUEST"], unLikePost);
+}
+
+function* watchRetweet() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["RETWEET_REQUEST"], reTweet);
+}
+
 function* postSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadHashtagPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUploadImages)]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadHashtagPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUploadImages), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUnLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchRetweet)]);
 }
 
 /***/ }),
@@ -3576,11 +3701,23 @@ function* signUpAPI(signUpData) {
 function* logoutAPI() {
   return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/user/logout', {}, {
     withCredentials: true
-  }); //▲데이터 없더라도 빈 객체라도 보내야 한다.
+  }); //▲POST로 보낼 때, 데이터 없더라도 빈 객체라도 보내야 한다.
 }
 
 function* loadUserAPI(userId) {
   return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(userId ? `/user/${userId}` : '/user/', {
+    withCredentials: true
+  });
+}
+
+function* followAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`/user/${userId}/follow`, {}, {
+    withCredentials: true
+  }); //▲데이터 없더라도 빈 객체라도 보내야 한다.
+}
+
+function* unFollowAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.delete(`/user/${userId}/follow`, {
     withCredentials: true
   });
 } //-----------------------------------END API
@@ -3603,6 +3740,14 @@ function* watchLogout() {
 
 function* watchLoadUser() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_REQUEST"], loadUser);
+}
+
+function* watchFollowUser() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["FOLLOW_USER_REQUEST"], follow);
+}
+
+function* watchUnFollowUser() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["UNFOLLOW_USER_REQUEST"], unFollow);
 } //-----------------------------------END WATCH 
 
 
@@ -3656,21 +3801,46 @@ function* logout() {
 function* loadUser(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadUserAPI, action.data);
-    const userData = yield result.then(resolve => {
-      return resolve.data;
-    });
-    console.log('userData==>', userData);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_SUCCESS"],
-      data: userData,
-      me: !action.data //남의 정보가 없으면 내 정보를 가져옴
-
+      data: result.data
     });
   } catch (e) {
-    console.log('eeee==>', e);
     console.error(e);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* follow(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(followAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["FOLLOW_USER_SUCCESS"],
+      data: result.data
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["FOLLOW_USER_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* unFollow(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(unFollowAPI, action.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["UNFOLLOW_USER_SUCCESS"],
+      data: result.data
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["UNFOLLOW_USER_FAILURE"],
       error: e
     });
   }
@@ -3697,7 +3867,7 @@ function* watchHello() {
 
 function* userSaga() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogin), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogout), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUser), //fork(watchHello),
-  Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchSignUp)]);
+  Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchSignUp), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFollowUser), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUnFollowUser)]);
 }
 
 /***/ }),

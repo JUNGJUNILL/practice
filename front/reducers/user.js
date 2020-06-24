@@ -1,5 +1,7 @@
 //user의 store 
 
+import { UNLIKE_POST_SUCCESS } from "./post";
+
 //초기 state
 const dummyUser = {
     nickname:'정준일일', 
@@ -159,6 +161,72 @@ const reducer = (state = initialState , action)=>{
                 ...state, 
             }; 
         }
+
+
+//------------------------------------------------팔로우
+        case FOLLOW_USER_REQUEST:{
+            return {
+                ...state, 
+            }; 
+        }
+
+        case FOLLOW_USER_SUCCESS:{
+            if(action.me){
+                return {
+                    ...state, 
+                    me:{
+                        ...state.me,
+                        Followings : [{id:action.data}, ...state.me.Followings], 
+                    },
+                }; 
+
+            }
+
+            return {
+                ...state,
+                userInfo: action.data, 
+            }
+                
+            
+        }
+
+        case FOLLOW_USER_FAILURE:{
+            return {
+                ...state, 
+            }; 
+        }
+
+//------------------------------------------------팔로우
+
+
+
+//------------------------------------------------언팔로우
+case UNFOLLOW_USER_REQUEST:{
+    return {
+        ...state, 
+    }; 
+}
+
+case UNFOLLOW_USER_SUCCESS:{
+
+        return {
+            ...state, 
+            me:{
+                ...state.me,
+                Followings: state.me.Followings.filter(v => v.id !== action.data),            },
+        }; 
+
+        
+    
+}
+
+case UNFOLLOW_USER_FAILURE:{
+    return {
+        ...state, 
+    }; 
+}
+
+//------------------------------------------------언팔로우
 
 
         default : {
