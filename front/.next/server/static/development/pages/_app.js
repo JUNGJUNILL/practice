@@ -115,7 +115,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\components\\AppLayout.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -129,169 +128,39 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 const AppLayout = ({
   children
 }) => {
-  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["useDispatch"])();
   const {
-    isLoggedIn,
     me
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["useSelector"])(state => state.user);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (!me) {
-      dispatch({
-        type: _reducers_user__WEBPACK_IMPORTED_MODULE_7__["LOAD_USER_REQUEST"]
-      });
-    }
-  }, []);
-  return __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26,
-      columnNumber: 12
-    }
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"], {
-    mode: "horizontal",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27,
-      columnNumber: 17
-    }
+  return __jsx("div", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"], {
+    mode: "horizontal"
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
-    key: "home",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28,
-      columnNumber: 21
-    }
+    key: "home"
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28,
-      columnNumber: 43
-    }
-  }, __jsx("a", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28,
-      columnNumber: 58
-    }
-  }, "\uB178\uB4DC \uBC84\uB4DC"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
-    key: "profile",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29,
-      columnNumber: 21
-    }
+    href: "/"
+  }, __jsx("a", null, "\uB178\uB4DC \uBC84\uB4DC"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
+    key: "profile"
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/profile",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29,
-      columnNumber: 46
-    }
-  }, __jsx("a", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29,
-      columnNumber: 68
-    }
-  }, "\uD504\uB85C\uD544"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
-    key: "mail",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30,
-      columnNumber: 21
-    }
+    href: "/profile"
+  }, __jsx("a", null, "\uD504\uB85C\uD544"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Menu"].Item, {
+    key: "mail"
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Input"].Search, {
     enterButton: true,
     style: {
       verticalAlign: 'middle'
-    },
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 31,
-      columnNumber: 25
     }
   }))), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "signup",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34,
-      columnNumber: 17
-    }
-  }, __jsx("a", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34,
-      columnNumber: 37
-    }
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 34,
-      columnNumber: 40
-    }
-  }, "\uD68C\uC6D0\uAC00\uC785"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Row"], {
-    gutter: 10,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35,
-      columnNumber: 17
-    }
+    href: "signup"
+  }, __jsx("a", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], null, "\uD68C\uC6D0\uAC00\uC785"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Row"], {
+    gutter: 10
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
     xs: 24,
-    md: 6,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 36,
-      columnNumber: 21
-    }
-  }, me ? __jsx(_UserProfile__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38,
-      columnNumber: 24
-    }
-  }) : __jsx(_LoginForm__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 41,
-      columnNumber: 25
-    }
-  })), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    md: 6
+  }, me ? __jsx(_UserProfile__WEBPACK_IMPORTED_MODULE_5__["default"], null) : __jsx(_LoginForm__WEBPACK_IMPORTED_MODULE_4__["default"], null)), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
     xs: 24,
-    md: 12,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 44,
-      columnNumber: 21
-    }
+    md: 12
   }, children), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Col"], {
     xs: 24,
-    md: 6,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 47,
-      columnNumber: 21
-    }
+    md: 6
   }, "\uC138\uBC88\uCA30")));
 };
 
@@ -504,7 +373,7 @@ const UserProfile = () => {
   const {
     me
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(state => state.user);
-  console.log(me);
+  console.log('mememem', me);
   const onLogout = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
     dispatch({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["LOG_OUT_REQUEST"]
@@ -516,11 +385,11 @@ const UserProfile = () => {
   return __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"], {
     actions: [__jsx("div", {
       key: "twit"
-    }, "\uC9F9\uC9F9", __jsx("br", null), me.Posts.length), __jsx("div", {
+    }, "\uC9F9\uC9F9", __jsx("br", null), me && me.Posts ? me.Posts.length : ''), __jsx("div", {
       key: "following"
-    }, "\uD314\uB85C\uC789", __jsx("br", null), me.Followings.length), __jsx("div", {
+    }, "\uD314\uB85C\uC789", __jsx("br", null), me && me.Followings ? me.Followings.length : ''), __jsx("div", {
       key: "follower"
-    }, "\uD314\uB85C\uC6CC", __jsx("br", null), me.Followers.length)]
+    }, "\uD314\uB85C\uC6CC", __jsx("br", null), me && me.Followers ? me.Followers.length : '')]
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"].Meta, {
     avatar: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Avatar"], null, me.nickname[0]),
     title: me.nickname
@@ -2224,19 +2093,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "prop-types");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers */ "./reducers/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next-redux-wrapper */ "next-redux-wrapper");
-/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-saga */ "redux-saga");
-/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reducers */ "./reducers/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next-redux-wrapper */ "next-redux-wrapper");
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var next_redux_saga__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! next-redux-saga */ "next-redux-saga");
+/* harmony import */ var next_redux_saga__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_redux_saga__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux-saga */ "redux-saga");
+/* harmony import */ var redux_saga__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(redux_saga__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _sagas__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../sagas */ "./sagas/index.js");
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 //next에서 제공하는 최상위 컴포넌트 파일 (_app.js로 직접 만들어야 한다. )
 //페이지들의 공통적인 부분기여주기 
+
 
 
 
@@ -2249,7 +2124,11 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
- //리덕스 사가 
+
+ //next 용 redux saga
+//서버 사이드 랜더링을 위한 준비물
+//리덕스 사가 
+
 
 
 
@@ -2260,7 +2139,7 @@ const NodeBird = ({
   pageProps
 }) => {
   //▲ next에서 제공하는 props
-  return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+  return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_5__["Provider"], {
     store: store
   }, " ", __jsx("div", null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("title", null, "NodeBird"), __jsx("link", {
     rel: "stylesheet",
@@ -2281,7 +2160,9 @@ NodeBird.propTypes = {
   Component: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.elementType.isRequired,
   store: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
   pageProps: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
-}; //ㅁnext에서 제공하는 기능
+}; //next에서 제공하는 기능
+//해당 pages의 페이지들이 맨 처음에 실행될 때 서버에서도 실행된다고 한다.
+//그렇기 때문에 서버로부터 데이터를 받아 올 수 있다.
 
 NodeBird.getInitialProps = async context => {
   //▲ next에서 제공해줌
@@ -2289,8 +2170,25 @@ NodeBird.getInitialProps = async context => {
   const {
     ctx,
     Component
-  } = context;
-  let pageProps = {};
+  } = context; //▲컴포넌트들(페이지들))
+
+  let pageProps = {}; //ctx.isServer 서버 환경이냐 아니냐
+
+  const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
+
+  if (ctx.isServer && cookie) {
+    //클라이언 환경에서는 브라우저가 쿠키를 넣어주고, 
+    //SSR일 때는 우리가 직접 넣어줘야 한다. 
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.Cookie = cookie;
+  }
+
+  const state = ctx.store.getState();
+
+  if (!state.user.me) {
+    ctx.store.dispatch({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_12__["LOAD_USER_REQUEST"]
+    });
+  }
 
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
@@ -2313,15 +2211,19 @@ const hello = (Component) => ()=>{
 
 
 const configureStore = (initialState, options) => {
-  const sagaMiddleware = redux_saga__WEBPACK_IMPORTED_MODULE_8___default()();
-  const middlewares = [sagaMiddleware];
-  const enhancer = false ? undefined : Object(redux__WEBPACK_IMPORTED_MODULE_6__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_6__["applyMiddleware"])(...middlewares), !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f);
-  const store = Object(redux__WEBPACK_IMPORTED_MODULE_6__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_5__["default"], initialState, enhancer);
-  sagaMiddleware.run(_sagas__WEBPACK_IMPORTED_MODULE_9__["default"]);
+  const sagaMiddleware = redux_saga__WEBPACK_IMPORTED_MODULE_10___default()();
+  const middlewares = [sagaMiddleware, store => next => action => {
+    console.log(action);
+    next(action); //리덕스 사가 에러 찾아내는 방식 (커스텀 미들웨어)
+  }];
+  const enhancer = false ? undefined : Object(redux__WEBPACK_IMPORTED_MODULE_7__["compose"])(Object(redux__WEBPACK_IMPORTED_MODULE_7__["applyMiddleware"])(...middlewares), !options.isServer && typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined' ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f);
+  const store = Object(redux__WEBPACK_IMPORTED_MODULE_7__["createStore"])(_reducers__WEBPACK_IMPORTED_MODULE_6__["default"], initialState, enhancer);
+  store.sagaTask = sagaMiddleware.run(_sagas__WEBPACK_IMPORTED_MODULE_11__["default"]); //서버사이드 랜더링
+
   return store;
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()(configureStore)(NodeBird));
+/* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_8___default()(configureStore)(next_redux_saga__WEBPACK_IMPORTED_MODULE_9___default()(NodeBird)));
 
 /***/ }),
 
@@ -3070,7 +2972,7 @@ const reducer = (state = initialState, action) => {
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, LOAD_FOLLOW_REQUEST, LOAD_FOLLOW_SUCCESS, LOAD_FOLLOW_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, default */
+/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, EDIT_NICKNAME_REQUEST, EDIT_NICKNAME_SUCCESS, EDIT_NICKNAME_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3088,9 +2990,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_REQUEST", function() { return LOG_OUT_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_SUCCESS", function() { return LOG_OUT_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_FAILURE", function() { return LOG_OUT_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_REQUEST", function() { return LOAD_FOLLOW_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_SUCCESS", function() { return LOAD_FOLLOW_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_FAILURE", function() { return LOAD_FOLLOW_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_REQUEST", function() { return FOLLOW_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_SUCCESS", function() { return FOLLOW_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_FAILURE", function() { return FOLLOW_USER_FAILURE; });
@@ -3101,6 +3000,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_SUCCESS", function() { return REMOVE_FOLLOWER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_FAILURE", function() { return REMOVE_FOLLOWER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_POST_TO_ME", function() { return ADD_POST_TO_ME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_REQUEST", function() { return LOAD_FOLLOWERS_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_SUCCESS", function() { return LOAD_FOLLOWERS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_FAILURE", function() { return LOAD_FOLLOWERS_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWINGS_REQUEST", function() { return LOAD_FOLLOWINGS_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWINGS_SUCCESS", function() { return LOAD_FOLLOWINGS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWINGS_FAILURE", function() { return LOAD_FOLLOWINGS_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_NICKNAME_REQUEST", function() { return EDIT_NICKNAME_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_NICKNAME_SUCCESS", function() { return EDIT_NICKNAME_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_NICKNAME_FAILURE", function() { return EDIT_NICKNAME_FAILURE; });
 /* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./post */ "./reducers/post.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -3109,16 +3017,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //user의 store 
- //초기 state
 
-const dummyUser = {
-  nickname: '정준일일',
-  Post: ['정', '준'],
-  Followings: ['정', '준'],
-  Followers: ['정', '준'],
-  signUpData: {},
-  id: 1
-};
 const initialState = {
   isLoggedIn: false,
   //로그인 여부 
@@ -3136,13 +3035,17 @@ const initialState = {
   //회원가입 실패 사유 
   me: null,
   //내 정보 
-  follwingList: [],
+  followingList: [],
   followerList: [],
   userInfo: null,
   //남의 정보 
   successMesage: '',
   isLoading: true,
-  isSignedUp: false //회원가입 성공여부 
+  isSignedUp: false,
+  //회원가입 성공여부 
+  isEditingNickName: false,
+  //닉네임 변경 중 
+  editNickNameErrorReason: '' //이름변경 실패사유 
 
 };
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
@@ -3157,9 +3060,6 @@ const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
 const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
-const LOAD_FOLLOW_REQUEST = 'LOAD_FOLLOW_REQUEST';
-const LOAD_FOLLOW_SUCCESS = 'LOAD_FOLLOW_SUCCESS';
-const LOAD_FOLLOW_FAILURE = 'LOAD_FOLLOW_FAILURE';
 const FOLLOW_USER_REQUEST = 'FOLLOW_USER_REQUEST';
 const FOLLOW_USER_SUCCESS = 'FOLLOW_USER_SUCCESS';
 const FOLLOW_USER_FAILURE = 'FOLLOW_USER_FAILURE';
@@ -3170,6 +3070,15 @@ const REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST';
 const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS';
 const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE';
 const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST';
+const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS';
+const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE';
+const LOAD_FOLLOWINGS_REQUEST = 'LOAD_FOLLOWINGS_REQUEST';
+const LOAD_FOLLOWINGS_SUCCESS = 'LOAD_FOLLOWINGS_SUCCESS';
+const LOAD_FOLLOWINGS_FAILURE = 'LOAD_FOLLOWINGS_FAILURE';
+const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST';
+const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS';
+const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE';
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -3274,18 +3183,12 @@ const reducer = (state = initialState, action) => {
 
     case FOLLOW_USER_SUCCESS:
       {
-        if (action.me) {
-          return _objectSpread({}, state, {
-            me: _objectSpread({}, state.me, {
-              Followings: [{
-                id: action.data
-              }, ...state.me.Followings]
-            })
-          });
-        }
-
         return _objectSpread({}, state, {
-          userInfo: action.data
+          me: _objectSpread({}, state.me, {
+            Followings: [{
+              id: action.data
+            }, ...state.me.Followings]
+          })
         });
       }
 
@@ -3306,7 +3209,8 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           me: _objectSpread({}, state.me, {
             Followings: state.me.Followings.filter(v => v.id !== action.data)
-          })
+          }),
+          followingList: state.followingList.filter(v => v.id !== action.data)
         });
       }
 
@@ -3315,6 +3219,107 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state);
       }
     //------------------------------------------------언팔로우
+
+    case ADD_POST_TO_ME:
+      {
+        // 포스트 추가 할 때 마다 숫자 변경되는거 
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Posts: [{
+              id: action.data
+            }, ...state.me.Posts]
+          })
+        });
+      }
+    //------------------------------------------------날 팔로우 한 목록 가져오기 
+
+    case LOAD_FOLLOWERS_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LOAD_FOLLOWERS_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          followerList: action.data
+        });
+      }
+
+    case LOAD_FOLLOWERS_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------날 팔로우 한 목록 가져오기 
+    //------------------------------------------------내가 팔로잉 한 목록 가져오기 
+
+    case LOAD_FOLLOWINGS_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LOAD_FOLLOWINGS_SUCCESS:
+      {
+        console.log('LOAD_FOLLOWINGS_SUCCESS', action.data);
+        return _objectSpread({}, state, {
+          followingList: action.data
+        });
+      }
+
+    case LOAD_FOLLOWINGS_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------내가 팔로잉 한 목록 가져오기 
+    //------------------------------------------------팔로워 제거 
+
+    case REMOVE_FOLLOWER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case REMOVE_FOLLOWER_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Followers: state.me.Followers.filter(v => v.id !== action.data)
+          }),
+          followerList: state.followerList.filter(v => v.id !== action.data)
+        });
+      }
+
+    case REMOVE_FOLLOWER_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------팔로워 제거 
+    //------------------------------------------------닉네임 수정
+
+    case EDIT_NICKNAME_REQUEST:
+      {
+        return _objectSpread({}, state, {
+          isEditingNickName: true,
+          editNickNameErrorReason: ''
+        });
+      }
+
+    case EDIT_NICKNAME_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          isEditingNickName: false,
+          me: _objectSpread({}, state.me, {
+            nickname: action.data
+          })
+        });
+      }
+
+    case EDIT_NICKNAME_FAILURE:
+      {
+        return _objectSpread({}, state, {
+          isEditingNickName: false,
+          editNickNameErrorReason: action.error
+        });
+      }
+    //------------------------------------------------닉네임 수정
 
     default:
       {
@@ -3370,9 +3375,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _reducers_post__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/post */ "./reducers/post.js");
+/* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
 
  //한번 불러온 모듈을 캐싱이 되므로 user.js에서 
 //axios.defaults.baseURL='http://captainryan.gonetis.com:3065/api'; 해 놓은게 post.js에서도 적용이 된다. 
+
 
 
 
@@ -3390,7 +3397,6 @@ function loadMainPostsAPI() {
 function* loadMainPosts(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadMainPostsAPI);
-    console.log('posts==>', result.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_SUCCESS"],
       data: result.data
@@ -3405,7 +3411,7 @@ function* loadMainPosts(action) {
 }
 
 function loadHashtagPostsAPI(tag) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/hashtag/${tag}`);
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/hashtag/${encodeURIComponent(tag)}`);
 }
 
 function* loadHashtagPosts(action) {
@@ -3450,6 +3456,10 @@ function* addPost(action) {
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_POST_SUCCESS"],
       data: result.data
+    });
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["ADD_POST_TO_ME"],
+      data: result.data.id
     });
   } catch (e) {
     console.error('ADD_POST_FAILURE==>', e);
@@ -3702,9 +3712,13 @@ function* logoutAPI() {
   return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/user/logout', {}, {
     withCredentials: true
   }); //▲POST로 보낼 때, 데이터 없더라도 빈 객체라도 보내야 한다.
-}
+} // function* loadUserAPI(userId){
+//     return axios.get(userId? `/user/${userId}`:'/user/',{withCredentials:true}); 
+// }
 
-function* loadUserAPI(userId) {
+
+function loadUserAPI(userId) {
+  // 서버에 요청을 보내는 부분
   return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(userId ? `/user/${userId}` : '/user/', {
     withCredentials: true
   });
@@ -3713,7 +3727,7 @@ function* loadUserAPI(userId) {
 function* followAPI(userId) {
   return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(`/user/${userId}/follow`, {}, {
     withCredentials: true
-  }); //▲데이터 없더라도 빈 객체라도 보내야 한다.
+  }); //▲post인 경우 데이터 없더라도 빈 객체라도 보내야 한다.
 }
 
 function* unFollowAPI(userId) {
@@ -3725,7 +3739,6 @@ function* unFollowAPI(userId) {
 
 
 function* watchLogin() {
-  console.log('watchLogin');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_IN_REQUEST"], login);
 }
 
@@ -3734,12 +3747,11 @@ function* watchSignUp() {
 }
 
 function* watchLogout() {
-  console.log('watchLogout');
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOG_OUT_REQUEST"], logout);
 }
 
 function* watchLoadUser() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_REQUEST"], loadUser);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_REQUEST"], loadUser);
 }
 
 function* watchFollowUser() {
@@ -3772,7 +3784,6 @@ function* login(action) {
 function* signUp(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(signUpAPI, action.data);
-    console.log('result----', result);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["SIGN_UP_SUCCESS"]
     });
@@ -3803,7 +3814,8 @@ function* loadUser(action) {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadUserAPI, action.data);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_USER_SUCCESS"],
-      data: result.data
+      data: result.data,
+      me: !action.data
     });
   } catch (e) {
     console.error(e);
@@ -3817,9 +3829,14 @@ function* loadUser(action) {
 function* follow(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(followAPI, action.data);
+    console.log('result==>', result);
+    const followInfo = yield result.then(resolve => {
+      return resolve.data;
+    });
+    console.log('followInfo==>', followInfo);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["FOLLOW_USER_SUCCESS"],
-      data: result.data
+      data: followInfo
     });
   } catch (e) {
     console.error(e);
@@ -3833,9 +3850,12 @@ function* follow(action) {
 function* unFollow(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(unFollowAPI, action.data);
+    const unFollowInfo = yield result.then(resolve => {
+      return resolve.data;
+    });
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["UNFOLLOW_USER_SUCCESS"],
-      data: result.data
+      data: unFollowInfo
     });
   } catch (e) {
     console.error(e);
@@ -3865,9 +3885,130 @@ function* watchHello() {
 // }
 
 
+function* loadFollowersAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`/user/${userId}/followers`, {
+    withCredentials: true
+  }); //▲post인 경우 데이터 없더라도 빈 객체라도 보내야 한다.
+}
+
+function* loadFollowers(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadFollowersAPI, action.data);
+    const followerList = yield result.then(resolve => {
+      return resolve.data;
+    });
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWERS_SUCCESS"],
+      data: followerList
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWERS_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* watchLoadFollowers() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWERS_REQUEST"], loadFollowers);
+}
+
+function* loadFollowingsAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`/user/${userId}/followings`, {
+    withCredentials: true
+  });
+}
+
+function* loadFollowings(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadFollowingsAPI, action.data);
+    const followingList = yield result.then(resolve => {
+      return resolve.data;
+    });
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWINGS_SUCCESS"],
+      data: followingList
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWINGS_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* watchLoadFollowings() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWINGS_REQUEST"], loadFollowings);
+}
+
+function* removeFollowerAPI(userId) {
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.delete(`/user/${userId}/follower`, {
+    withCredentials: true
+  });
+}
+
+function* removeFollower(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(removeFollowerAPI, action.data);
+    const removeFollowerList = yield result.then(resolve => {
+      return resolve.data;
+    });
+    console.log('removeFollowerList==>', removeFollowerList);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FOLLOWER_SUCCESS"],
+      data: removeFollowerList
+    });
+  } catch (e) {
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FOLLOWER_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* watchRemoveFollower() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FOLLOWER_REQUEST"], removeFollower);
+}
+
+function editNicknameAPI(nickname) {
+  // 서버에 요청을 보내는 부분
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.patch('/user/nickname', {
+    nickname
+  }, {
+    withCredentials: true
+  });
+}
+
+function* editNickname(action) {
+  try {
+    // yield call(loadFollowersAPI);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(editNicknameAPI, action.data);
+    console.log('editNickName', result);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      // put은 dispatch 동일
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["EDIT_NICKNAME_SUCCESS"],
+      data: result.data
+    });
+  } catch (e) {
+    // loginAPI 실패
+    console.error(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["EDIT_NICKNAME_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* watchEditNickname() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeEvery"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["EDIT_NICKNAME_REQUEST"], editNickname);
+}
+
 function* userSaga() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogin), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLogout), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUser), //fork(watchHello),
-  Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchSignUp), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFollowUser), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUnFollowUser)]);
+  Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchSignUp), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchFollowUser), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUnFollowUser), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadFollowers), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadFollowings), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchRemoveFollower), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchEditNickname)]);
 }
 
 /***/ }),
@@ -3914,6 +4055,17 @@ module.exports = require("antd");
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
+
+/***/ }),
+
+/***/ "next-redux-saga":
+/*!**********************************!*\
+  !*** external "next-redux-saga" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next-redux-saga");
 
 /***/ }),
 

@@ -2448,12 +2448,7 @@ const Home = () => {
   const {
     mainPosts
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.post);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    //   dispatch(loginActi
-    dispatch({
-      type: _reducers_post__WEBPACK_IMPORTED_MODULE_5__["LOAD_MAIN_POSTS_REQUEST"]
-    });
-  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
   return __jsx("div", null, me ? __jsx("div", null, "\uB85C\uADF8\uC778\uB428") : __jsx("div", null, "\uB85C\uADF8\uC778 \uC548\uB428"), me && __jsx(_components_PostForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     userInfo: me
   }), mainPosts.map((v, i) => {
@@ -2462,6 +2457,13 @@ const Home = () => {
       post: v
     });
   }));
+};
+
+Home.getInitialProps = async context => {
+  console.log(Object.keys(context));
+  context.store.dispatch({
+    type: _reducers_post__WEBPACK_IMPORTED_MODULE_5__["LOAD_MAIN_POSTS_REQUEST"]
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
@@ -2821,7 +2823,7 @@ const reducer = (state = initialState, action) => {
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, LOAD_FOLLOW_REQUEST, LOAD_FOLLOW_SUCCESS, LOAD_FOLLOW_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, default */
+/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, EDIT_NICKNAME_REQUEST, EDIT_NICKNAME_SUCCESS, EDIT_NICKNAME_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2839,9 +2841,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_REQUEST", function() { return LOG_OUT_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_SUCCESS", function() { return LOG_OUT_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_FAILURE", function() { return LOG_OUT_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_REQUEST", function() { return LOAD_FOLLOW_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_SUCCESS", function() { return LOAD_FOLLOW_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOW_FAILURE", function() { return LOAD_FOLLOW_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_REQUEST", function() { return FOLLOW_USER_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_SUCCESS", function() { return FOLLOW_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FOLLOW_USER_FAILURE", function() { return FOLLOW_USER_FAILURE; });
@@ -2852,6 +2851,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_SUCCESS", function() { return REMOVE_FOLLOWER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_FAILURE", function() { return REMOVE_FOLLOWER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_POST_TO_ME", function() { return ADD_POST_TO_ME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_REQUEST", function() { return LOAD_FOLLOWERS_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_SUCCESS", function() { return LOAD_FOLLOWERS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_FAILURE", function() { return LOAD_FOLLOWERS_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWINGS_REQUEST", function() { return LOAD_FOLLOWINGS_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWINGS_SUCCESS", function() { return LOAD_FOLLOWINGS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWINGS_FAILURE", function() { return LOAD_FOLLOWINGS_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_NICKNAME_REQUEST", function() { return EDIT_NICKNAME_REQUEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_NICKNAME_SUCCESS", function() { return EDIT_NICKNAME_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_NICKNAME_FAILURE", function() { return EDIT_NICKNAME_FAILURE; });
 /* harmony import */ var _post__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./post */ "./reducers/post.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -2860,16 +2868,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //user의 store 
- //초기 state
 
-const dummyUser = {
-  nickname: '정준일일',
-  Post: ['정', '준'],
-  Followings: ['정', '준'],
-  Followers: ['정', '준'],
-  signUpData: {},
-  id: 1
-};
 const initialState = {
   isLoggedIn: false,
   //로그인 여부 
@@ -2887,13 +2886,17 @@ const initialState = {
   //회원가입 실패 사유 
   me: null,
   //내 정보 
-  follwingList: [],
+  followingList: [],
   followerList: [],
   userInfo: null,
   //남의 정보 
   successMesage: '',
   isLoading: true,
-  isSignedUp: false //회원가입 성공여부 
+  isSignedUp: false,
+  //회원가입 성공여부 
+  isEditingNickName: false,
+  //닉네임 변경 중 
+  editNickNameErrorReason: '' //이름변경 실패사유 
 
 };
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
@@ -2908,9 +2911,6 @@ const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
 const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
-const LOAD_FOLLOW_REQUEST = 'LOAD_FOLLOW_REQUEST';
-const LOAD_FOLLOW_SUCCESS = 'LOAD_FOLLOW_SUCCESS';
-const LOAD_FOLLOW_FAILURE = 'LOAD_FOLLOW_FAILURE';
 const FOLLOW_USER_REQUEST = 'FOLLOW_USER_REQUEST';
 const FOLLOW_USER_SUCCESS = 'FOLLOW_USER_SUCCESS';
 const FOLLOW_USER_FAILURE = 'FOLLOW_USER_FAILURE';
@@ -2921,6 +2921,15 @@ const REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST';
 const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS';
 const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE';
 const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST';
+const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS';
+const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE';
+const LOAD_FOLLOWINGS_REQUEST = 'LOAD_FOLLOWINGS_REQUEST';
+const LOAD_FOLLOWINGS_SUCCESS = 'LOAD_FOLLOWINGS_SUCCESS';
+const LOAD_FOLLOWINGS_FAILURE = 'LOAD_FOLLOWINGS_FAILURE';
+const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST';
+const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS';
+const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE';
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -3025,18 +3034,12 @@ const reducer = (state = initialState, action) => {
 
     case FOLLOW_USER_SUCCESS:
       {
-        if (action.me) {
-          return _objectSpread({}, state, {
-            me: _objectSpread({}, state.me, {
-              Followings: [{
-                id: action.data
-              }, ...state.me.Followings]
-            })
-          });
-        }
-
         return _objectSpread({}, state, {
-          userInfo: action.data
+          me: _objectSpread({}, state.me, {
+            Followings: [{
+              id: action.data
+            }, ...state.me.Followings]
+          })
         });
       }
 
@@ -3057,7 +3060,8 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state, {
           me: _objectSpread({}, state.me, {
             Followings: state.me.Followings.filter(v => v.id !== action.data)
-          })
+          }),
+          followingList: state.followingList.filter(v => v.id !== action.data)
         });
       }
 
@@ -3066,6 +3070,107 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state);
       }
     //------------------------------------------------언팔로우
+
+    case ADD_POST_TO_ME:
+      {
+        // 포스트 추가 할 때 마다 숫자 변경되는거 
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Posts: [{
+              id: action.data
+            }, ...state.me.Posts]
+          })
+        });
+      }
+    //------------------------------------------------날 팔로우 한 목록 가져오기 
+
+    case LOAD_FOLLOWERS_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LOAD_FOLLOWERS_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          followerList: action.data
+        });
+      }
+
+    case LOAD_FOLLOWERS_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------날 팔로우 한 목록 가져오기 
+    //------------------------------------------------내가 팔로잉 한 목록 가져오기 
+
+    case LOAD_FOLLOWINGS_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case LOAD_FOLLOWINGS_SUCCESS:
+      {
+        console.log('LOAD_FOLLOWINGS_SUCCESS', action.data);
+        return _objectSpread({}, state, {
+          followingList: action.data
+        });
+      }
+
+    case LOAD_FOLLOWINGS_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------내가 팔로잉 한 목록 가져오기 
+    //------------------------------------------------팔로워 제거 
+
+    case REMOVE_FOLLOWER_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case REMOVE_FOLLOWER_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Followers: state.me.Followers.filter(v => v.id !== action.data)
+          }),
+          followerList: state.followerList.filter(v => v.id !== action.data)
+        });
+      }
+
+    case REMOVE_FOLLOWER_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //------------------------------------------------팔로워 제거 
+    //------------------------------------------------닉네임 수정
+
+    case EDIT_NICKNAME_REQUEST:
+      {
+        return _objectSpread({}, state, {
+          isEditingNickName: true,
+          editNickNameErrorReason: ''
+        });
+      }
+
+    case EDIT_NICKNAME_SUCCESS:
+      {
+        return _objectSpread({}, state, {
+          isEditingNickName: false,
+          me: _objectSpread({}, state.me, {
+            nickname: action.data
+          })
+        });
+      }
+
+    case EDIT_NICKNAME_FAILURE:
+      {
+        return _objectSpread({}, state, {
+          isEditingNickName: false,
+          editNickNameErrorReason: action.error
+        });
+      }
+    //------------------------------------------------닉네임 수정
 
     default:
       {

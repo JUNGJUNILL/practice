@@ -19,15 +19,13 @@ const Home = ()=>{
     const {mainPosts} =useSelector(state => state.post); 
   
     useEffect(()=>{
-     //   dispatch(loginActi
-     dispatch({
-         type:LOAD_MAIN_POSTS_REQUEST, 
-     });
+ 
     },[])
 
     return (
-                
+      
             <div>
+            
             {me ? <div>로그인됨</div> : <div>로그인 안됨</div>}
                 {me && <PostForm userInfo={me} />}
                 
@@ -40,5 +38,15 @@ const Home = ()=>{
         )
 
 }
+
+Home.getInitialProps = async (context) =>{
+    console.log(Object.keys(context)); 
+    context.store.dispatch({
+
+            type:LOAD_MAIN_POSTS_REQUEST, 
+
+    });
+
+};
 
 export default Home;

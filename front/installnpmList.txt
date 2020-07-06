@@ -116,3 +116,12 @@ npm i -D babel-eslint --바벨 최신 문법 쓸래?
 
 --리엑트에서 제공해주는 이미지 슬라이더
 npm install react-slick --save
+
+
+
+
+--서버사이드 랜더링 
+npm i next-redux-saga
+
+기존  : 클라이언트 -> 백엔드 서버 
+SSR   : 클라이언트 -> 프론트 서버 -> 백엔드 서버 

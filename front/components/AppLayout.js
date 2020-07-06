@@ -10,17 +10,9 @@ import { LOG_IN_REQUEST, LOAD_USER_REQUEST } from '../reducers/user';
 
 const AppLayout = ({children}) =>{
 
-    const dispatch = useDispatch();
-    const {isLoggedIn,me} = useSelector(state=>state.user); 
-    
-    useEffect(()=>{
+    const {me} = useSelector(state=>state.user); 
 
-        if(!me){
-            dispatch({
-                type:LOAD_USER_REQUEST,
-            });
-        }
-    },[]);
+
 
         return(
            <div>

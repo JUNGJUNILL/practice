@@ -117,18 +117,18 @@ router.post('/login',(req,res,next)=>{
 }); 
 
 //로그아웃
-router.post('/logout',(req,res)=>{
+router.post('/logout',isLoggedIn,(req,res)=>{
         req.logout(); 
         req.session.destroy();
         res.send('logout 성공'); 
 }); 
 
-router.get('/api/user/:id',(req,res)=>{
-//:id 
-//req.param.id 로 가져올 수 있다.
+// router.get('/api/user/:id',(req,res)=>{
+// //:id 
+// //req.param.id 로 가져올 수 있다.
 
 
-}); 
+// }); 
 
 
 //작성자의 게시글 
@@ -239,11 +239,95 @@ router.delete('/:id/follow', isLoggedIn, async (req, res, next) => {
       });
 
 
+//팔로잉 리스트 
+router.get('/:id/followings',isLoggedIn, async (req,res)=>{
+
+        try {
+                const user = await db.User.findOne({
+                  where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 },
+                });
+                const followers = await user.getFollowings({
+                  attributes: ['id', 'nickname'],
+                });
+                res.json(followers);
+              } catch (e) {
+                console.error(e);
+                next(e);
+              }
+
+}); 
 
 
-// router.delete('/api/user/:id/follower',(req,res)=>{
 
-// }); 
+//팔로우 리스트 
+router.get('/:id/followers',isLoggedIn,async (req,res)=>{
+
+
+    
+        try {
+                const user = await db.User.findOne({
+                        where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 },
+                }); // req.params.id가 문자열 '0'
+                const followers = await user.getFollowers({
+                        attributes: ['id', 'nickname'],
+        
+                });
+                res.json(followers);
+                } catch (e) {
+                console.error(e);
+                next(e);
+                }
+         
+
+        
+}); 
+
+
+//팔로워 삭제
+ router.delete('/:id/follower',isLoggedIn,async (req,res)=>{
+
+        try{
+
+                const me = await db.User.findOne({
+                        where : { id : req.user.id}, 
+                }); 
+
+                await me.removeFollower(req.params.id); 
+                res.send(req.params.id); 
+
+                
+        }catch(e){
+                console.error(e); 
+                next(e); 
+        }
+
+
+ }); 
+
+
+ //닉네임 수정 
+ router.patch('/nickname', isLoggedIn, async (req,res,next)=>{
+
+
+        try{
+                await db.User.update({
+                        nickname : req.body.nickname, 
+                },{
+                        where:{id:req.user.id}, 
+                });
+
+                res.send(req.body.nickname);
+
+
+
+        }catch(e){
+                console.error(e); 
+                next(e); 
+        };
+
+        
+
+ }); 
 
 
 

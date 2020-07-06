@@ -34,7 +34,6 @@ router.get('/' , async (req,res)=>{
               
            }); 
 
-           console.log('posts 요청==>', posts); 
            res.json(posts); 
 
 

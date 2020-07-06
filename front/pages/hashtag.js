@@ -9,14 +9,6 @@ const Hashtag = ({tag})=>{
     const dispatch = useDispatch(); 
     const {mainPosts} = useSelector(state=>state.post); 
 
-    useEffect(()=>{
-
-        dispatch({
-            type:LOAD_HASHTAG_POSTS_REQUEST,
-            data:tag,
-        }); 
-        
-    },[])
 
     return(
         <div>
@@ -36,8 +28,15 @@ Hashtag.propTypes = {
         //_app.js에서 context가 이 Hashtag의 실행 문맥이 된다.
 Hashtag.getInitialProps = async (context) =>{
     
+    const tag = context.query.tag; 
     console.log(context.query.tag);
-    return {tag:context.query.tag}; 
+
+    context.store.dispatch({
+        type:LOAD_HASHTAG_POSTS_REQUEST,
+        data:tag,
+    }); 
+
+    return { tag }; 
 }
 
 export default Hashtag; 

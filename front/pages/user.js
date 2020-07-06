@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import  { Card,Avatar } from 'antd'
 import {useDispatch, useSelector} from 'react-redux'
 import PostCard from '../components/PostCard'
@@ -12,17 +12,7 @@ const User = ({id})=>{
     const dispatch = useDispatch(); 
     const {mainPosts} = useSelector(state=>state.post); 
     const {userInfo}  = useSelector(state=>state.user); //남의 정보 
-    useEffect(()=>{
-        dispatch({
-            type:LOAD_USER_REQUEST,
-            data:id,
-        });
-        dispatch({
-            type:LOAD_USER_POSTS_REQUEST,
-            data:id,
-        }); 
-        
-    },[])
+
 
     return (
         <div>
@@ -61,13 +51,24 @@ const User = ({id})=>{
 }
 
 User.propTypes = {
-    id : PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
-User.getInitialProps = async (context) =>{
-    
-    console.log(context.query.id);
-    return {id: parseInt(context.query.id,10)};
-}
+User.getInitialProps = async (context) => {
+  const id = parseInt(context.query.id,10); 
+  console.log('user getInitialProps', id);
+
+  context.store.dispatch({
+      type:LOAD_USER_REQUEST,
+      data:id,
+  }); 
+
+  context.store.dispatch({
+    type:LOAD_USER_POSTS_REQUEST,
+    data:id,
+
+  });
+  return { id };
+};
 
 export default User; 
