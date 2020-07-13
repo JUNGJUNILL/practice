@@ -124,4 +124,4 @@ npm install react-slick --save
 npm i next-redux-saga
 
 기존  : 클라이언트 -> 백엔드 서버 
-SSR   : 클라이언트 -> 프론트 서버 -> 백엔드 서버 
+SSR   : 클라이언트 -> 프론트 서버 -> 백엔드 서버 (isServer)

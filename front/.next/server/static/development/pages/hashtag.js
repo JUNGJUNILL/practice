@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -341,6 +341,14 @@ const PostCard = ({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_9__["FOLLOW_USER_REQUEST"],
       data: userId
     });
+  }, []); //게시글 삭제
+
+  const onRemovePost = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(postId => () => {
+    console.log('postId===>', postId);
+    dispatch({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_8__["REMOVE_POST_REQUEST"],
+      data: postId
+    });
   }, []);
   return __jsx("div", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Card"] //key={post.}
   , {
@@ -353,7 +361,13 @@ const PostCard = ({
       onClick: onToggleLike
     }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["MessageOutlined"], {
       onClick: onToggleComment
-    }), __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["EllipsisOutlined"], null)],
+    }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Popover"], {
+      key: "more",
+      content: __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"].Group, null, me && post.User.id === me.id ? __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], null, "\uC218\uC815"), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        type: "danger",
+        onClick: onRemovePost(post.id)
+      }, "\uC0AD\uC81C")) : __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], null, "\uC2E0\uACE0"))
+    }, __jsx(_ant_design_icons__WEBPACK_IMPORTED_MODULE_2__["EllipsisOutlined"], null))],
     title: post.RetweetId && post.Retweet ? `${post.User.nickname} 님이 리트윗하셨습니다.` : '',
     extra: !me || post.User.id === me.id ? null : me.Followings && me.Followings.find(v => v.id === post.User.id) ? __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       onClick: onUnfollow(post.User.id)
@@ -2284,8 +2298,31 @@ const Hashtag = ({
 }) => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
   const {
-    mainPosts
+    mainPosts,
+    hasMorePost
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(state => state.post);
+  const onScroll = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    //window.scrollY + document.documentElement.clientHeight = document.documentElement.scrollHeight
+    console.log(window.scrollY, document.documentElement.clientHeight, document.documentElement.scrollHeight);
+
+    if (hasMorePost) {
+      //스크롤 할 때 마다 서버로 요청보내면 서버 뒤질 수 도 있음 방지
+      //reducer 잘 보면 이해가 가능할 것이다. 
+      if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 300) {
+        dispatch({
+          type: _reducers_post__WEBPACK_IMPORTED_MODULE_4__["LOAD_HASHTAG_POSTS_REQUEST"],
+          lastId: mainPosts[mainPosts.length - 1].id,
+          data: tag
+        });
+      }
+    }
+  }, [hasMorePost, mainPosts.length]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [mainPosts.length]);
   return __jsx("div", null, mainPosts.map((v, i) => __jsx(_components_PostCard__WEBPACK_IMPORTED_MODULE_3__["default"], {
     key: i,
     post: v
@@ -2379,7 +2416,8 @@ const initialState = {
   postAdded: false,
   isAddingComment: false,
   addCommentErrorReason: '',
-  commentAdded: false
+  commentAdded: false,
+  hasMorePost: false
 };
 const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST';
 const LOAD_MAIN_POSTS_SUCCESS = 'LOAD_MAIN_POSTS_SUCCESS';
@@ -2532,7 +2570,8 @@ const reducer = (state = initialState, action) => {
     case LOAD_USER_POSTS_REQUEST:
       {
         return _objectSpread({}, state, {
-          mainPosts: []
+          mainPosts: action.lastId === 0 ? [] : state.mainPosts,
+          hasMorePost: action.lastId ? state.hasMorePost : true
         });
       }
 
@@ -2540,9 +2579,9 @@ const reducer = (state = initialState, action) => {
     case LOAD_HASHTAG_POSTS_SUCCESS:
     case LOAD_USER_POSTS_SUCCESS:
       {
-        console.log('action.data ==>', action);
         return _objectSpread({}, state, {
-          mainPosts: action.data
+          mainPosts: state.mainPosts.concat(action.data),
+          hasMorePost: action.data.length === 3
         });
       }
 
@@ -2642,7 +2681,7 @@ const reducer = (state = initialState, action) => {
     case RETWEET_SUCCESS:
       {
         return _objectSpread({}, state, {
-          mainPosts: [action.data, ...state.mainPosts]
+          mainPosts: [action.data, ...state.mainPosts.PostId]
         });
       }
 
@@ -2651,6 +2690,26 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state);
       }
     //리트윗------------------------------------------
+    //게시글 삭제------------------------------------------
+
+    case REMOVE_POST_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case REMOVE_POST_SUCCESS:
+      {
+        console.log('REMOVE_POST_SUCCESS===>', action.data);
+        return _objectSpread({}, state, {
+          mainPosts: state.mainPosts.filter(v => v.id !== action.data)
+        });
+      }
+
+    case REMOVE_POST_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //게시글 삭제------------------------------------------
 
     default:
       {
@@ -2667,7 +2726,7 @@ const reducer = (state = initialState, action) => {
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, EDIT_NICKNAME_REQUEST, EDIT_NICKNAME_SUCCESS, EDIT_NICKNAME_FAILURE, default */
+/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, REMOVE_POST_OF_ME, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, EDIT_NICKNAME_REQUEST, EDIT_NICKNAME_SUCCESS, EDIT_NICKNAME_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2695,6 +2754,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_SUCCESS", function() { return REMOVE_FOLLOWER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_FAILURE", function() { return REMOVE_FOLLOWER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_POST_TO_ME", function() { return ADD_POST_TO_ME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_OF_ME", function() { return REMOVE_POST_OF_ME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_REQUEST", function() { return LOAD_FOLLOWERS_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_SUCCESS", function() { return LOAD_FOLLOWERS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_FAILURE", function() { return LOAD_FOLLOWERS_FAILURE; });
@@ -2740,8 +2800,10 @@ const initialState = {
   //회원가입 성공여부 
   isEditingNickName: false,
   //닉네임 변경 중 
-  editNickNameErrorReason: '' //이름변경 실패사유 
-
+  editNickNameErrorReason: '',
+  //이름변경 실패사유 
+  hasMoreFollower: false,
+  hasMoreFollowing: false
 };
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -2765,6 +2827,7 @@ const REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST';
 const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS';
 const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE';
 const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
 const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST';
 const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS';
 const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE';
@@ -2927,6 +2990,17 @@ const reducer = (state = initialState, action) => {
         });
       }
     //------------------------------------------------날 팔로우 한 목록 가져오기 
+    //------------------------------------------------ 게시글 삭제시 게시글 갯수 변경 리듀서 
+
+    case REMOVE_POST_OF_ME:
+      {
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Posts: state.me.Posts.filter(v => v.id !== action.data)
+          })
+        });
+      }
+    //------------------------------------------------ 게시글 삭제시 게시글 갯수 변경 리듀서 
 
     case LOAD_FOLLOWERS_REQUEST:
       {
@@ -2949,14 +3023,18 @@ const reducer = (state = initialState, action) => {
 
     case LOAD_FOLLOWINGS_REQUEST:
       {
-        return _objectSpread({}, state);
+        return _objectSpread({}, state, {
+          hasMoreFollowing: action.offset ? state.hasMoreFollowing : true //처음 데이터를 가져올 때는 더보기 버튼을 보여주는걸로
+
+        });
       }
 
     case LOAD_FOLLOWINGS_SUCCESS:
       {
         console.log('LOAD_FOLLOWINGS_SUCCESS', action.data);
         return _objectSpread({}, state, {
-          followingList: action.data
+          followingList: state.followingList.concat(action.data),
+          hasMoreFollowing: action.data.length === 3
         });
       }
 
@@ -3027,7 +3105,7 @@ const reducer = (state = initialState, action) => {
 
 /***/ }),
 
-/***/ 5:
+/***/ 4:
 /*!********************************!*\
   !*** multi ./pages/hashtag.js ***!
   \********************************/

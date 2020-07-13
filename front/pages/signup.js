@@ -107,6 +107,11 @@ const SignUp = () =>{
     setTerm(e.target.checked)
   },[]); 
 
+  //로그인 한 상태면 회원가입 화면을 아예 안보여주게... 
+  if(me){
+    return null;
+  }
+
 
 
     return(

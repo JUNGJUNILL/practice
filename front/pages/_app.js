@@ -64,20 +64,18 @@ NodeBird.getInitialProps = async (context)=>{
     let pageProps ={}; 
 
     //ctx.isServer 서버 환경이냐 아니냐
+    const state  = ctx.store.getState(); 
     const cookie = ctx.isServer ? ctx.req.headers.cookie : ''; 
+
     if(ctx.isServer && cookie){
         //클라이언 환경에서는 브라우저가 쿠키를 넣어주고, 
         //SSR일 때는 우리가 직접 넣어줘야 한다. 
         axios.defaults.headers.Cookie = cookie; 
-
-       
     }
-   
-
-    const state  = ctx.store.getState(); 
+    
     if(!state.user.me){
         ctx.store.dispatch({
-            type: LOAD_USER_REQUEST
+            type: LOAD_USER_REQUEST,
         }); 
     }
 

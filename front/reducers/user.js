@@ -19,7 +19,9 @@ export const initialState = {
     isLoading: true, 
     isSignedUp : false, //회원가입 성공여부 
     isEditingNickName : false,  //닉네임 변경 중 
-    editNickNameErrorReason:'' //이름변경 실패사유 
+    editNickNameErrorReason:'', //이름변경 실패사유 
+    hasMoreFollower : false, 
+    hasMoreFollowing : false,
 };
 
 export const SIGN_UP_REQUEST ='SIGN_UP_REQUEST'; 
@@ -52,6 +54,7 @@ export const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS';
 export const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE';
 
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME'
+export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME'
 
 export const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST';
 export const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS';
@@ -64,6 +67,8 @@ export const LOAD_FOLLOWINGS_FAILURE = 'LOAD_FOLLOWINGS_FAILURE';
 export const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST'; 
 export const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS'; 
 export const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE'; 
+
+
 
 const reducer = (state = initialState , action)=>{
 
@@ -235,6 +240,22 @@ case ADD_POST_TO_ME: {
 
 //------------------------------------------------날 팔로우 한 목록 가져오기 
 
+
+//------------------------------------------------ 게시글 삭제시 게시글 갯수 변경 리듀서 
+
+case REMOVE_POST_OF_ME :{
+
+    return {
+        ...state,
+        me :{
+            ...state.me,
+            Posts : state.me.Posts.filter(v=>v.id !== action.data),
+        },
+    }
+}
+
+//------------------------------------------------ 게시글 삭제시 게시글 갯수 변경 리듀서 
+
 case LOAD_FOLLOWERS_REQUEST:{
     return {
         ...state,
@@ -265,6 +286,7 @@ case LOAD_FOLLOWERS_FAILURE:{
 case LOAD_FOLLOWINGS_REQUEST:{
     return {
         ...state,
+        hasMoreFollowing : action.offset ?  state.hasMoreFollowing : true, //처음 데이터를 가져올 때는 더보기 버튼을 보여주는걸로
 
     }
 }
@@ -273,7 +295,8 @@ case LOAD_FOLLOWINGS_SUCCESS: {
     console.log('LOAD_FOLLOWINGS_SUCCESS',action.data)
     return{
         ...state,
-        followingList : action.data, 
+        followingList : state.followingList.concat(action.data), 
+        hasMoreFollowing : action.data.length === 3,
 
     }    
 }
@@ -345,6 +368,8 @@ case EDIT_NICKNAME_FAILURE:{
 }
 
 //------------------------------------------------닉네임 수정
+
+
 
 
 

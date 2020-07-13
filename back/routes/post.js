@@ -145,8 +145,7 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => { // POST /api
                                //fields
                                //single
   router.post('/images',upload.array('image'),(req,res)=>{
-      console.log('이미지 업로드 라우터!!!'); 
-      console.log(req.files); 
+      //onsole.log(req.files); 
       return res.json(req.files.map(v=>v.filename)); 
 
   }); 
@@ -267,6 +266,34 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => { // POST /api
     }
 
   })
+
+
+  //게시글 삭제 
+  router.delete('/:id' , isLoggedIn , async (req,res,next)=>{
+
+
+
+              try{
+
+                const post = await db.Post.findOne({where:{id: req.params.id} }); 
+                if(!post){
+                  return res.status(404).send('포스트가 존재하지 않습니다.'); 
+                }
+
+                await db.Post.destroy({
+                  where:{ id: req.params.id}
+                }); 
+
+                res.send(req.params.id); 
+        
+            }catch(e){
+              console.error(e); 
+              next(e); 
+            } 
+
+  });
+
+  
 
 
 

@@ -1,5 +1,5 @@
 
-import React, {useEffect} from 'react'; 
+import React, {useEffect, useCallback} from 'react'; 
 import PostForm from '../components/PostForm'
 import PostCard from '../components/PostCard'
 import {useDispatch ,useSelector} from 'react-redux'
@@ -16,11 +16,31 @@ const Home = ()=>{
 
     const {me} = useSelector(state => state.user);
                                 //리덕스 STATE를 가져오기 위해서는 userSelector 
-    const {mainPosts} =useSelector(state => state.post); 
+    const {mainPosts,hasMorePost} =useSelector(state => state.post); 
+
+
+    const onScroll = useCallback(() =>{
+            //window.scrollY + document.documentElement.clientHeight = document.documentElement.scrollHeight
+        console.log(window.scrollY, document.documentElement.clientHeight, document.documentElement.scrollHeight); 
+
+        if(hasMorePost){//스크롤 할 때 마다 서버로 요청보내면 서버 뒤질 수 도 있음 방지
+                        //reducer 잘 보면 이해가 가능할 것이다. 
+            if(window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight-300){
+                dispatch({
+                    type:LOAD_MAIN_POSTS_REQUEST,
+                    lastId : mainPosts[mainPosts.length - 1].id,
+                }); 
+            }
+        }         
+    },[hasMorePost , mainPosts.length]); 
   
     useEffect(()=>{
- 
-    },[])
+            window.addEventListener('scroll',onScroll); 
+
+            return ()=>{
+                window.removeEventListener('scroll',onScroll);
+            }
+    },[mainPosts.length])
 
     return (
       

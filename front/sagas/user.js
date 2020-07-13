@@ -276,9 +276,10 @@ function* watchHello(){
 //     }
 // }
 
-function* loadFollowersAPI(userId){
-
-    return axios.get(`/user/${userId}/followers`,{withCredentials:true});
+//
+function* loadFollowersAPI(userId, offset = 0, limit = 3 ){
+    //
+    return axios.get(`/user/${userId||0}/followers?offset=${offset}&limit=${limit}`,{withCredentials:true});
                                              //▲post인 경우 데이터 없더라도 빈 객체라도 보내야 한다.
 }
 
@@ -326,10 +327,10 @@ function* watchLoadFollowers(){
 
 
 
-
-function* loadFollowingsAPI(userId){
-
-    return axios.get(`/user/${userId}/followings`, {withCredentials: true,});
+//
+function* loadFollowingsAPI(userId, offset = 0, limit =3 ){
+//
+    return axios.get(`/user/${userId||0}/followings?offset=${offset}&limit=${limit}`, {withCredentials: true,});
 
 }
 
@@ -338,13 +339,15 @@ function* loadFollowingsAPI(userId){
 function* loadFollowings(action){
 
     try{
-        const result   = yield call(loadFollowingsAPI,action.data);  
+        const result   = yield call(loadFollowingsAPI,action.data,action.offset);  
 
         
         const followingList = yield result.then((resolve)=>{
             
             return resolve.data; 
          }); 
+
+         console.log('followingListfollowingList' , followingList); 
         yield put({
                 type: LOAD_FOLLOWINGS_SUCCESS,
                 data: followingList, 

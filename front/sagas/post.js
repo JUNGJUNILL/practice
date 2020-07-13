@@ -1,26 +1,25 @@
-import {all,fork,takeLatest, put, delay,call} from 'redux-saga/effects'; 
+import {all,fork,takeLatest, put, delay,call,throttle} from 'redux-saga/effects'; 
 import axios from 'axios'; //한번 불러온 모듈을 캐싱이 되므로 user.js에서 
                            //axios.defaults.baseURL='http://captainryan.gonetis.com:3065/api'; 해 놓은게 post.js에서도 적용이 된다. 
 
-import { ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE, LOAD_MAIN_POSTS_REQUEST, LOAD_MAIN_POSTS_SUCCESS, LOAD_MAIN_POSTS_FAILURE, LOAD_HASHTAG_POSTS_SUCCESS, LOAD_HASHTAG_POSTS_FAILURE, LOAD_HASHTAG_POSTS_REQUEST, LOAD_USER_POSTS_FAILURE, LOAD_USER_POSTS_SUCCESS, LOAD_USER_POSTS_REQUEST, LOAD_COMMENTS_REQUEST, LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_FAILURE, UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE, RETWEET_REQUEST, RETWEET_SUCCESS, RETWEET_FAILURE } from '../reducers/post';
-import { ADD_POST_TO_ME} from '../reducers/user'
+import { ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE, LOAD_MAIN_POSTS_REQUEST, LOAD_MAIN_POSTS_SUCCESS, LOAD_MAIN_POSTS_FAILURE, LOAD_HASHTAG_POSTS_SUCCESS, LOAD_HASHTAG_POSTS_FAILURE, LOAD_HASHTAG_POSTS_REQUEST, LOAD_USER_POSTS_FAILURE, LOAD_USER_POSTS_SUCCESS, LOAD_USER_POSTS_REQUEST, LOAD_COMMENTS_REQUEST, LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_FAILURE, UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE, UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE, RETWEET_REQUEST, RETWEET_SUCCESS, RETWEET_FAILURE, REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE } from '../reducers/post';
+import { ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user'
 
 
 function addPostAPI(postData){
-    console.log('postData===>' , postData); 
     return axios.post('/post',postData,{withCredentials:true}); 
 }
 
-function loadMainPostsAPI(){
+function loadMainPostsAPI(lastId = 0 , limit = 3){
 
-    return axios.get('/posts'); 
+    return axios.get(`/posts?lastId=${lastId}&limit=${limit}`); 
 }
 
 
 function* loadMainPosts(action){
 
     try{
-           const result = yield call(loadMainPostsAPI);       
+           const result = yield call(loadMainPostsAPI,action.lastId);       
             yield put({
                 type:LOAD_MAIN_POSTS_SUCCESS,
                 data:result.data,
@@ -40,16 +39,16 @@ function* loadMainPosts(action){
 }
 
 
-function loadHashtagPostsAPI(tag){
+function loadHashtagPostsAPI(tag,lastId,limit = 3){
 
-    return axios.get(`/hashtag/${encodeURIComponent(tag)}`); 
+    return axios.get(`/hashtag/${encodeURIComponent(tag)}?lastId=${lastId}&limit=${limit}`); 
 }
 
 
 function* loadHashtagPosts(action){
 
     try{
-           const result = yield call(loadHashtagPostsAPI,action.data);     
+           const result = yield call(loadHashtagPostsAPI,action.data,action.lastId);     
            yield put({
                type:LOAD_HASHTAG_POSTS_SUCCESS,
                data: result.data,
@@ -71,7 +70,7 @@ function* loadHashtagPosts(action){
 
 function loadUserPostsAPI(id){
 
-    return axios.get(`/user/${id}/posts`); 
+    return axios.get(`/user/${id || 0}/posts`); 
 }
 
 
@@ -197,7 +196,6 @@ function* upLoadImages(action){
 
     try{
         const result = yield call(upLoadImagesAPI,action.data);
-        console.log('upLoadImages result ===>' , result); 
         yield put({
             type:UPLOAD_IMAGES_SUCCESS,
             data: result.data,  //이미지가 저장된 주소를 가져온다. 
@@ -306,6 +304,46 @@ function* reTweet(action){
 
 
 
+function removePostAPI(postId){
+    return axios.delete( `/post/${postId}`,{withCredentials:true}); 
+}
+
+function* removePost(action){
+    try{
+        const result = yield call(removePostAPI,action.data);
+        // const deleteinfo  =yield result.then((resolve)=>{
+        //             return resolve.data; 
+        // }); 
+
+         console.log('removePost' , result.data); 
+        yield put({
+            type:REMOVE_POST_SUCCESS,
+            data: result.data,
+        });
+
+        yield put({
+            type:REMOVE_POST_OF_ME,
+            data : result.data,
+        })
+
+}catch(e){
+    console.log(e); 
+   alert(e); 
+    yield put({
+        type:REMOVE_POST_FAILURE,
+        error: e,
+    });
+  
+}
+
+}
+
+
+
+function* watchRemovePost(){
+
+    yield takeLatest(REMOVE_POST_REQUEST,removePost); 
+}
 
 
 function* whatchAddPost(){
@@ -314,7 +352,8 @@ function* whatchAddPost(){
 }
 
 function* watchLoadMainPosts(){
-    yield takeLatest(LOAD_MAIN_POSTS_REQUEST,loadMainPosts); 
+          //LOAD_MAIN_POSTS_REQUEST 가 한 번 호출되면 다음 1초까지는 같은 요청을 할 수 없게 해주는 이펙트이다.
+    yield throttle(1000,LOAD_MAIN_POSTS_REQUEST,loadMainPosts); 
 }
 
 
@@ -365,6 +404,7 @@ export default function* postSaga() {
      fork(watchLikePost),
      fork(watchUnLikePost),
      fork(watchRetweet),
+     fork(watchRemovePost),
  ]); 
 
 }

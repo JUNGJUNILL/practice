@@ -12,6 +12,7 @@ export const initialState = {
      isAddingComment: false,
      addCommentErrorReason:'',
      commentAdded: false,
+     hasMorePost : false, 
 
 
 };
@@ -193,17 +194,18 @@ const reducer = (state = initialState , action) =>{
             case LOAD_USER_POSTS_REQUEST : {
                 return {
                     ...state,
-                    mainPosts:[], 
+                    mainPosts:action.lastId === 0 ? [] : state.mainPosts,
+                    hasMorePost : action.lastId ? state.hasMorePost : true,
                 }
             }
 
             case LOAD_MAIN_POSTS_SUCCESS :
             case LOAD_HASHTAG_POSTS_SUCCESS :
             case LOAD_USER_POSTS_SUCCESS : {
-            console.log('action.data ==>' , action);
             return {
                 ...state,
-                mainPosts:action.data,
+                mainPosts:state.mainPosts.concat(action.data),
+                hasMorePost : action.data.length === 3,
 
             }
         }
@@ -320,7 +322,7 @@ const reducer = (state = initialState , action) =>{
 
             return {
                 ...state,
-                mainPosts : [action.data, ...state.mainPosts],
+                mainPosts : [action.data, ...state.mainPosts.PostId],
             };
         }
         case RETWEET_FAILURE : {
@@ -330,6 +332,34 @@ const reducer = (state = initialState , action) =>{
             }
         }
 //리트윗------------------------------------------
+
+
+//게시글 삭제------------------------------------------
+        case REMOVE_POST_REQUEST : {
+
+
+            return {
+                ...state,
+            
+            }
+        }
+
+        case REMOVE_POST_SUCCESS : {
+            
+            console.log('REMOVE_POST_SUCCESS===>' , action.data);
+            return {
+                ...state,
+                mainPosts : state.mainPosts.filter((v)=>v.id !== action.data), 
+            };
+        }
+        case REMOVE_POST_FAILURE : {
+            return {
+                ...state,
+
+            }
+        }
+//게시글 삭제------------------------------------------
+
 
 
 

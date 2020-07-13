@@ -148,7 +148,7 @@ const AppLayout = ({
     style: {
       verticalAlign: 'middle'
     }
-  }))), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }))), !me && __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "signup"
   }, __jsx("a", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Button"], null, "\uD68C\uC6D0\uAC00\uC785"))), __jsx(antd__WEBPACK_IMPORTED_MODULE_2__["Row"], {
     gutter: 10
@@ -2174,6 +2174,7 @@ NodeBird.getInitialProps = async context => {
 
   let pageProps = {}; //ctx.isServer 서버 환경이냐 아니냐
 
+  const state = ctx.store.getState();
   const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
 
   if (ctx.isServer && cookie) {
@@ -2181,8 +2182,6 @@ NodeBird.getInitialProps = async context => {
     //SSR일 때는 우리가 직접 넣어줘야 한다. 
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.Cookie = cookie;
   }
-
-  const state = ctx.store.getState();
 
   if (!state.user.me) {
     ctx.store.dispatch({
@@ -2248,7 +2247,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _reducers_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/user */ "./reducers/user.js");
-var _jsxFileName = "D:\\git Repository\\practice\\front\\pages\\signup.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -2260,14 +2258,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 const TextInput = ({
   value
 }) => {
-  return __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 10,
-      columnNumber: 5
-    }
-  }, value);
+  return __jsx("div", null, value);
 };
 
 TextInput.propTypes = {
@@ -2368,224 +2359,70 @@ const SignUp = () => {
   const onChangeTerm = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(e => {
     setTermError(false);
     setTerm(e.target.checked);
-  }, []);
+  }, []); //로그인 한 상태면 회원가입 화면을 아예 안보여주게... 
+
+  if (me) {
+    return null;
+  }
+
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Form"], {
     onFinish: onSubmit,
     style: {
       padding: 10
-    },
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 115,
-      columnNumber: 13
     }
   }, __jsx(TextInput, {
-    value: '124',
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 116,
-      columnNumber: 13
-    }
-  }), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 117,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-id",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 118,
-      columnNumber: 21
-    }
-  }, "\uC544\uC774\uB514"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 119,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    value: '124'
+  }), __jsx("div", null, __jsx("label", {
+    htmlFor: "user-id"
+  }, "\uC544\uC774\uB514"), __jsx("br", null), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "user-id",
     value: userId,
     required: true,
-    onChange: onChangeUserId,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 120,
-      columnNumber: 21
-    }
-  })), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 122,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-nick",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 123,
-      columnNumber: 21
-    }
-  }, "\uB2C9\uB124\uC784"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 124,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    onChange: onChangeUserId
+  })), __jsx("div", null, __jsx("label", {
+    htmlFor: "user-nick"
+  }, "\uB2C9\uB124\uC784"), __jsx("br", null), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "user-nick",
     value: nickName,
     required: true,
-    onChange: onChangeNick,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 125,
-      columnNumber: 21
-    }
-  })), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 127,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-password",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 128,
-      columnNumber: 21
-    }
-  }, "\uBE44\uBC00\uBC88\uD638"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 129,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    onChange: onChangeNick
+  })), __jsx("div", null, __jsx("label", {
+    htmlFor: "user-password"
+  }, "\uBE44\uBC00\uBC88\uD638"), __jsx("br", null), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "user-password",
     value: password,
     required: true,
-    onChange: onChangePassword,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 130,
-      columnNumber: 21
-    }
-  })), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 132,
-      columnNumber: 17
-    }
-  }, __jsx("label", {
-    htmlFor: "user-password-check",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 133,
-      columnNumber: 21
-    }
-  }, "\uBE44\uBC00\uBC88\uD638\uCCB4\uD06C"), __jsx("br", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 134,
-      columnNumber: 21
-    }
-  }), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+    onChange: onChangePassword
+  })), __jsx("div", null, __jsx("label", {
+    htmlFor: "user-password-check"
+  }, "\uBE44\uBC00\uBC88\uD638\uCCB4\uD06C"), __jsx("br", null), __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Input"], {
     name: "user-password-check",
     value: passwordCheck,
     required: true,
-    onChange: onChangepasswordCheck,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 135,
-      columnNumber: 21
-    }
+    onChange: onChangepasswordCheck
   }), passwordError && __jsx("div", {
     style: {
       color: 'red'
-    },
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 136,
-      columnNumber: 39
     }
-  }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uB2E4\uB985\uB2C8\uB2E4.")), __jsx("div", {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 138,
-      columnNumber: 17
-    }
-  }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Checkbox"], {
+  }, "\uBE44\uBC00\uBC88\uD638\uAC00 \uB2E4\uB985\uB2C8\uB2E4.")), __jsx("div", null, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Checkbox"], {
     name: "user-term",
     value: term,
-    onChange: onChangeTerm,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 139,
-      columnNumber: 21
-    }
+    onChange: onChangeTerm
   }, "\uB3D9\uC758 \uD569\uB2C8\uB2E4."), termError && __jsx("div", {
     style: {
       color: 'red'
-    },
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 140,
-      columnNumber: 35
     }
   }, "\uC57D\uAD00\uC5D0 \uB3D9\uC758 \uD574\uC57C \uD569\uB2C8\uB2E4.")), __jsx("div", {
     style: {
       marginTop: 10
-    },
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 143,
-      columnNumber: 17
     }
   }, __jsx(antd__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     type: "primary",
     htmlType: "submit",
-    loading: isSigningUp,
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 144,
-      columnNumber: 22
-    }
+    loading: isSigningUp
   }, "\uAC00\uC785\uD558\uAE30"), __jsx("input", {
     type: "submit",
-    value: "rkdlq",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 145,
-      columnNumber: 22
-    }
+    value: "rkdlq"
   }))));
 };
 
@@ -2684,7 +2521,8 @@ const initialState = {
   postAdded: false,
   isAddingComment: false,
   addCommentErrorReason: '',
-  commentAdded: false
+  commentAdded: false,
+  hasMorePost: false
 };
 const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST';
 const LOAD_MAIN_POSTS_SUCCESS = 'LOAD_MAIN_POSTS_SUCCESS';
@@ -2837,7 +2675,8 @@ const reducer = (state = initialState, action) => {
     case LOAD_USER_POSTS_REQUEST:
       {
         return _objectSpread({}, state, {
-          mainPosts: []
+          mainPosts: action.lastId === 0 ? [] : state.mainPosts,
+          hasMorePost: action.lastId ? state.hasMorePost : true
         });
       }
 
@@ -2845,9 +2684,9 @@ const reducer = (state = initialState, action) => {
     case LOAD_HASHTAG_POSTS_SUCCESS:
     case LOAD_USER_POSTS_SUCCESS:
       {
-        console.log('action.data ==>', action);
         return _objectSpread({}, state, {
-          mainPosts: action.data
+          mainPosts: state.mainPosts.concat(action.data),
+          hasMorePost: action.data.length === 3
         });
       }
 
@@ -2947,7 +2786,7 @@ const reducer = (state = initialState, action) => {
     case RETWEET_SUCCESS:
       {
         return _objectSpread({}, state, {
-          mainPosts: [action.data, ...state.mainPosts]
+          mainPosts: [action.data, ...state.mainPosts.PostId]
         });
       }
 
@@ -2956,6 +2795,26 @@ const reducer = (state = initialState, action) => {
         return _objectSpread({}, state);
       }
     //리트윗------------------------------------------
+    //게시글 삭제------------------------------------------
+
+    case REMOVE_POST_REQUEST:
+      {
+        return _objectSpread({}, state);
+      }
+
+    case REMOVE_POST_SUCCESS:
+      {
+        console.log('REMOVE_POST_SUCCESS===>', action.data);
+        return _objectSpread({}, state, {
+          mainPosts: state.mainPosts.filter(v => v.id !== action.data)
+        });
+      }
+
+    case REMOVE_POST_FAILURE:
+      {
+        return _objectSpread({}, state);
+      }
+    //게시글 삭제------------------------------------------
 
     default:
       {
@@ -2972,7 +2831,7 @@ const reducer = (state = initialState, action) => {
 /*!**************************!*\
   !*** ./reducers/user.js ***!
   \**************************/
-/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, EDIT_NICKNAME_REQUEST, EDIT_NICKNAME_SUCCESS, EDIT_NICKNAME_FAILURE, default */
+/*! exports provided: initialState, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_IN_FAILURE, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, FOLLOW_USER_REQUEST, FOLLOW_USER_SUCCESS, FOLLOW_USER_FAILURE, UNFOLLOW_USER_REQUEST, UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAILURE, REMOVE_FOLLOWER_REQUEST, REMOVE_FOLLOWER_SUCCESS, REMOVE_FOLLOWER_FAILURE, ADD_POST_TO_ME, REMOVE_POST_OF_ME, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWERS_SUCCESS, LOAD_FOLLOWERS_FAILURE, LOAD_FOLLOWINGS_REQUEST, LOAD_FOLLOWINGS_SUCCESS, LOAD_FOLLOWINGS_FAILURE, EDIT_NICKNAME_REQUEST, EDIT_NICKNAME_SUCCESS, EDIT_NICKNAME_FAILURE, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3000,6 +2859,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_SUCCESS", function() { return REMOVE_FOLLOWER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOWER_FAILURE", function() { return REMOVE_FOLLOWER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_POST_TO_ME", function() { return ADD_POST_TO_ME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_POST_OF_ME", function() { return REMOVE_POST_OF_ME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_REQUEST", function() { return LOAD_FOLLOWERS_REQUEST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_SUCCESS", function() { return LOAD_FOLLOWERS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_FOLLOWERS_FAILURE", function() { return LOAD_FOLLOWERS_FAILURE; });
@@ -3045,8 +2905,10 @@ const initialState = {
   //회원가입 성공여부 
   isEditingNickName: false,
   //닉네임 변경 중 
-  editNickNameErrorReason: '' //이름변경 실패사유 
-
+  editNickNameErrorReason: '',
+  //이름변경 실패사유 
+  hasMoreFollower: false,
+  hasMoreFollowing: false
 };
 const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -3070,6 +2932,7 @@ const REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST';
 const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS';
 const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE';
 const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
 const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST';
 const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS';
 const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE';
@@ -3232,6 +3095,17 @@ const reducer = (state = initialState, action) => {
         });
       }
     //------------------------------------------------날 팔로우 한 목록 가져오기 
+    //------------------------------------------------ 게시글 삭제시 게시글 갯수 변경 리듀서 
+
+    case REMOVE_POST_OF_ME:
+      {
+        return _objectSpread({}, state, {
+          me: _objectSpread({}, state.me, {
+            Posts: state.me.Posts.filter(v => v.id !== action.data)
+          })
+        });
+      }
+    //------------------------------------------------ 게시글 삭제시 게시글 갯수 변경 리듀서 
 
     case LOAD_FOLLOWERS_REQUEST:
       {
@@ -3254,14 +3128,18 @@ const reducer = (state = initialState, action) => {
 
     case LOAD_FOLLOWINGS_REQUEST:
       {
-        return _objectSpread({}, state);
+        return _objectSpread({}, state, {
+          hasMoreFollowing: action.offset ? state.hasMoreFollowing : true //처음 데이터를 가져올 때는 더보기 버튼을 보여주는걸로
+
+        });
       }
 
     case LOAD_FOLLOWINGS_SUCCESS:
       {
         console.log('LOAD_FOLLOWINGS_SUCCESS', action.data);
         return _objectSpread({}, state, {
-          followingList: action.data
+          followingList: state.followingList.concat(action.data),
+          hasMoreFollowing: action.data.length === 3
         });
       }
 
@@ -3384,19 +3262,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function addPostAPI(postData) {
-  console.log('postData===>', postData);
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/post', postData, {
     withCredentials: true
   });
 }
 
-function loadMainPostsAPI() {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/posts');
+function loadMainPostsAPI(lastId = 0, limit = 3) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/posts?lastId=${lastId}&limit=${limit}`);
 }
 
 function* loadMainPosts(action) {
   try {
-    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadMainPostsAPI);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadMainPostsAPI, action.lastId);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_SUCCESS"],
       data: result.data
@@ -3410,13 +3287,13 @@ function* loadMainPosts(action) {
   }
 }
 
-function loadHashtagPostsAPI(tag) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/hashtag/${encodeURIComponent(tag)}`);
+function loadHashtagPostsAPI(tag, lastId, limit = 3) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/hashtag/${encodeURIComponent(tag)}?lastId=${lastId}&limit=${limit}`);
 }
 
 function* loadHashtagPosts(action) {
   try {
-    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadHashtagPostsAPI, action.data);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadHashtagPostsAPI, action.data, action.lastId);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_HASHTAG_POSTS_SUCCESS"],
       data: result.data
@@ -3431,7 +3308,7 @@ function* loadHashtagPosts(action) {
 }
 
 function loadUserPostsAPI(id) {
-  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/user/${id}/posts`);
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(`/user/${id || 0}/posts`);
 }
 
 function* loadUserPosts(action) {
@@ -3529,7 +3406,6 @@ function upLoadImagesAPI(formData) {
 function* upLoadImages(action) {
   try {
     const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(upLoadImagesAPI, action.data);
-    console.log('upLoadImages result ===>', result);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["UPLOAD_IMAGES_SUCCESS"],
       data: result.data //이미지가 저장된 주소를 가져온다. 
@@ -3619,12 +3495,48 @@ function* reTweet(action) {
   }
 }
 
+function removePostAPI(postId) {
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete(`/post/${postId}`, {
+    withCredentials: true
+  });
+}
+
+function* removePost(action) {
+  try {
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(removePostAPI, action.data); // const deleteinfo  =yield result.then((resolve)=>{
+    //             return resolve.data; 
+    // }); 
+
+    console.log('removePost', result.data);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["REMOVE_POST_SUCCESS"],
+      data: result.data
+    });
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_user__WEBPACK_IMPORTED_MODULE_3__["REMOVE_POST_OF_ME"],
+      data: result.data
+    });
+  } catch (e) {
+    console.log(e);
+    alert(e);
+    yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
+      type: _reducers_post__WEBPACK_IMPORTED_MODULE_2__["REMOVE_POST_FAILURE"],
+      error: e
+    });
+  }
+}
+
+function* watchRemovePost() {
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["REMOVE_POST_REQUEST"], removePost);
+}
+
 function* whatchAddPost() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["ADD_POST_REQUEST"], addPost);
 }
 
 function* watchLoadMainPosts() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_REQUEST"], loadMainPosts);
+  //LOAD_MAIN_POSTS_REQUEST 가 한 번 호출되면 다음 1초까지는 같은 요청을 할 수 없게 해주는 이펙트이다.
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["throttle"])(1000, _reducers_post__WEBPACK_IMPORTED_MODULE_2__["LOAD_MAIN_POSTS_REQUEST"], loadMainPosts);
 }
 
 function* whatchAddComment() {
@@ -3660,7 +3572,7 @@ function* watchRetweet() {
 }
 
 function* postSaga() {
-  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadHashtagPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUploadImages), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUnLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchRetweet)]);
+  yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadMainPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddPost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(whatchAddComment), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadComments), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadHashtagPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLoadUserPosts), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUploadImages), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchUnLikePost), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchRetweet), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["fork"])(watchRemovePost)]);
 }
 
 /***/ }),
@@ -3883,10 +3795,12 @@ function* watchHello() {
 //         console.log('hello saga'); 
 //     }
 // }
+//
 
 
-function* loadFollowersAPI(userId) {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`/user/${userId}/followers`, {
+function* loadFollowersAPI(userId, offset = 0, limit = 3) {
+  //
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`/user/${userId || 0}/followers?offset=${offset}&limit=${limit}`, {
     withCredentials: true
   }); //▲post인 경우 데이터 없더라도 빈 객체라도 보내야 한다.
 }
@@ -3912,20 +3826,23 @@ function* loadFollowers(action) {
 
 function* watchLoadFollowers() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["takeLatest"])(_reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWERS_REQUEST"], loadFollowers);
-}
+} //
 
-function* loadFollowingsAPI(userId) {
-  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`/user/${userId}/followings`, {
+
+function* loadFollowingsAPI(userId, offset = 0, limit = 3) {
+  //
+  return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(`/user/${userId || 0}/followings?offset=${offset}&limit=${limit}`, {
     withCredentials: true
   });
 }
 
 function* loadFollowings(action) {
   try {
-    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadFollowingsAPI, action.data);
+    const result = yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(loadFollowingsAPI, action.data, action.offset);
     const followingList = yield result.then(resolve => {
       return resolve.data;
     });
+    console.log('followingListfollowingList', followingList);
     yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["put"])({
       type: _reducers_user__WEBPACK_IMPORTED_MODULE_1__["LOAD_FOLLOWINGS_SUCCESS"],
       data: followingList

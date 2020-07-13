@@ -8,7 +8,6 @@ const passport = require('passport');
 
 
 router.get('/', isLoggedIn,(req,res)=>{
-        console.log('router/user.js==>',req.user); 
 
         const user = Object.assign({}, req.user.toJSON()); 
         delete user.password;
@@ -43,7 +42,6 @@ router.post('/signUp',async (req,res,next)=>{
                         password : hashedPassword, 
                 }); 
 
-                console.log(newUser); 
                 return res.status(200).json(newUser); 
 
         }catch(e){
@@ -138,7 +136,7 @@ router.get('/:id/posts',async (req,res,next)=>{
         try{
                 const posts  = await db.Post.findAll({
                         where: {
-                                UserId : parseInt(req.params.id,10), 
+                                UserId : parseInt(req.params.id,10) || (req.user && req.user.id) || 0, 
                                 RetweetId : null,
                         },
                         include: [{
@@ -245,9 +243,14 @@ router.get('/:id/followings',isLoggedIn, async (req,res)=>{
         try {
                 const user = await db.User.findOne({
                   where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 },
+
                 });
                 const followers = await user.getFollowings({
                   attributes: ['id', 'nickname'],
+                  limit : parseInt(req.query.limit,10),
+                  offset: parseInt(req.query.offset,10),
+               
+                
                 });
                 res.json(followers);
               } catch (e) {
@@ -263,13 +266,18 @@ router.get('/:id/followings',isLoggedIn, async (req,res)=>{
 router.get('/:id/followers',isLoggedIn,async (req,res)=>{
 
 
-    
+        
         try {
                 const user = await db.User.findOne({
                         where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 },
+ 
                 }); // req.params.id가 문자열 '0'
                 const followers = await user.getFollowers({
                         attributes: ['id', 'nickname'],
+                       // limit : parseInt(req.query.limit,10),
+                       // offset: parseInt(req.query.offset,10),
+                     
+                      
         
                 });
                 res.json(followers);

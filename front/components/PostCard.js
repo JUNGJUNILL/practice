@@ -1,6 +1,6 @@
 
 import React,{useState,useCallback,useEffect}  from 'react'
-import {Card , Button, Avatar,Form, Input, List, Comment}from 'antd'
+import {Card , Button, Avatar,Form, Input, List, Comment , Popover}from 'antd'
 import {
     RetweetOutlined, 
     HeartOutlined,
@@ -15,8 +15,8 @@ import PostCardContent from './PostCardContent';
 
 
 import {useDispatch ,useSelector} from 'react-redux'
-import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST, UNLIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_REQUEST, RETWEET_REQUEST } from '../reducers/post';
-import {FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST} from '../reducers/user';
+import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST, UNLIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_REQUEST, RETWEET_REQUEST, REMOVE_POST_REQUEST } from '../reducers/post';
+import {FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST, REMOVE_FOLLOWER_REQUEST} from '../reducers/user';
 
 const PostCard = ({post}) =>{
     
@@ -118,6 +118,18 @@ const PostCard = ({post}) =>{
     },[])
 
 
+    //게시글 삭제
+    const onRemovePost = useCallback(postId=>()=>{
+
+      console.log('postId===>' , postId); 
+        dispatch({
+            type:REMOVE_POST_REQUEST,
+            data:postId,
+        });
+
+    },[])
+
+
 
     return (
         <div>
@@ -128,7 +140,23 @@ const PostCard = ({post}) =>{
                 <RetweetOutlined onClick={onRetweet} />,
                 <HeartOutlined onClick={onToggleLike} />,
                 <MessageOutlined  onClick={onToggleComment} />,
-                <EllipsisOutlined />,
+                <Popover
+                key="more"
+                content={(
+                  <Button.Group>
+                    {me && post.User.id === me.id
+                      ? (
+                        <>
+                          <Button>수정</Button>
+                          <Button type="danger"  onClick={onRemovePost(post.id)}>삭제</Button>
+                        </>
+                      )
+                      : <Button>신고</Button>}
+                  </Button.Group>
+                )}
+              >
+                <EllipsisOutlined />
+              </Popover>,
             ]}
             title={post.RetweetId && post.Retweet ? `${post.User.nickname} 님이 리트윗하셨습니다.` : ''}
             extra={!me || post.User.id === me.id
