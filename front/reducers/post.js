@@ -121,7 +121,6 @@ const reducer = (state = initialState , action) =>{
         }
 
         case ADD_POST_SUCCESS : {
-            console.log('ADD_POST_SUCCESS ==>' , action);
             return {
                 ...state,
                 isAddingPost:false,
@@ -141,7 +140,6 @@ const reducer = (state = initialState , action) =>{
  //---------댓글 달기 액션    
 
         case ADD_COMMENT_REQUEST : {
-            console.log('ADD_COMMENT_REQUEST==>' , ADD_COMMENT_REQUEST); 
             return {
                 ...state,
                 isAddingComment : true,

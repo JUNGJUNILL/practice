@@ -2603,7 +2603,6 @@ const reducer = (state = initialState, action) => {
 
     case ADD_POST_SUCCESS:
       {
-        console.log('ADD_POST_SUCCESS ==>', action);
         return _objectSpread({}, state, {
           isAddingPost: false,
           mainPosts: [action.data, ...state.mainPosts],
@@ -2623,7 +2622,6 @@ const reducer = (state = initialState, action) => {
 
     case ADD_COMMENT_REQUEST:
       {
-        console.log('ADD_COMMENT_REQUEST==>', ADD_COMMENT_REQUEST);
         return _objectSpread({}, state, {
           isAddingComment: true,
           addCommentErrorReason: '',
@@ -3231,7 +3229,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://captainryan.gonetis.com:3065/api';
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://localhost:3065/api';
 function* rootSaga() {
   yield Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(_user__WEBPACK_IMPORTED_MODULE_2__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_0__["call"])(_post__WEBPACK_IMPORTED_MODULE_3__["default"])]);
 }

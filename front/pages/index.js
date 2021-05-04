@@ -17,7 +17,7 @@ const Home = ()=>{
     const {me} = useSelector(state => state.user);
                                 //리덕스 STATE를 가져오기 위해서는 userSelector 
     const {mainPosts,hasMorePost} =useSelector(state => state.post); 
-
+    console.log('index.js Home'); 
 
     const onScroll = useCallback(() =>{
             //window.scrollY + document.documentElement.clientHeight = document.documentElement.scrollHeight

@@ -1,5 +1,5 @@
 
-import React,{useState,useCallback,useEffect}  from 'react'
+import React,{useState,useCallback,useEffect,memo}  from 'react'
 import {Card , Button, Avatar,Form, Input, List, Comment , Popover}from 'antd'
 import {
     RetweetOutlined, 
@@ -18,18 +18,16 @@ import {useDispatch ,useSelector} from 'react-redux'
 import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST, UNLIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_REQUEST, RETWEET_REQUEST, REMOVE_POST_REQUEST } from '../reducers/post';
 import {FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST, REMOVE_FOLLOWER_REQUEST} from '../reducers/user';
 
-const PostCard = ({post}) =>{
+const PostCard = memo(({post}) =>{
     
     const [commentFormOpend,setCommentFormOpend] = useState(false); 
     const [commentText, setCommentText] = useState(''); 
     const { me } = useSelector(state=> state.user); 
     const {commentAdded, isAddingComment}  = useSelector(state=>state.post); 
     const dispatch = useDispatch(); 
-
+    console.log('힝힝힝'); 
     const liked =me && post.Likers && post.Likers.find(v => v.id === me.id);
-    useEffect(()=>{
-        console.log('힝힝힝' + me); 
-    },[])
+    
     const onToggleComment = useCallback(() =>{
         setCommentFormOpend(preve => !preve); 
         if(!commentFormOpend){
@@ -219,7 +217,7 @@ const PostCard = ({post}) =>{
         </div>
     )
      
-}
+})
 
 PostCard.propTypes = {
                     //shape을 써서 객체의 각 props의 상세 타입을 지정할 수 있다.
